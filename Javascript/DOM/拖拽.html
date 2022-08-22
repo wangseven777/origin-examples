@@ -1,0 +1,39 @@
+<!--
+ * @Author: zzh
+ * @Description: 拖拽练习
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function drag(ev) {
+            ev.dataTransfer.setData("Text", ev.target.id);
+            console.log('开始拖拽');
+        }
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            console.log(ev);
+            console.log(ev.dataTransfer.getData("Text"));
+            console.log(ev.target);
+            var data = ev.dataTransfer.getData("Text");
+            ev.target.appendChild(document.getElementById(data));
+        }
+    </script>
+</head>
+
+<body style="width: 100wh; height: 100vh;" ondrop="drop(event)" ondragover="allowDrop(event)">
+    <div id="test1" draggable="true" ondragstart="drag(event)">可拖拽的文字</div>
+    <div id="test2" style="width: 300px; height: 300px; border: 1px solid black;" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+</body>
+
+</html>

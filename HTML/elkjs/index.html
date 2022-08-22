@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./lib/elk.bundled.js"></script>
+    <script
+    type="text/javascript"
+    src="https://unpkg.com/d3@7.2.1/dist/d3.min.js"
+  ></script>
+  <script src="./elkmodule.js"></script>
+  <script src="./preview.js"></script>
+    <style>
+        /* #root {
+            height: 300px;
+            width: 300px;
+            background-color: rebeccapurple;
+        } */
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+</body>
+<!-- <script src="./lib/elk.bundled.js"></script>
+<script src="./lib/elk-api.js"></script>
+<script src="./elk/elk-d3.js"></script>
+<script src="./elk/elk-preview.js"></script> -->
+
+<script type="text/javascript">
+  
+
+  var data = [
+        { "dep": "d1", "name": "name1", "size": "size1" },
+        { "dep": "d1", "name": "name2", "size": "size2" },
+        { "dep": "d2", "name": "name1", "size": "size3" },
+        { "dep": "d2", "name": "name2", "size": "size4" }
+    ]
+    // var newData = d3.nest()
+    // .key(function(d,i){ return d.dep; })
+    // .entries(data);
+    d3.select("body").text(JSON.stringify(data));
+
+    d3.json("./pipeline.json").then(function(graph) { 
+  let options = {
+    "elk.algorithm": "layered",
+    "nodePlacement.strategy": "BRANDES_KOEPF",
+    "org.eclipse.elk.port.borderOffset":10,
+    "org.eclipse.elk.edgeRouting": "ORTHOGONAL",
+    "org.eclipse.elk.layered.mergeEdges":true,
+    "spacing": 40,
+    "spacing.nodeNodeBetweenLayers": 40,
+    "spacing.edgeNodeBetweenLayers": 40,
+    "spacing.edgeEdgeBetweenLayers": 40,
+    "layering.strategy": "LONGEST_PATH"
+  };
+
+  const zoomFn = d3.zoom().on("zoom", function () {
+  svg.attr("transform", d3.event.transform);
+});
+let svg = d3.select("body")
+    .append("svg")
+    .attr("xmlns:xlink","http://www.w3.org/1999/xlink")
+    .attr("width", 300)
+    .attr("height", 300)
+    .call(zoomFn)
+    .append("g");
+// define an arrow head
+let defs = svg.append("defs");
+defs.append("marker")
+  .attr("id", "end")
+  .attr("viewBox", "0 0 10 10")
+  .attr("refX", 5)
+  .attr("refY", 5)
+  .attr("markerWidth", 4)        // marker settings
+  .attr("markerHeight", 4)
+  .attr("orient", "auto")
+  .style("fill", "black")
+  .style("stroke-opacity", 1)  // arrowhead color
+  .append("path")
+    .attr("d", "M 0 0 L 10 5 L 0 10 z");
+
+defs.append("circle")
+  .attr("id", "start")
+  .attr("viewBox", "0 0 24 24")
+  //.attr("width", 24)
+  //.attr("height", 24)
+  .style("fill", "transparent")
+  .style("stroke", "inherit")
+  .style("stroke-width", "2px")
+  .attr("cx", 12)
+  .attr("cy", 12)
+  .attr("r", 8);
+
+defs.append("circle")
+    .attr("id", "finish")
+    .attr("viewBox", "0 0 24 24")
+    //.attr("width", 24)
+    //.attr("height", 24)
+    .style("fill", "inherit")
+    .style("stroke", "transparent")
+    .style("stroke-width", "2px")
+    .attr("cx", 12)
+    .attr("cy", 12)
+    .attr("r", 8);
+     
+//*/
+defs.append("rect")
+    .attr("id", "start1")
+    .attr("viewBox", "0 0 24 24")
+    .style("fill", "transparent")
+    .style("stroke", "inherit")
+    .style("stroke-width", "2px")
+    .attr("width", 20)
+    .attr("height", 20)
+    .attr("x", 2)
+    .attr("y", 2)
+    .attr("rx", 2);
+
+defs.append("rect")
+    .attr("id", "finish1")
+    .attr("viewBox", "0 0 24 24")
+    .style("fill", "inherit")
+    .style("stroke", "transparent")
+    .style("stroke-width", "2px")
+    .attr("width", 20)
+    .attr("height", 20)
+    .attr("x", 2)
+    .attr("y", 2)
+    .attr("rx", 2);
+  // group shizzle  
+// group shizzle
+let root = svg.append("g");
+    
+  let layouter = elkmodule.d3kgraph()
+    .size([300, 300])
+    .transformGroup(root)
+    .options(options);
+
+    layouter.on("finish", function(node) {
+      renderd3Layoutv2(root,node);
+    });
+  
+    // start an initial layout
+    layouter.kgraph(graph);
+  
+});
+</script>
+</html>

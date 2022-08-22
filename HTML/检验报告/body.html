@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @page { size: a4; margin: 20px 10px 0px 10px; }
+        body { margin: 0 auto; width: 1150px;}
+        .header { border-bottom: 1px solid black; padding-bottom: 10px; overflow: auto; }
+        .header-logo { display: inline-block; width: 175px; text-align: center; }
+        .header-logo div:nth-child(1) img { display: block; width: 160px; padding-bottom: 10px; margin: 0 auto; }
+        .header-logo div:nth-child(2) img { display: block; width: 160px; margin: 0 auto; }
+        .header-logo div:nth-child(3) { text-align: left; width: 160px; margin: 0 auto; padding-left: 25px;    }
+        .header-title { float: right; width: 720px; text-align: center; }
+        .header-title div:nth-child(1) { font-size: 40px; text-align: center; letter-spacing: 5px; }
+        .header-title div:nth-child(2) { font-size: 18px; text-align: center; padding-top: 15px; }
+        .header-title div:nth-child(3) { font-size: 24px; text-align: center; padding-top: 15px; font-weight: bolder; letter-spacing: 2px; }
+        .header-qr-code { float: right; text-align: center; width: 160px; text-align: center; }
+        .header-qr-code-img { width: 115px; }
+        /* report personal info */
+        .person-info { padding-top: 8px; padding-bottom: 5px; }
+        .person-info-row div { display: inline-block; width: 33%; letter-spacing: 1px; line-height: 20px; height: 20x; vertical-align: middle; }
+        /* report project list */
+        .project-list-header { display: table; word-spacing:-1em; width: 100%; border-top: 1px solid black; padding: 8px 0px; }
+        .project-list-header div { display: inline-block; width: 15%; text-align: center; }
+        .project-list-header div:nth-child(1) { display: inline-block; width: 25%; }
+
+        /* report body */
+        .project-list-group-name { padding: 5px 0px; }
+        .project-list-group-row { width: 100%; display: table; word-spacing:-1em; width: 100%; line-height: 23px; height: 23px; vertical-align: middle; }
+        .project-list-group-row div { display: inline-block; width: 15%; text-align: center; }
+        .project-list-group-row div:nth-child(1) { display: inline-block; width: 25%; }
+        .project-list-group-row:nth-child(odd) { background-color: #D3D3D3; }
+
+        /* report footer */
+        .footer { font-size: 14px; width: 1150px; }
+        .footer-marks, .footer-statement, .footer-sign, .footer-address { line-height: 30px; height: 30px; vertical-align: middle; }
+        .footer-sign { font-size: 16px; border-top: 1px solid black; display: table; word-spacing: 1px; width: 100%; }
+        .footer-sign span {  display: inline-block; width: 25%; }
+        .footer-sign span img { height: 25px; position: relative; top: 7px; }
+        .footer-address { letter-spacing: 2px; word-break: break-all; }
+        .footer-address span:nth-child(2), .footer-address span:nth-child(3) { float: right; }
+        .footer-address span:nth-child(2) { width: 200px; }
+        .footer-address span:nth-child(3) { padding: 0px 5px; width: 200px; }   
+    </style>
+</head>
+
+<body>
+
+    <!-- report project list -->
+    <div class="project-list body">
+        <div class="project-list-group-name">血常规五分类</div>
+        <div class="bind-list project-list-group" data-property="${list1}" data-each-property="{name: 'list', property-list: ['${list.name}', '${list.age}']}">
+            <div class="project-list-group-row">
+                <div>白细胞计数</div>
+                <div>WBC</div>
+                <div>4.53</div>
+                <div>10^9/L</div>
+                <div>3.50--9.50</div>
+                <div>电阻抗法</div>
+            </div>
+            <div class="project-list-group-row">
+                <div>中性粒细胞百分比</div>
+                <div>NEU%</div>
+                <div>57.3</div>
+                <div>%</div>
+                <div>40.0--75.0</div>
+                <div>计算法</div>
+            </div>
+            <div class="project-list-group-row">
+                <div>单核细胞计数</div>
+                <div>MON#</div>
+                <div>0.20</div>
+                <div>10^9/L</div>
+                <div>0.10--0.60</div>
+                <div>流式细胞计数</div>
+            </div>
+            <div class="project-list-group-row">
+                <div>嗜酸性粒细胞百分比</div>
+                <div>EOS%</div>
+                <div>1.0</div>
+                <div>%</div>
+                <div>0.4--8.0</div>
+                <div>计算法</div>
+            </div>
+            <div class="project-list-group-row">
+                <div>嗜酸性粒细胞计数</div>
+                <div>EOS#</div>
+                <div>0.05</div>
+                <div>10~9/L</div>
+                <div>0.02--0.52</div>
+                <div>流式细胞计数</div>
+            </div>
+
+        </div>
+        
+    </div>
+</body>
+
+</html>

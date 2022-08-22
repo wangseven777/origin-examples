@@ -1,0 +1,39 @@
+<!--
+ * @Author: zzh
+ * @Date: 2021-11-12 10:41:11
+ * @LastEditors: zzh
+ * @LastEditTime: 2021-11-12 11:14:49
+ * @FilePath: \origin\CSS\filter.html
+ * @Description: 请填写简介
+-->
+<!--
+ * @Author: zzh
+ * @Description: filter练习
+ * css语法：filter: none | blur() | brightness() | contrast() | drop-shadow() | grayscale() | hue-rotate() | invert() | opacity() | saturate() | sepia() | url();
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        img {
+            width: 200px;
+            height: auto;
+            /*  blur(3px) brightness(80%) contrast(20%) drop-shadow(-8px 8px 8px red) 
+                grayscale(70%)  hue-rotate(90deg) invert(95%) opacity(70%) saturate(60%)
+                sepia(100%)
+            */
+            filter: sepia(100%) drop-shadow(-8px 8px 8px #909090) blur(1px) brightness(120%);
+        }
+    </style>
+
+</head>
+<body>
+<img src="./firefox-logo.svg" />
+    
+</body>
+</html>

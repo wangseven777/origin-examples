@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @page { size: a4; margin: 20px 10px 0px 10px; }
+        body { width: 1075px; margin: 0 auto; }
+        /* report header:  header-logo + header-title + header-qr-code = 1075px */
+        .header { border-bottom: 1px solid black; padding-bottom: 10px; overflow: auto; }
+        .header-logo { display: inline-block; width: 175px; text-align: center; }
+        .header-logo div:nth-child(1) img { display: block; width: 160px; padding-bottom: 10px; margin: 0 auto; }
+        .header-logo div:nth-child(2) img { display: block; width: 160px; margin: 0 auto; }
+        .header-logo div:nth-child(3) { text-align: left; width: 160px; margin: 0 auto; padding-left: 25px;    }
+        .header-title { float: right; width: 740px; text-align: center; }
+        .header-title div:nth-child(1) { font-size: 40px; text-align: center; letter-spacing: 5px; }
+        .header-title div:nth-child(2) { font-size: 18px; text-align: center; padding-top: 15px; }
+        .header-title div:nth-child(3) { font-size: 24px; text-align: center; padding-top: 15px; font-weight: bolder; letter-spacing: 2px; }
+        .header-qr-code { float: right; text-align: center; width: 160px; text-align: center; }
+        .header-qr-code-img { width: 115px; }
+        /* report personal info */
+        .person-info { padding-top: 8px; padding-bottom: 5px; }
+        .person-info-row div { display: inline-block; width: 33%; letter-spacing: 1px; line-height: 20px; height: 20x; vertical-align: middle; }
+        /* report project list */
+        .project-list-header { display: table; word-spacing:-1em; width: 100%; border-top: 1px solid black; border-bottom: 1px solid black;
+            line-height: 23px; height: 23px; vertical-align: middle; }
+        .project-list-header div { display: inline-block; width: 15%; text-align: center; }
+        .project-list-header div:nth-child(1) { display: inline-block; width: 25%; }
+        .project-list-group-row { width: 100%; display: table; word-spacing:-1em; width: 100%; line-height: 23px; height: 23px; vertical-align: middle; }
+        .project-list-group-row div { display: inline-block; width: 15%; text-align: center; }
+        .project-list-group-row div:nth-child(1) { display: inline-block; width: 25%; }
+        .project-list-group-row:nth-child(odd) { background-color: #D3D3D3; }
+
+        /* report footer */
+        .footer { position:absolute; bottom: 10px; font-size: 14px; width: 1075px; }
+        .footer-marks, .footer-statement, .footer-sign, .footer-address { line-height: 30px; height: 30px; vertical-align: middle; }
+        .footer-sign { font-size: 16px; border-top: 1px solid black; display: table; word-spacing: 1px; width: 100%; }
+        .footer-sign span {  display: inline-block; width: 25%; }
+        .footer-sign span img { height: 25px; position: relative; top: 7px; }
+        .footer-address { letter-spacing: 2px; }
+        .footer-address span:nth-child(2), .footer-address span:nth-child(3) { float: right; }
+        .footer-address span:nth-child(3) { padding: 0px 30px; }
+    </style>
+</head>
+
+<body>
+    <!-- report header -->
+    <div class="header">
+        <div class="header-logo">
+            <div><img src="https://picture.hwason.cn/image/png/144662572315551040.png"></div>
+            <div><img src="https://picture.hwason.cn/image/png/144664008467730944.png" ></div>
+            <div>A92031004345</div>
+        </div>
+        <div class="header-qr-code">
+            <img class="header-qr-code-img" src="https://picture.hwason.cn/image/png/144663445940261376.png">
+            <div>1/1</div>
+        </div>
+        <div class="header-title">
+            <div>南京江河华晟医学检验实验室</div>
+            <div>Nanjing Jiangho Hwason For Clinical Laboratory</div>
+            <div>检验结果报告单</div>
+        </div>
+    </div>
+
+    <!-- report personal info -->
+    <div class="person-info">
+        <div class="person-info-row">
+            <div>样本条码:A92031004345</div>
+            <div>送检医院:盐城市仁德医院</div>
+            <div>送检医生:杨丽娟</div>
+        </div>
+        <div class="person-info-row">
+            <div>姓&emsp;&emsp;名:夏慧</div>
+            <div>医院标识:</div>
+            <div>报告编码:2021051010040126-1</div>
+        </div>
+        <div class="person-info-row">
+            <div>性&emsp;&emsp;别:女</div>
+            <div>门诊/住院号:</div>
+            <div>标本类型:全</div>
+        </div>
+        <div class="person-info-row">
+            <div>年&emsp;&emsp;龄:34岁</div>
+            <div>科室/病区:</div>
+            <div>标本性状:标本未见异常</div>
+        </div>
+        <div class="person-info-row">
+            <div>联系电话:</div>
+            <div>床&emsp;&emsp;号:</div>
+            <div>采样时间:2021-05-10 19:48:18</div>
+        </div>
+        <div class="person-info-row">
+            <div>身份证号:</div>
+            <div>临床诊断:</div>
+            <div>接收时间:2021-05-10 23:00:11</div>
+        </div>
+    </div>
+
+    <!-- report project list -->
+    <div class="project-list">
+        <div class="project-list-header">
+            <div>项目名称</div>
+            <div>简称</div>
+            <div>结果</div>
+            <div>单位</div>
+            <div>参考范围</div>
+            <div>方法学</div>
+        </div>
+        <div class="project-list-group">
+            <div class="project-list-group-name">血常规五分类</div>
+            <div class="project-list-group-row">
+                <div>白细胞计数</div>
+                <div>WBC</div>
+                <div>4.53</div>
+                <div>10^9/L</div>
+                <div>3.50--9.50</div>
+                <div>电阻抗法</div>
+            </div>
+            <div class="project-list-group-row">
+                <div>中性粒细胞百分比</div>
+                <div>NEU%</div>
+                <div>57.3</div>
+                <div>%</div>
+                <div>40.0--75.0</div>
+                <div>计算法</div>
+            </div>
+            <div class="project-list-group-row">
+                <div>单核细胞计数</div>
+                <div>MON#</div>
+                <div>0.20</div>
+                <div>10^9/L</div>
+                <div>0.10--0.60</div>
+                <div>流式细胞计数</div>
+            </div>
+            <div class="project-list-group-row">
+                <div>嗜酸性粒细胞百分比</div>
+                <div>EOS%</div>
+                <div>1.0</div>
+                <div>%</div>
+                <div>0.4--8.0</div>
+                <div>计算法</div>
+            </div>
+            <div class="project-list-group-row">
+                <div>嗜酸性粒细胞计数</div>
+                <div>EOS#</div>
+                <div>0.05</div>
+                <div>10~9/L</div>
+                <div>0.02--0.52</div>
+                <div>流式细胞计数</div>
+            </div>
+
+        </div>
+        
+    </div>
+
+    <!-- report footer -->
+    <div class="footer">
+        <div class="footer-marks">备注:</div>
+        <div class="footer-statement">※本检测仅对来样负责,如有疑问请在报告一周内提出。</div>
+        <div class="footer-sign">
+            <span>检验者: <img src="./sign1.png"> </span>
+            <span>审核者: <img src="./sign2.png"></span>
+            <span>主检实验室: 临检</span>
+            <span>报告时间: 2021-05-11 01:48:06</span>
+        </div>
+        <div class="footer-address">
+            <span>地址: 南京市江北新区新锦湖路3-1号中丹生态生命科学产业园二期C座4层</span>
+            <span>客服电话: 400-894-5099</span>
+            <span>网址: www.hwason.cn</span>
+        </div>
+    </div>
+</body>
+
+</html>

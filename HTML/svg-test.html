@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <svg class="dv-border-svg-container" width="776" height="264">
+        <path fill="transparent" d="
+          M 5 20 L 5 10 L 12 3  L 60 3 L 68 10
+          L 756 10 L 771 25
+          L 771 259 L 20 259
+          L 5 244 L 5 20
+        " stroke="#6586ec"></path>
+        <path fill="transparent" stroke-width="3" stroke-linecap="round" stroke-dasharray="10, 5" d="M 16 9 L 61 9" stroke="#6586ec"></path>
+        <path fill="transparent" d="M 5 20 L 5 10 L 12 3  L 60 3 L 68 10" stroke="#2cf7fe"></path>
+        <path fill="transparent" d="M 771 234 L 771 259 L 746 259" stroke="#2cf7fe"></path>
+    </svg>
+
+    <svg class="dv-border-svg-container" width="776" height="264">
+        <defs>
+            <path id="border-box-8-path-598ffe75beb24bb5b3ddb5527d605610" d="M2.5, 2.5 L773.5, 2.5 L773.5, 261.5 L2.5, 261.5 L2.5, 2.5" fill="transparent"></path>
+            <radialGradient id="border-box-8-gradient-598ffe75beb24bb5b3ddb5527d605610" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#fff" stop-opacity="1"></stop>
+                <stop offset="100%" stop-color="#fff" stop-opacity="0"></stop>
+            </radialGradient>
+            <mask id="border-box-8-mask-598ffe75beb24bb5b3ddb5527d605610">
+                <circle cx="0" cy="0" r="150" fill="url(#border-box-8-gradient-598ffe75beb24bb5b3ddb5527d605610)">
+                    <animateMotion dur="5s" path="M2.5, 2.5 L773.5, 2.5 L773.5, 261.5 L2.5, 261.5 L2.5, 2.5" rotate="auto" repeatCount="indefinite"></animateMotion>
+                </circle>
+            </mask>
+        </defs>
+        <polygon fill="transparent" points="5, 5 771, 5 771 259 5, 259"></polygon>
+        <use stroke-width="1" xlink:href="#border-box-8-path-598ffe75beb24bb5b3ddb5527d605610" stroke="#235fa7"></use>
+        <use stroke-width="3" xlink:href="#border-box-8-path-598ffe75beb24bb5b3ddb5527d605610" mask="url(#border-box-8-mask-598ffe75beb24bb5b3ddb5527d605610)" stroke="#4fd2dd">
+            <animate attributeName="stroke-dasharray" from="0, 2070" to="2070, 0" dur="5s" repeatCount="indefinite">
+
+            </animate>
+        </use>
+    </svg>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>可拖动弹窗</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <style>
+        body {background: #f5f5f5; font-size: 14px; color: #333; }
+        .dialog_btn_wrap {padding: 100px; text-align: center; }
+        #mask {position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: 1; background: rgba(0,0,0,.4); display: none;
+            -moz-user-select: none; -webkit-user-select: none;}
+        #dialog {position: absolute; width: 250px; height: 200px; top: 0; left: 0; border-radius: 10px; z-index: 2; background: #fff; display: none;
+            -moz-user-select: none; -webkit-user-select: none;}
+        .dialog_head {text-align: center; line-height: 50px; background-color: #ddd; cursor: move; }
+        .dialog-body {height: 100px; }
+        .dialog-foot {height: 50px; text-align: center; line-height: 50px; background-color: #ddd; }
+    </style>
+</head>
+<body>
+
+<div class="dialog_btn_wrap">
+    <a class="btn btn-lg btn-primary" id="dialog_btn">弹窗</a>
+</div>
+
+<!--蒙层-->
+<!-- <div id="mask"></div> -->
+
+<!--弹窗-->
+<div id="dialog">
+    <div class="dialog_head" id="move_part">可拖拽区域</div>
+    <div class="dialog-body"></div>
+    <div class="dialog-foot">
+        <a class="btn btn-default" id="dialog_close">关闭</a>
+    </div>
+</div>
+
+<script>
+    //g()函数用于获取dom对象
+    function g(id) {
+        return document.getElementById(id);
+    }
+
+    //点击弹出弹窗
+    g('dialog_btn').onclick = function () {
+        // g('mask').style.display = 'block';
+        g('dialog').style.display = 'block';
+        autoCenter(g('dialog'));
+    }
+
+    //点击关闭弹窗
+    g('dialog_close').onclick = function () {
+        // g('mask').style.display = 'none';
+        g('dialog').style.display = 'none';
+    }
+    
+    //弹窗自动居中
+    function autoCenter(el) {
+        //获取窗口宽高
+        var windowW = document.documentElement.clientWidth;
+        var windowH = document.documentElement.clientHeight;
+
+        //获取弹窗宽高
+        var elW = el.offsetWidth;
+        var elH = el.offsetHeight;
+
+        el.style.left = (windowW-elW)/2 + 'px';
+        el.style.top = (windowH-elH)/2 + 'px';
+    }
+
+    //禁止选中弹窗内容
+    //document.attachEvent IE浏览器监听事件，拖拽时禁止选中，firefox、chrome通过css -moz-user-select: none; -webkit-user-select: none;设置
+    if(document.attachEvent) {
+        g('dialog').attachEvent('onselectstart', function () {
+            return false;
+        })
+    }
+
+    //改变窗口大小，弹窗自动居中
+    window.onresize = function () {
+        autoCenter(g('dialog'));
+    }
+
+    //拖拽实现原理
+    //1.鼠标点击时，设置弹窗可拖动，记录鼠标初试位置
+    //2.鼠标拖动时，根据鼠标新位置更新弹窗位置
+    //3.鼠标离开时，设置弹窗不可拖动
+    //4.限制弹窗拖拽范围
+
+    var mx = 0; //鼠标x,y轴坐标(相对于left top)
+    var my = 0;
+
+    var dx = 0; //弹窗x,y轴坐标
+    var dy = 0;
+
+    var isDraging = false; // 弹窗不可拖动
+
+    //鼠标点击
+    g('move_part').addEventListener('mousedown', function (e) {
+        var e = e || window.event; //兼容写法，window.event为IE浏览器独有对象
+        mx = e.pageX; //点击时鼠标X坐标
+        my = e.pageY; //点击时鼠标Y坐标
+        dx = g('dialog').offsetLeft; //弹窗距页面左侧距离
+        dy = g('dialog').offsetTop; //弹窗距页面顶部距离
+        isDraging = true; //标记弹窗可拖动
+    })
+
+    //鼠标拖动
+    //当鼠标在当前对象上移动时就产生了onmousemove事件
+    document.onmousemove = function (e) {
+        var e = e || window.event;
+        var x = e.pageX; //移动时鼠标X坐标
+        var y = e.pageY; //移动时鼠标X坐标
+        if(isDraging) {
+            var moveX = x - mx + dx; //位移值+弹窗left值=移动后弹窗left值
+            var moveY = y - my + dy; //移动后弹窗top值
+
+            //限制弹窗拖拽范围
+            //页面宽高
+            var pageW = document.documentElement.clientWidth;
+            var pageH = document.documentElement.clientHeight;
+            //弹窗宽高
+            var dialogW = g('dialog').offsetWidth;
+            var dialogH = g('dialog').offsetHeight;
+            var maxX = pageW - dialogW; //x轴可拖动最大值
+            var maxY = pageH - dialogH; //x轴可拖动最大值
+            //Math.min()  Math.max()妙用
+            moveX = Math.min(Math.max(0, moveX), maxX); //设定left范围, 0-maxX
+            moveY = Math.min(Math.max(0, moveY), maxY); //设定top范围, 0-maxY
+            //重新设置弹窗位置
+            g('dialog').style.left = moveX + 'px';
+            g('dialog').style.top = moveY + 'px';
+        }
+    }
+
+    //鼠标离开
+    g('move_part').addEventListener('mouseup', function () {
+        isDraging = false;
+    })
+
+</script>
+</body>
+</html>

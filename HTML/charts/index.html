@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            padding: 0px;
+            margin: 0px;
+            background-color: #2F3136;
+        }
+
+        .container-box {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+            overflow: auto;
+        }
+
+        .edit-box {
+            width: 30%;
+            height: 100%;
+        }
+
+        .preview-boxf {
+            flex: 1;
+            height: 100%;
+            overflow-x: auto;
+        }
+
+        .preview-box {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+    <script type="text/javascript" src="./echarts/echarts.min.js"></script>
+    <script type="text/javascript" src="./monaco/loader.js"></script>
+    <script type="text/javascript" src="./monaco/basic-languages/javascript/javascript.js"></script>
+    <script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./editor.js"></script>
+    <script type="text/javascript" src="./preview.js"></script>
+</head>
+
+<body>
+    <button onclick="changData()" style="position: absolute; top: 5px; right: 10px; z-index: 1000;">初始化数据(测试)</button>
+    <button onclick="previewUnFold()" style="position: absolute; top: 5px; right: 140px; z-index: 1000;">全部展开</button>
+    <button onclick="previewFold()" style="position: absolute; top: 5px; right: 220px; z-index: 1000;">全部折叠</button>
+    <div class="container-box">
+        <div id="editBox" class="edit-box"></div>
+        <div class="preview-boxf" id="previewBoxF">
+            <div class="preview-box" id="previewBox"></div>
+        </div>
+    </div>
+
+    <script>
+        // test data
+        var testJSONStringData = `{
+  "squadName": "Super hero squad",
+  "homeTown": "Metro City",
+  "formed": 2016,
+  "secretBase": "Super tower",
+  "active": true,
+  "members": [
+    {
+      "name": "Molecule Man",
+      "age": 29,
+      "secretIdentity": "Dan Jukes",
+      "powers": [
+        "Radiation resistance",
+        "Turning tiny",
+        "Radiation blast",
+        1,
+        true
+      ]
+    },
+    {
+      "name": "Madame Uppercut",
+      "age": 39,
+      "secretIdentity": "Jane Wilson",
+      "powers": [
+        "Million tonne punch",
+        "Damage resistance",
+        "Superhuman reflexes"
+      ]
+    },
+    {
+      "name": "Eternal Flame",
+      "age": 1000000,
+      "secretIdentity": "Unknown",
+      "powers": [
+        "Immortality",
+        "Heat Immunity",
+        "Inferno",
+        "Teleportation",
+        "Interdimensional travel"
+      ]
+    }
+  ]
+}`;
+
+        testJSONStringData = '[{"name":"发起人","type":0,"org":[{"code":"001","name":"部门"}],"subi":"","id":""},{"name":"条件分支","type":3,"condition":[{"priority":1,"subi":"","id":"FM7PnJmUxmJvlV0n_EYRU","workflow":[{"name":"审核人","type":1,"org":[{"code":"001","name":"部门"}],"subi":"","id":""}]},{"subi":"","id":"EK8ZgAHpe3EAz34goVXy-","priority":1,"workflow":[{"name":"抄送人","type":2,"org":[{"code":"001","name":"部门"}],"subi":"","id":""}]},{"subi":"","id":"I8VsqdvbsKBvf5wkqbntT","priority":2,"workflow":[{"name":"条件分支","type":3,"condition":[{"priority":1,"subi":"","id":"WWaPle42qU66WiT5sqnNN","workflow":[{"name":"审核人","type":1,"org":[{"code":"001","name":"部门"}],"subi":"","id":"WWaPle42qU66WiT5sqnNN"},{"name":"发起人","type":0,"org":[{"code":"001","name":"部门"}],"subi":"","id":""},{"name":"条件分支","type":3,"condition":[{"priority":1,"subi":"","id":"XAZ1e-vhjQ2vHtzIfw0cC","workflow":[{"name":"审核人","type":1,"org":[{"code":"001","name":"部门"}],"subi":"","id":"9qs2obZPxflffh98JKueS"},{"name":"发起人","type":0,"org":[{"code":"001","name":"部门"}],"subi":"","id":""},{"name":"条件分支","type":3,"condition":[{"priority":1,"subi":"","id":"FM7PnJmUxmJvlV0n_EYRU","workflow":[{"name":"审核人","type":1,"org":[{"code":"001","name":"部门"}],"subi":"","id":""}]},{"subi":"","id":"EK8ZgAHpe3EAz34goVXy-","priority":1,"workflow":[{"name":"抄送人","type":2,"org":[{"code":"001","name":"部门"}],"subi":"","id":""}]},{"subi":"","id":"I8VsqdvbsKBvf5wkqbntT","priority":2,"workflow":[{"name":"条件分支","type":3,"condition":[{"subi":"","id":"cWACwvXN5kKEw4Z31n6pH","priority":1,"workflow":[{"name":"审核人","type":1,"org":[{"code":"001","name":"部门"}],"subi":"","id":""}]},{"subi":"","id":"q0HipX2S2u8nBEtL845kz","priority":2,"workflow":[{"name":"抄送人","type":2,"org":[{"code":"001","name":"部门"}],"subi":"","id":""}]}],"org":[{"code":"001","name":"部门"}],"id":""}]}],"org":[{"code":"001","name":"部门"}],"subi":"","id":""},{"name":"抄送人","type":2,"org":[{"code":"001","name":"部门"}],"subi":"","id":""},{"name":"审核人","type":1,"org":[{"code":"001","name":"部门"}],"subi":"","id":""}]},{"subi":"","id":"qjnqhd9ZHnWqTL6FX0doe","priority":1,"workflow":[{"name":"抄送人","type":2,"org":[{"code":"001","name":"部门"}],"subi":"","id":"9qs2obZPxflffh98JKueS"},{"name":"发起人","type":0,"org":[{"code":"001","name":"部门"}],"subi":"","id":""},{"name":"条件分支","type":3,"condition":[{"priority":1,"subi":"","id":"FM7PnJmUxmJvlV0n_EYRU","workflow":[{"name":"审核人","type":1,"org":[{"code":"001","name":"部门"}],"subi":"","id":""}]},{"subi":"","id":"EK8ZgAHpe3EAz34goVXy-","priority":1,"workflow":[{"name":"抄送人","type":2,"org":[{"code":"001","name":"部门"}],"subi":"","id":""}]},{"subi":"","id":"I8VsqdvbsKBvf5wkqbntT","priority":2,"workflow":[{"name":"条件分支","type":3,"condition":[{"priority":1,"subi":"","id":"WWaPle42qU66WiT5sqnNN","workflow":[{"name":"审核人","type":1,"org":[{"code":"001","name":"部门"}],"subi":"","id":"WWaPle42qU66WiT5sqnNN"},{"name":"发起人","type":0,"org":[{"code":"001","name":"部门"}],"subi":"","id":""},{"name":"条件分支","type":3,"condition":[{"priority":1,"subi":"","id":"XAZ1e-vhjQ2vHtzIfw0cC","workflow":[{"name":"审核人","type":1,"org":[{"code":"001","name":"部门"}],"subi":"","id":""}]},{"subi":"","id":"qjnqhd9ZHnWqTL6FX0doe","priority":1,"workflow":[{"name":"抄送人","type":2,"org":[{"code":"001","name":"部门"}],"subi":"","id":"9qs2obZPxflffh98JKueS"},{"name":"发起人","type":0,"org":[{"code":"001","name":"部门"}],"subi":"","id":""},{"name":"条件分支","type":3,"condition":[{"priority":1,"subi":"","id":"FM7PnJmUxmJvlV0n_EYRU","workflow":[{"name":"审核人","type":1,"org":[{"code":"001","name":"部门"}],"subi":"","id":""}]},{"subi":"","id":"EK8ZgAHpe3EAz34goVXy-","priority":1,"workflow":[{"name":"抄送人","type":2,"org":[{"code":"001","name":"部门"}],"subi":"","id":""}]},{"subi":"","id":"I8VsqdvbsKBvf5wkqbntT","priority":2,"workflow":[{"name":"条件分支","type":3,"condition":[{"subi":"","id":"cWACwvXN5kKEw4Z31n6pH","priority":1,"workflow":[{"name":"审核人","type":1,"org":[{"code":"001","name":"部门"}],"subi":"","id":""}]},{"subi":"","id":"q0HipX2S2u8nBEtL845kz","priority":2,"workflow":[{"name":"抄送人","type":2,"org":[{"code":"001","name":"部门"}],"subi":"","id":""}]}],"org":[{"code":"001","name":"部门"}],"id":""}]}],"org":[{"code":"001","name":"部门"}],"subi":"","id":""},{"name":"抄送人","type":2,"org":[{"code":"001","name":"部门"}],"subi":"","id":""},{"name":"审核人","type":1,"org":[{"code":"001","name":"部门"}],"subi":"","id":""}]},{"subi":"","id":"9qs2obZPxflffh98JKueS","priority":2,"workflow":[{"name":"条件分支","type":3,"condition":[{"priority":1,"subi":"","id":"","workflow":[]},{"subi":"","id":"","priority":1,"workflow":[]},{"subi":"","id":"","priority":2,"workflow":[]}],"org":[{"code":"001","name":"部门"}],"id":""}]}],"org":[{"code":"001","name":"部门"}],"subi":"","id":""},{"name":"抄送人","type":2,"org":[{"code":"001","name":"部门"}],"subi":"","id":""},{"name":"审核人","type":1,"org":[{"code":"001","name":"部门"}],"subi":"","id":""}]},{"subi":"","id":"","priority":1,"workflow":[]},{"subi":"","id":"","priority":2,"workflow":[]}],"org":[{"code":"001","name":"部门"}],"id":""}]}],"org":[{"code":"001","name":"部门"}],"subi":"","id":""},{"name":"抄送人","type":2,"org":[{"code":"001","name":"部门"}],"subi":"","id":""},{"name":"审核人","type":1,"org":[{"code":"001","name":"部门"}],"subi":"","id":""}]},{"subi":"","id":"9qs2obZPxflffh98JKueS","priority":2,"workflow":[{"name":"条件分支","type":3,"condition":[{"priority":1,"subi":"","id":"","workflow":[]},{"subi":"","id":"","priority":1,"workflow":[]},{"subi":"","id":"","priority":2,"workflow":[]}],"org":[{"code":"001","name":"部门"}],"id":""}]}],"org":[{"code":"001","name":"部门"}],"subi":"","id":""},{"name":"抄送人","type":2,"org":[{"code":"001","name":"部门"}],"subi":"","id":""},{"name":"审核人","type":1,"org":[{"code":"001","name":"部门"}],"subi":"","id":""}]},{"subi":"","id":"","priority":1,"workflow":[]},{"subi":"","id":"","priority":2,"workflow":[]}],"org":[{"code":"001","name":"部门"}],"id":""}]}],"org":[{"code":"001","name":"部门"}],"subi":"","id":""},{"name":"抄送人","type":2,"org":[{"code":"001","name":"部门"}],"subi":"","id":""},{"name":"审核人","type":1,"org":[{"code":"001","name":"部门"}],"subi":"","id":""}]'; 
+    </script>
+
+    <script>
+        initEditor();
+        // initPreview();
+
+        function changData(data) {
+            // let dataStr = data;
+            let dataStr = testJSONStringData; // for test line
+            if (typeof data === 'string' && !isJsonString(data)) return;
+            if (typeof data === 'object') dataStr = JSON.stringify(data);
+
+            editorSetValue(dataStr); // 初始化编辑器
+            initPreview(dataStr); // 初始化预览
+
+        }
+
+        window.onload = () => { editorFormat(); }
+    </script>
+</body>
+
+</html>

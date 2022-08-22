@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @page { size: a4; margin: 20px 10px 0px 10px; }
+        body { margin: 0 auto; width: 1150px;}
+        .header { border-bottom: 1px solid black; padding-bottom: 10px; overflow: auto; }
+        .header-logo { display: inline-block; width: 175px; text-align: center; }
+        .header-logo div:nth-child(1) img { display: block; width: 160px; padding-bottom: 10px; margin: 0 auto; }
+        .header-logo div:nth-child(2) img { display: block; width: 160px; margin: 0 auto; }
+        .header-logo div:nth-child(3) { text-align: left; width: 160px; margin: 0 auto; padding-left: 25px;    }
+        .header-title { float: right; width: 720px; text-align: center; }
+        .header-title div:nth-child(1) { font-size: 40px; text-align: center; letter-spacing: 5px; }
+        .header-title div:nth-child(2) { font-size: 18px; text-align: center; padding-top: 15px; }
+        .header-title div:nth-child(3) { font-size: 24px; text-align: center; padding-top: 15px; font-weight: bolder; letter-spacing: 2px; }
+        .header-qr-code { float: right; text-align: center; width: 160px; text-align: center; }
+        .header-qr-code-img { width: 115px; }
+        /* report personal info */
+        .person-info { padding-top: 8px; padding-bottom: 5px; }
+        .person-info-row div { display: inline-block; width: 33%; letter-spacing: 1px; line-height: 20px; height: 20x; vertical-align: middle; }
+        /* report project list */
+        .project-list-header { display: table; word-spacing:-1em; width: 100%; border-top: 1px solid black; padding: 8px 0px; }
+        .project-list-header div { display: inline-block; width: 15%; text-align: center; }
+        .project-list-header div:nth-child(1) { display: inline-block; width: 25%; }
+
+        /* report body */
+        .project-list-group-name { padding: 5px 0px; }
+        .project-list-group-row { width: 100%; display: table; word-spacing:-1em; width: 100%; line-height: 23px; height: 23px; vertical-align: middle; }
+        .project-list-group-row div { display: inline-block; width: 15%; text-align: center; }
+        .project-list-group-row div:nth-child(1) { display: inline-block; width: 25%; }
+        .project-list-group-row:nth-child(odd) { background-color: #D3D3D3; }
+
+        /* report footer */
+        .footer { font-size: 14px; width: 1150px; }
+        .footer-marks, .footer-statement, .footer-sign, .footer-address { line-height: 30px; height: 30px; vertical-align: middle; }
+        .footer-sign { font-size: 16px; border-top: 1px solid black; display: table; word-spacing: 1px; width: 100%; }
+        .footer-sign span {  display: inline-block; width: 25%; }
+        .footer-sign span img { height: 25px; position: relative; top: 7px; }
+        .footer-address { letter-spacing: 2px; word-break: break-all; }
+        .footer-address span:nth-child(2), .footer-address span:nth-child(3) { float: right; }
+        .footer-address span:nth-child(2) { width: 200px; }
+        .footer-address span:nth-child(3) { padding: 0px 5px; width: 200px; }   
+    </style>
+</head>
+
+<body>
+
+    <!-- report footer -->
+    <div class="footer">
+        <div class="footer-marks">备注:</div>
+        <div class="footer-statement">※本检测仅对来样负责,如有疑问请在报告一周内提出。</div>
+        <div class="footer-sign">
+            <span>检验者: <img src="./sign1.png"> </span>
+            <span>审核者: <img src="./sign2.png"></span>
+            <span>主检实验室: 临检</span>
+            <span>报告时间: 2021-05-11 01:48:06</span>
+        </div>
+        <div class="footer-address">
+            <span>地址: 南京市江北新区新锦湖路3-1号中丹生态生命科学产业园二期C座4层</span>
+            <span>客服电话: 400-894-5099</span>
+            <span>网址: www.hwason.cn</span>
+        </div>
+    </div>
+</body>
+
+</html>

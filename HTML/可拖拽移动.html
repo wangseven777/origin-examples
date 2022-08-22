@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div ondragenter="ondragenter" ondragover="ondragover" style="height: 500px; width: 500px; user-select: none; background-color: blue; display: block;">
+        <div class="box1" draggable="true" id="source" 
+            style="display: block; height: 100px; width: 100px;
+            position: relative;
+             user-select: none;
+             cursor: pointer; background-color: pink; transform: translate3d(100px, 100px, 0px) scale(0.9);"></div>
+    </div>
+
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+
+    <script>
+        function ondragenter(e) {
+            e.preventDefault();
+        }
+
+        function ondragover (e) {
+            e.preventDefault();
+        }
+
+        const source = document.getElementById('source');
+        source.ondragstart = function (event) {
+            var e = event || window.event
+            // console.log(e);
+            // source.style.transform = `translate3d(${e.x}px, 143.65px, 0px) scale(0.9);}`;
+        }
+        
+        source.ondrag = function (event) {
+            console.log('拖拽中');
+            var e = event || window.event
+            var lis = document.getElementsByTagName('li');
+            lis[0].innerHTML = `x: ${e.x}`;
+            lis[1].innerHTML = `y: ${e.y}`;
+            lis[2].innerHTML = `offsetX: ${e.offsetX}`;
+            lis[3].innerHTML = `offsetY: ${e.offsetY}`;
+            lis[4].innerHTML = `pageX: ${e.pageX}`;
+            lis[5].innerHTML = `pageY: ${e.pageY}`;
+            lis[6].innerHTML = `screenX: ${e.screenX}`;
+            lis[7].innerHTML = `screenY: ${e.screenY}`;
+        }
+        
+        source.ondragend = function (event) {
+            console.log('拖拽结束')
+            var e = event || window.event
+            console.log(e);
+            source.style.transform = `translate3d(${e.x - 50}px, ${e.y - 50}px, 0px)`;
+            source.style.backgroundColor = 'red';
+        }
+
+    </script>
+</body>
+
+</html>

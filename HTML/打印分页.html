@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+@media print {
+  footer {
+    position: fixed;
+    height: 30px;
+    bottom: 0;
+  }
+
+  .box {
+    margin-bottom: 30px;
+  }
+}
+
+@page {
+    margin: 0mm;
+    padding: 20mm;
+  }
+    </style>
+</head>
+<body>
+
+    <div class="box" style="overflow: auto;counter-reset: headings;">
+        <div class="foot"></div>
+    </div>
+
+<div id="empty"></div>
+<footer>测试</footer>
+</body>
+<script>
+    const box = document.getElementsByClassName('box')[0];
+    for (let i = 0; i < 500; i++) {
+        const child = document.createElement('div');
+        child.innerHTML = i;
+        box.appendChild(child);
+    }
+
+    window.addEventListener('afterprint', function(e){
+      console.log('结束打印');
+      console.log(e);
+    });
+
+    window.addEventListener('beforeprint', function(e){
+      console.log('开始打印');
+      console.log(e);
+    });
+
+    window.addEventListener('scroll', function(e) {
+      console.log(e);
+      console.log(window.scrollY);
+    });
+</script>
+</html>

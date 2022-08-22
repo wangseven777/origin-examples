@@ -1,0 +1,85 @@
+<!--
+ * @Author: zzh
+ * @Date: 2022-02-18 13:13:42
+ * @LastEditors: zzh
+ * @LastEditTime: 2022-02-18 15:55:52
+ * @Description: 转换图片
+ * @FilePath: \origin\HTML\convertPic.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+        <!-- 引入文件保存js-->
+	<script src="./js/sheetjs/xlsx.core.min.js" ></script>
+	<script src="./js/sheetjs/xlsxStyle.core.min.js" ></script>
+	<script src="./js/sheetjs/xlsxStyle.utils.js" ></script>
+	<script src="./js/sheetjs/xlsxExport.utils.js" ></script>
+
+</head>
+
+<body>
+    <label for="uploadFile" class="upload-file">点击上传</label>
+    <!-- 在CSS中将input隐藏，UI效果用label展示 -->
+    <input type="file" name="upload_file" id="uploadFile" onchange="uploadImg()" />
+    <br>
+    <!-- 没有上传的时候不显示 ,上传以后添加src-->
+    <img id="showUploadFile" src="" class="picture" style="display:none;" >
+</body>
+
+<script>
+    function uploadImg() {
+        let file = document.getElementById('uploadFile').files[0];
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function (result) {
+            const base64 =  result.target.result;
+            $.ajax({
+                type: 'POST',
+                url: 'http://10.161.2.57:8082/ocr/characterRecognise',
+                // url: url,
+                timeout : 100000, //超时时间设置，单位毫秒
+                contentType:'application/json',
+                // dataType:"jsonp",/*加上datatype*/
+                data: JSON.stringify({ fileBase64: base64 }),
+                // data: JSON.stringify({ fileBase64: 'data:' }),
+                success: function(data, textStatus, jqXHR) {
+                    console.log(data);
+                    console.log(textStatus);
+                    console.log(jqXHR);
+                    // var elt = document.getElementById('tbl_exporttable_to_xls');
+                    XSExport.excelExport(
+						[
+					["序号","姓名","年龄","性别","手机","邮箱","金额","创建日期"],
+					[1,"周一",28,"男","13888888881","1@q.com",4123.3,"2020-05-01"],
+					[2,"崔二",25,"女","13888888882","2@q.com",23432,"2020-05-03"],
+					[3,"张三",15,"男","13888888883","3@q.com",433.14,"2020-05-02"],
+					[4,"李四",27,"男","13888888884","4@q.com",6523,"2020-05-01"],
+					[5,"王五",18,"男","13888888885","5@q.com",411.36,"2020-05-04"],
+					[6,"赵六",21,"男","13888888886","6@q.com",1234,"2020-05-08"],
+					[7,"唐七",22,"女","13888888887","7@q.com",4321.75,"2020-05-05"],
+					[8,"范八",19,"男","13888888888","8@q.com",4322,"2020-05-06"],
+					[9,"薛九",31,"女","13888888889","9@q.com",56465,"2020-05-01"],
+					[10,"闫十",45,"男","13888888810","10@q.com",7864,"2020-05-07"]
+				],
+						'测试'
+                        );
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown){
+                //请求出错处理
+                console.log(XMLHttpRequest);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }  
+            });
+        }
+    }
+
+</script>
+
+</html>

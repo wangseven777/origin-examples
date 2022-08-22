@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button class="debounce">防抖</button>
+    <script>
+        const consoleFunc = () => {
+            console.log('hello world');
+        }
+
+        const debounce = function (func, timeout, immediate) {
+            let timeId = null;
+            return (...args) => {
+                clearTimeout(timeId);
+                if (immediate) {
+                    let callNow = !timeId;
+                    timeId = setTimeout(() => {
+                        timeId = null;
+                    }, timeout);
+                    if (callNow) func.apply(this, args);
+
+                } else {
+                    timeId = setTimeout(() => func.apply(this, args), timeout);
+                }
+            };
+        }
+
+        const de = document.querySelector(".debounce");
+        de.addEventListener('click', debounce(consoleFunc, 1000, true));
+
+    </script>
+    </button>
+</body>
+
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+        const htmlStr = `
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        @page { size: a4; margin: 20px 10px 0px 10px; }
+        body { margin: 0 auto; width: 1150px;}
+        .header { border-bottom: 1px solid black; padding-bottom: 10px; overflow: auto; }
+        .header-logo { display: inline-block; width: 175px; text-align: center; }
+        .header-logo div:nth-child(1) img { display: block; width: 160px; padding-bottom: 10px; margin: 0 auto; }
+        .header-logo div:nth-child(2) img { display: block; width: 160px; margin: 0 auto; }
+        .header-logo div:nth-child(3) { text-align: left; width: 160px; margin: 0 auto; padding-left: 25px;    }
+        .header-title { float: right; width: 720px; text-align: center; }
+        .header-title div:nth-child(1) { font-size: 40px; text-align: center; letter-spacing: 5px; }
+        .header-title div:nth-child(2) { font-size: 18px; text-align: center; padding-top: 15px; }
+        .header-title div:nth-child(3) { font-size: 24px; text-align: center; padding-top: 15px; font-weight: bolder; letter-spacing: 2px; }
+        .header-qr-code { float: right; text-align: center; width: 160px; text-align: center; }
+        .header-qr-code-img { width: 115px; }
+        /* report personal info */
+        .person-info { padding-top: 8px; padding-bottom: 5px; }
+        .person-info-row div { display: inline-block; width: 33%; letter-spacing: 1px; line-height: 20px; height: 20x; vertical-align: middle; }
+        /* report project list */
+        .project-list-header { display: table; word-spacing:-1em; width: 100%; border-top: 1px solid black; line-height: 20px; height: 20x; vertical-align: middle; padding-top: 8px; }
+        .project-list-header div { display: inline-block; width: 15%; text-align: center; }
+        .project-list-header div:nth-child(1) { display: inline-block; width: 25%; }
+
+        /* report body */
+        .project-list-group-name { padding: 5px 0px; }
+        .project-list-group-row { width: 100%; display: table; word-spacing:-1em; width: 100%; line-height: 23px; height: 23px; vertical-align: middle; }
+        .project-list-group-row div { display: inline-block; width: 15%; text-align: center; }
+        .project-list-group-row div:nth-child(1) { display: inline-block; width: 25%; }
+        .project-list-group-row:nth-child(odd) { background-color: #D3D3D3; }
+
+        /* report footer */
+        .footer { font-size: 14px; width: 1150px; }
+        .footer-marks, .footer-statement, .footer-sign, .footer-address { line-height: 30px; height: 30px; vertical-align: middle; }
+        .footer-sign { font-size: 16px; border-top: 1px solid black; display: table; word-spacing: 1px; width: 100%; }
+        .footer-sign span {  display: inline-block; width: 25%; }
+        .footer-sign span img { height: 25px; position: relative; top: 7px; }
+        .footer-address { letter-spacing: 2px; word-break: break-all; }
+        .footer-address span:nth-child(2), .footer-address span:nth-child(3) { float: right; }
+        .footer-address span:nth-child(2) { width: 200px; }
+        .footer-address span:nth-child(3) { padding: 0px 5px; width: 200px; }   
+    </style>
+</head>
+
+<body>
+    <!-- report header -->
+    <div class="header">
+        <div class="header-logo">
+            <div><img class="bind-value" data-type="image" data-property="#logSrc" src="https://picture.hwason.cn/image/png/144662572315551040.png"></div>
+            <div><img class="bind-value" data-type="image" data-property="#barCodeSrc" src="https://picture.hwason.cn/image/png/144664008467730944.png" ></div>
+            <div class="bind-value" data-type="value" data-property="#barcode">A92031004345</div>
+        </div>
+        <div class="header-qr-code">
+            <img class="header-qr-code-img" src="https://picture.hwason.cn/image/png/144663445940261376.png">
+            <div>1/1</div>
+        </div>
+        <div class="header-title">
+            <div>南京江河华晟医学检验实验室</div>
+            <div>Nanjing Jiangho Hwason For Clinical Laboratory</div>
+            <div>检验结果报告单</div>
+        </div>
+    </div>
+
+    <!-- report personal info -->
+    <div class="person-info">
+        <div class="person-info-row">
+            <div>样本条码:<span class="bind-value" data-type="value" data-property="#barcode">A92031004345</span></div>
+            <div>送检医院:<span class="bind-value" data-type="value" data-property="#hosName">盐城市仁德医院特别长的单位名称测试别长的单位名称测试</span></div>
+            <div>送检医生:<span class="bind-value" data-type="value" data-property="#doctorName">杨丽娟</span></div>
+        </div>
+        <div class="person-info-row">
+            <div>姓&emsp;&emsp;名:<span class="bind-value" data-type="value" data-property="#patientName">夏慧</span></div>
+            <div>医院标识:</div>
+            <div>报告编码:2021051010040126-1</div>
+        </div>
+        <div class="person-info-row">
+            <div>性&emsp;&emsp;别:<span class="bind-value" data-type="value" data-property="#patientSexName">女</span></div>
+            <div>门诊/住院号:</div>
+            <div>标本类型:全</div>
+        </div>
+        <div class="person-info-row">
+            <div>年&emsp;&emsp;龄:<span class="bind-value" data-type="value" data-property="#patientAge">34岁</span></div>
+            <div>科室/病区:</div>
+            <div>标本性状:标本未见异常</div>
+        </div>
+        <div class="person-info-row">
+            <div>联系电话:</div>
+            <div>床&emsp;&emsp;号:</div>
+            <div>采样时间:<span class="bind-value" data-type="value" data-property="#samplingTime">2021-05-10 19:48:18</span></div>
+        </div>
+        <div class="person-info-row">
+            <div>身份证号:</div>
+            <div>临床诊断:</div>
+            <div>接收时间:<span class="bind-value" data-type="value" data-property="#signTime">2021-05-10 23:00:11</span></div>
+        </div>
+    </div>
+
+    <!-- report project list -->
+    <div class="project-list header">
+        <div class="project-list-header">
+            <div>项目名称</div>
+            <div>简称</div>
+            <div>结果</div>
+            <div>单位</div>
+            <div>参考范围</div>
+            <div>方法学</div>
+        </div>        
+    </div>
+
+</body>
+
+</html>
+        `;
+
+const parser = new DOMParser();
+const htmlDom = parser.parseFromString(htmlStr, 'text/html');
+    </script>
+</body>
+</html>
