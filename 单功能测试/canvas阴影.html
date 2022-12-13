@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c2d">浏览器不支持canvas</canvas>
+    <script>
+        const canvas = document.querySelector('#c2d');
+        if(canvas.getContext) {
+            const ctx = canvas.getContext('2d');
+            
+            // 设置阴影效果
+            ctx.shadowOffsetX = -7;
+            ctx.shadowOffsetY = 5;
+            ctx.shadowBlur = 3;
+            ctx.shadowColor = 'rgba(255,255,0,0.7)';
+            
+            ctx.fillStyle = 'red';
+            ctx.fillRect(15,30,130,40);
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form>
+        <p align="left">请输入颜色编码：</p>
+        <input type="text" name="text" size="20" /> &nbsp;&nbsp;
+        <input type="button" name="button" value="修改颜色" onClick="change(this.form)" />
+    </form>
+</body>
+<script language="JavaScript">
+    function change(form) {
+        /*未输入颜色编码，弹出提示框*/
+        if (form.text.value == "")
+            alert("你喜欢的颜色是?");
+        else {
+            /*按输入颜色编码，修改背景颜色*/
+            document.bgColor = ("" + form.text.value + " ");
+        }
+    }
+</script>
+
+</html>

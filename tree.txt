@@ -1,0 +1,84 @@
+卷 code 的文件夹 PATH 列表
+卷序列号为 3677-7296
+E:.
+│  tree.txt
+│  
+├─HTML5+CSS3
+│      文字闪烁功能.html
+│      
+├─JavaScript实例
+│      修改背景.html
+│      
+├─JQ封装组件
+│      index.css
+│      index.html
+│      index.js
+│      
+├─JS原理方法实践
+│      DOM0Test.html
+│      EventDemo01.html
+│      
+├─WebComponents
+│  ├─demo1
+│  │      index.html
+│  │      main.js
+│  │      
+│  └─demo2
+│          index.html
+│          main.js
+│          
+├─单功能测试
+│  │  box.html
+│  │  canvas.html
+│  │  canvas1.html
+│  │  ColoredBorder.html
+│  │  export.js
+│  │  import.js
+│  │  Indexa.html
+│  │  indexedDB.html
+│  │  notification.html
+│  │  ReactTest.html
+│  │  StorageEvent.html
+│  │  windowOpen.html
+│  │  类型类属性测试.html
+│  │  
+│  └─RequireTest
+│          a.js
+│          b.js
+│          index.html
+│          notification.html
+│          
+├─菜鸟教程css3
+│  │  border.png
+│  │  css3背景.html
+│  │  css3边框.html
+│  │  
+│  └─Image
+│          Pic1.jpg
+│          Pic2.png
+│          
+└─菜鸟教程TS
+    │  app.ts
+    │  arrayTest.ts
+    │  asTest.ts
+    │  classImplements.ts
+    │  classTest.ts
+    │  classTest1.ts
+    │  interfaceTest.ts
+    │  mapTest.js
+    │  mapTest.ts
+    │  namespace.ts
+    │  NumberTest.ts
+    │  objectTest.ts
+    │  stirngTest.ts
+    │  tupleTest1.js
+    │  tupleTest2.ts
+    │  unionType.ts
+    │  variableTest.ts
+    │  作用域.ts
+    │  函数1.ts
+    │  
+    └─类型
+            anyTypeTest.ts
+            nullAndUndefined.ts
+            

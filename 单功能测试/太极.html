@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="mycanvas"></canvas>
+    <script type="text/javascript">
+      var c=document.getElementById('mycanvas');
+      c.width=600;
+      c.height=600;
+      c.style.border="1px solid black";
+      var context=c.getContext('2d');
+      context.strokeStyle="black";
+      context.lineWidth=4;
+      context.fillStyle="black";
+      context.beginPath();
+      context.arc(300,300,250,0,Math.PI,true);
+      context.stroke();
+      context.fill();
+      context.closePath();
+
+      context.strokeStyle="black";
+      context.lineWidth=3;
+      context.fillStyle="white";
+      context.beginPath();
+      context.arc(300,300,250,0,Math.PI,false);
+      context.stroke();
+      context.fill();
+      context.closePath()
+
+      context.strokeStyle="white";
+      context.lineWidth=1;
+      context.fillStyle="white";
+      context.beginPath();
+      context.arc(175,300,125,0,2*Math.PI);
+      context.stroke();
+      context.fill();
+      context.closePath()
+
+      context.strokeStyle="black";
+      context.lineWidth=1;
+      context.fillStyle="black";
+      context.beginPath();
+      context.arc(425,300,125,0,2*Math.PI);
+      context.stroke();
+      context.fill();
+      context.closePath()
+
+      context.strokeStyle="black";
+      context.lineWidth=1;
+      context.fillStyle="black";
+      context.beginPath();
+      context.arc(175,300,30,0,2*Math.PI);
+      context.stroke();
+      context.fill();
+      context.closePath()
+
+      context.strokeStyle="white";
+      context.lineWidth=1;
+      context.fillStyle="white";
+      context.beginPath();
+      context.arc(425,300,30,0,2*Math.PI);
+      context.stroke();
+      context.fill();
+      context.closePath()
+    </script>
+</body>
+</html>
