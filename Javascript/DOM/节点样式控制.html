@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <script>
+        console.log('head before Mounted:' + document.querySelector('#box')?.innerHTML);
+        
+        window.addEventListener('DOMContentLoaded', function (e) {
+            console.log('head dom content loaded: ' + document.querySelector('#box').innerHTML);
+        });
+
+        window.onload = function (e) {
+            console.log('head window onload: ' + document.querySelector('#box').innerHTML);
+        }
+    </script>
+</head>
+
+<body>
+    <script>
+        console.log('before Mounted:' + document.querySelector('#box')?.innerHTML);
+    </script>
+    <div id="box">box</div>
+    <script>
+        console.log('dom end: ' + document.querySelector('#box').innerHTML);
+    </script>
+
+    <script>
+        window.onload = function (e) {
+            console.log('window onload: ' + document.querySelector('#box').innerHTML);
+        }
+    </script>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', function (e) {
+            console.log('dom content loaded: ' + document.querySelector('#box').innerHTML);
+
+            // 查询: styleDom.sheet.cssRules
+
+            // 新增 CSSStyleSheet.insertRule()
+            const styleDom = document.getElementsByTagName('style')[0];
+            styleDom.sheet.insertRule('#box { width: 100px; height: 100px; background-color: red; color: white; }', styleDom.sheet.cssRules.length);
+            styleDom.textContent = Array.from(styleDom.sheet.cssRules).map(x => x.cssText).join('\n');
+
+
+            // 删除： deleteRule()
+
+
+            // 更新: CSSStyleSheet.replace()
+            const box = document.querySelector('.box');
+
+
+
+        });
+
+        function uuid(len, radix) {
+            var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
+            var uuid = [], i;
+            radix = radix || chars.length;
+
+            if (len) {
+                // Compact form
+                for (i = 0; i < len; i++) uuid[i] = chars[0 | Math.random() * radix];
+            } else {
+                // rfc4122, version 4 form
+                var r;
+
+                // rfc4122 requires these characters
+                uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
+                uuid[14] = '4';
+
+                // Fill in random data.  At i==19 set the high bits of clock sequence as
+                // per rfc4122, sec. 4.1.5
+                for (i = 0; i < 36; i++) {
+                    if (!uuid[i]) {
+                        r = 0 | Math.random() * 16;
+                        uuid[i] = chars[(i == 19) ? (r & 0x3) | 0x8 : r];
+                    }
+                }
+            }
+
+            return uuid.join('');
+        }
+    </script>
+</body>
+
+</html>

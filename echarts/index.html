@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>echarts.js案例一</title>
+    <script crossorigin="anonymous"
+        integrity="sha512-aOcqo6zSq6Fceh7v+bo/k632iJs6A3PkJWJu6a25lsquaB7vvTht+/eLBKUfDkh89Bvd56W6rUQogKt/xgc3Pg=="
+        src="https://lib.baomitu.com/echarts/5.4.1/echarts.common.js"></script>
+</head>
+
+<body>
+    <div id="chart" style="width:400px;height:400px;"></div>
+</body>
+<script type="text/javascript">
+    // 初始化图表标签
+    var myChart = echarts.init(document.getElementById('chart'));
+    var options = {
+        xAxis: {
+            type: 'category',
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            type: 'line',
+            smooth: false,
+            markLine: {
+                symbol: 'none',
+                data: [
+                    {
+                        type: 'average',
+                        label: {
+                            show: true,
+                        }
+                    },
+                    {
+                        yAxis: 1000
+                    },
+                ],
+            },
+        }],
+        animation: false,
+    };
+    myChart.setOption(options);
+</script>
+
+</html>
