@@ -4,7 +4,7 @@ const str = `
     color: white;
     background-color: #909090;
     padding: 5px;
-    border: 1px soli silver;
+    border: 1px solid silver;
   }
 </style>
 <p class="test"><slot name="my-text">默认文本</slot></p>
