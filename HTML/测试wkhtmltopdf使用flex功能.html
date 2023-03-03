@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Flexbox test</title>
+  <style>
+    body {
+      width: 800px;
+      border: 2px solid green;
+    }
+
+    .flexrow {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+    }
+
+    .flexrow>div {
+      -webkit-box-flex: 1;
+      -webkit-flex: 1;
+      flex: 1;
+      margin-right: 10%;
+      background-color: yellow;
+      border: 1px dashed black;
+    }
+
+    .flexrow>div:last-child {
+      margin-right: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="flexrow">
+    <div>This is<br>item 1</div>
+    <div>This is<br>item 2</div>
+    <div>This is<br>item 3</div>
+    <div>This is<br>item 4</div>
+    <div>This is<br>item 5</div>
+  </div>
+</body>
+
+</html>
