@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c2d" width="300" height="300">浏览器不支持canvas</canvas>
+    <script>
+        
+        const canvas2d = document.querySelector('#c2d');
+        const ctx2d = canvas2d.getContext('2d');
+        // 绘制矩形
+        ctx2d.fillRect(30,50,100,50);
+        ctx2d.strokeRect(100,30,100,50);
+        ctx2d.clearRect(101,51,28,28);
+    </script>
+</body>
+</html>

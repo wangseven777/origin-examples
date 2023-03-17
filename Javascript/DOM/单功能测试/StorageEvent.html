@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input value="Test Storage" type="button" id='button'/>
+    <script>
+        const btn = document.querySelector('#button');
+        btn.onclick = () => {
+            localStorage.setItem('testKey', 'testValue1');   
+        }
+
+
+        window.addEventListener('storage', function(e){
+            console.log(`key: ${e.key}`);
+            console.log(`oldValue: ${e.oldValue}`);
+            console.log(`newValue: ${e.newValue}`);
+            console.log(`url: ${e.url}`);
+            console.log(`is localStorage: ${e.storageArea === localStorage}`);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas" width="500" width="500"></canvas>
+    <script>
+        const canvas = document.querySelector('#canvas');
+        if(canvas.getContext) {
+            const ctx = canvas.getContext('2d');
+            ctx.beginPath();
+            ctx.lineWidth = 10;
+            ctx.moveTo(10,10);
+            ctx.lineTo(10,100);
+            ctx.lineTo(100,100);
+            ctx.lineTo(100,10);
+            ctx.closePath();
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.lineWidth = 1;
+            ctx.setLineDash([5,10]);
+            ctx.moveTo(10,120);
+            ctx.lineTo(120,120);
+            ctx.closePath();
+            ctx.stroke();
+            
+            ctx.beginPath();
+            ctx.setLineDash([5,10]);
+            ctx.lineDashOffset = 2;
+            ctx.moveTo(10,130);
+            ctx.lineTo(130,130);
+
+            ctx.closePath();
+            ctx.stroke();
+        }
+    </script>
+</body>
+</html>

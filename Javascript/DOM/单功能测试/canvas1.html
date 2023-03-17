@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c2d">浏览器不支持canvas</canvas>
+    <script>
+        const c2d = document.querySelector('#c2d');
+        const ctx2d = c2d.getContext('2d');
+
+        // 使用beginPath方法创建
+        ctx2d.beginPath();
+        // 这里可以使用ctx2d绘制路径
+        // ......
+        ctx2d.closePath();
+        ctx2d.fill();
+
+
+        // 使用Path2D新建路径
+        const newPath = new Path2D();
+        // 这里实际newPath来绘制路径
+        //......
+        newPath.closePath();
+        ctx2d.stroke(newPath);
+    </script>
+</body>
+</html>

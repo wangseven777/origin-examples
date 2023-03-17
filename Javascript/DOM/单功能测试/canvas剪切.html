@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id='c2d'>浏览器不支持canvas</canvas>
+    <script>
+        const canvas = document.getElementById('c2d');
+        if (canvas.getContext) {
+            let ctx = canvas.getContext('2d');
+
+            ctx.fillRect(110,15,30,45);
+
+            ctx.beginPath();
+            ctx.arc(60,60,45,0,2*Math.PI);
+            ctx.stroke();
+
+            ctx.clip();
+            ctx.fillRect(0,0,60,60);
+        }
+    </script>
+</body>
+</html>

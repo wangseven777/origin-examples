@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id='c2d'>浏览器不支持canvas</canvas>
+    <script>
+        const canvas = document.getElementById('c2d');
+        if (canvas.getContext) {
+            let ctx = canvas.getContext('2d');
+
+            ctx.fillStyle = "blue";
+            ctx.beginPath();
+            ctx.rect(0,0,20,20);
+            ctx.fill();
+
+            ctx.fillStyle = "rgb(249,27,27)";
+            ctx.beginPath();
+            ctx.rect(20,20,20,20);
+            ctx.fill();
+
+            ctx.fillStyle = "rgb(249,27,27, 0.5)";
+            ctx.beginPath();
+            ctx.rect(40,40,20,20);
+            ctx.fill();
+
+
+            
+        }
+    </script>
+</body>
+</html>

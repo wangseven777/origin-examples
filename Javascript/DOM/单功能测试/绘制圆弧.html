@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas width="500" height="500" id='c2d'></canvas>
+    <script>
+        const canvas = document.getElementById('c2d');
+        const ctx = canvas.getContext('2d');
+
+        ctx.fillStyle = "rgb(249,27,27)";
+        ctx.beginPath();
+        ctx.arc(100,100,100,0, 2*Math.PI,false);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = "black";
+        ctx.beginPath();
+        ctx.lineTo(250,30);
+        ctx.lineWidth = 0.5;
+        ctx.arcTo(200,30,250,50,20);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+    </script>
+</body>
+</html>
