@@ -6,11 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 
 <body>
-
     <p>Hello World</p>
     <p>Hello World</p>
     <script>
@@ -26,7 +25,7 @@
 
         var rectHeight = 25;   //每个矩形所占的像素高度(包括空白)
 
-        var linear = d3.scale.linear()
+        var linear = d3.scaleLinear()
         .domain([0, d3.max(dataset)])
         .range([0, 250]);
         
@@ -42,7 +41,7 @@
                 return linear(d);   //在这里用比例尺
             })
             .attr("height", rectHeight - 10)
-            .attr("fill", "steelblue");
+            .attr("fill", "#323232");
     </script>
 </body>
 
