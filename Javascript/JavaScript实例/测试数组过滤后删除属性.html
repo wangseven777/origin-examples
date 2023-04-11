@@ -13,15 +13,21 @@
             {name: 'zzh2', age: 19},
             {name: 'zzh3', age: 20},
             {name: 'zzh4', age: 21},
-            {name: 'zzh5', age: 22},
+            {name: 'zzh1', age: 22},
         ];
         
         const arr1 = arr.filter(x => x.name === 'zzh1');
-        
-        delete arr[0]; // [undefined, ....]
+        delete arr1[0];
+        // delete arr[3]; // [...,undefined, ....]
 
         console.log('arr:', arr);
         console.log('arr1:', arr1);
+
+        // const index = arr.findIndex(x => x && x.age === 18);
+        // const indexs = arr.findAll(x => x && x.name === 'zzh1');
+
+        // console.log('index', index);
+        // console.log('indexs', indexs);
     </script>
 </body>
 </html>
