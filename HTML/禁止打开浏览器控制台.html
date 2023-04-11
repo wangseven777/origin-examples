@@ -11,29 +11,34 @@
 <body>
     <h1>Hello World</h1>
     <script>
+        // 方法一
         // function anonymous() { debugger; }
         // setInterval(() => {
         //     anonymous();
         // }, 400);
 
+        // 方法二
+        function isConsoleOpen() {
+            var startTime = new Date();
+            debugger;
+            var endTime = new Date();
 
-        // function isConsoleOpen() {
-        //     var startTime = new Date();
-        //     debugger;
-        //     var endTime = new Date();
-
-        //     return endTime - startTime > 100;
-        // }
-
-        // setInterval(() => { if (isConsoleOpen()) { window.open(); } }, 400);
-
-
-        // 和百度一样
-        if (window.location.href.indexOf('#debug') == -1) {
-            setInterval(function () {
-                (function (a) { return (function (a) { return (Function('Function(arguments[0]+"' + a + '")()')) })(a) })('bugger')('de', 0, 0, (0, 0));
-            }, 1000)
+            return endTime - startTime > 100;
         }
+
+        setInterval(() => { 
+            if (isConsoleOpen()) { 
+                window.location.href = 'https://www.iotzzh.com'; 
+            } 
+        }, 400);
+
+
+        // 加点控制
+        // if (window.location.href.indexOf('#debug') == -1) {
+        //     setInterval(function () {
+        //         (function (a) { return (function (a) { return (Function('Function(arguments[0]+"' + a + '")()')) })(a) })('bugger')('de', 0, 0, (0, 0));
+        //     }, 1000)
+        // }
 
     </script>
 </body>
