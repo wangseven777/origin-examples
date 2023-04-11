@@ -17,9 +17,8 @@
         ];
         
         const arr1 = arr.filter(x => x.name === 'zzh1');
-        arr1.forEach(x => {
-            x.age = 10;
-        });
+        
+        delete arr[0]; // [undefined, ....]
 
         console.log('arr:', arr);
         console.log('arr1:', arr1);
