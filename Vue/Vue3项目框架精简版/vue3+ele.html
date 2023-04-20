@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue3 + ElementPlus Template</title>
+    <!-- <script src="https://unpkg.com/vue@next"></script> -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css" />
+    <script src="https://unpkg.com/element-plus"></script>
+    <script src="https://unpkg.com/@element-plus/icons-vue"></script>
+    <link rel="stylesheet" href="./vue3+ele.css" />
+    <link rel="stylesheet" href="./iconfont/iconfont.css" />
+</head>
+
+<body>
+    <div id="app">
+        <div class="layout">
+            <!-- 左侧：logo图片 + 菜单导航 -->
+            <div :class="collapse ? 'left' : 'left-fold'" class="left-box">
+                <div style="height: 45px;line-height: 45px; vertical-align: middle; text-align: center;">Logo图占位</div>
+                <el-scrollbar class="scrollbar" wrap-class="scrollbar-wrapper">
+                    <el-menu default-active="001" :collapse="collapse" class="menu el-menu-vertical"
+                        @select="handleMenuSelect">
+                        <el-menu-item index="001" title="首页">
+                            <el-icon>
+                                <document />
+                            </el-icon>
+                            <template #title><span>首页</span> </template>
+                        </el-menu-item>
+
+                        <el-menu-item index="002" disabled>
+                            <el-icon>
+                                <document />
+                            </el-icon>
+                            <span>禁用导航</span>
+                        </el-menu-item>
+
+                        <el-sub-menu index="003">
+                            <template #title>
+                                <el-icon>
+                                    <document />
+                                </el-icon>
+                                <span>分组导航</span>
+                            </template>
+                            <el-menu-item-group title="第一组">
+                                <el-menu-item index="003-1">菜单一</el-menu-item>
+                                <el-menu-item index="003-2">菜单二</el-menu-item>
+                            </el-menu-item-group>
+                            <el-menu-item-group title="第二组">
+                                <el-menu-item index="003-3">菜单三</el-menu-item>
+                            </el-menu-item-group>
+                        </el-sub-menu>
+
+                        <el-sub-menu index="004">
+                            <template #title>
+                                <el-icon>
+                                    <document />
+                                </el-icon>
+                                <span>分级导航</span>
+                            </template>
+                            <el-menu-item index="004-0">菜单1.1</el-menu-item>
+                            <el-sub-menu index="004-1">
+                                <template #title>二级菜单</template>
+                                <el-menu-item index="004-1-1">菜单2.1</el-menu-item>
+                                <el-menu-item index="004-1-2">菜单2.2</el-menu-item>
+
+                                <el-sub-menu index="004-2">
+                                    <template #title>三级菜单</template>
+                                    <el-menu-item index="004-2-1">菜单2.3.1</el-menu-item>
+                                    <el-menu-item index="004-2-2">菜单2.3.2</el-menu-item>
+                                </el-sub-menu>
+                            </el-sub-menu>
+                        </el-sub-menu>
+                    </el-menu>
+                </el-scrollbar>
+            </div>
+
+            <div class="right">
+                <div class="navbar">
+                    <div class="left">
+                        <span class="icon" @click="toggleCollapse">
+                            <el-icon v-if="collapse">
+                                <d-arrow-right />
+                            </el-icon>
+                            <el-icon v-else>
+                                <d-arrow-left />
+                            </el-icon>
+                        </span>
+
+                        <span class="menu">
+                            <el-dropdown class="dropdown">
+                                <span class="el-dropdown-link">
+                                    菜单
+                                    <el-icon class="el-icon--right">
+                                        <arrow-down />
+                                    </el-icon>
+                                </span>
+                                <template #dropdown>
+                                    <el-dropdown-menu>
+                                        <el-dropdown-item>子菜单1</el-dropdown-item>
+                                        <el-dropdown-item>子菜单2</el-dropdown-item>
+                                        <el-dropdown-item>子菜单3</el-dropdown-item>
+                                    </el-dropdown-menu>
+                                </template>
+                            </el-dropdown>/子菜单
+                        </span>
+                    </div>
+
+                    <!-- info -->
+                    <div class="info">
+                        <!-- <span>搜索</span> -->
+                        <span class="bell">
+                            <el-badge is-dot class="item">
+                                <el-icon>
+                                    <bell />
+                                </el-icon>
+                            </el-badge>
+                        </span>
+
+                        <span class="fullscreen" @click="toggleFullScreen">
+                            <i v-if="fullscreen" class="iconfont icon-fullscreen-shrink"></i>
+                            <i v-else class="iconfont icon-fullscreen-expand"></i>
+                        </span>
+
+                        <el-dropdown :hide-on-click="false" class="name">
+                            <el-icon>
+                                <service />
+                            </el-icon>
+                            <template #dropdown>
+                                <el-dropdown-menu>
+                                    <el-dropdown-item command="logout">中文</el-dropdown-item>
+                                    <el-dropdown-item command="logout">English</el-dropdown-item>
+                                </el-dropdown-menu>
+                            </template>
+                        </el-dropdown>
+                        <el-dropdown :hide-on-click="false" class="name" @command="dropdownChangePersonalInfo">
+                            <span>个人信息（头像 + Name）</span>
+                            <template #dropdown>
+                                <el-dropdown-menu>
+                                    <el-dropdown-item command="logout">退出登录</el-dropdown-item>
+                                </el-dropdown-menu>
+                            </template>
+                        </el-dropdown>
+                        <span class="setting-icon">
+                            <el-icon>
+                                <Setting />
+                            </el-icon>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="right-content">
+                    <div class="tags-box">
+                        <el-scrollbar class="tags-scrollbar tags">
+                            <el-tag class="tag" v-for="cachedView in cachedViews" :key="cachedView.index" closable
+                                :type="isActive(cachedView) ? '' : 'info'" @click="clickTag(cachedView.index)"
+                                @close="closeSingleTag(cachedView)" effect="dark">{{ cachedView.title }}</el-tag>
+                        </el-scrollbar>
+
+                        <div class="options-box">
+                            <div>
+                                <el-icon>
+                                    <refresh-left />
+                                </el-icon>
+                            </div>
+                            <div>
+                                <el-dropdown class="dropdown" @command="dropdownChangeCloseTag">
+                                    <span class="el-dropdown-link">
+                                        <el-icon class="el-icon--right">
+                                            <arrow-down />
+                                        </el-icon>
+                                    </span>
+                                    <template #dropdown>
+                                        <el-dropdown-menu>
+                                            <el-dropdown-item command="closeall">关闭全部</el-dropdown-item>
+                                            <el-dropdown-item command="closeother">关闭其他</el-dropdown-item>
+                                        </el-dropdown-menu>
+                                    </template>
+                                </el-dropdown>
+                            </div>
+                            <div @click="toggleFullScreenMain">
+                                <i v-if="fullscreenMain" class="iconfont icon-fullscreen-shrink"></i>
+                                <i v-else class="iconfont icon-fullscreen-expand"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="app-main">主体内容</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        const { createApp, reactive, toRefs, ref } = Vue;
+        const vue3Composition = {
+            setup() {
+                const collapse = ref(false);
+                const fullscreen = ref(false);
+                const fullscreenMain = ref(false);
+                const cachedViews = ref([]);
+                const currentIndex = ref();
+
+                const toggleCollapse = () => {
+                    collapse.value = !collapse.value;
+                };
+
+                const handleMenuSelect = (index, path, item) => {
+                    const dom = document.querySelector('.app-main');
+                    dom.innerHTML = `选中菜单，序号: ${index}`;
+
+                    !cachedViews.value.find(x => x.index === index) && cachedViews.value.push({ title: index, index });
+
+                    currentIndex.value = index;
+                }
+
+                const toggleSideBar = () => {
+                    collapse.value = !collapse.value;
+                };
+
+                // 关闭单个标签
+                const closeSingleTag = (cachedView) => {
+                    if (cachedViews.value.length < 2) return;
+                    cachedViews.value = cachedViews.value.filter(x => x.index !== cachedView.index);
+                    currentIndex.value = cachedViews.value[0].index;
+                };
+
+                // 标签高亮
+                const isActive = (route) => {
+                    return route.index === currentIndex.value;
+                };
+
+                const clickTag = (index) => {
+                    // console.log(path);
+                    //   router.push(path);
+                    // 路由跳转，更换主体内容
+                };
+
+                const toggleFullScreenByDom = (element, isFullScreen) => {
+                    if (!element) return;
+                    if (isFullScreen) {
+                        if (element.requestFullscreen) element.requestFullscreen();
+                        else if (element.mozRequestFullScreen) element.mozRequestFullScreen();
+                        else if (element.webkitRequestFullscreen) element.webkitRequestFullscreen();
+                        else if (element.msRequestFullscreen) element.msRequestFullscreen();
+                    } else {
+                        if (document.exitFullscreen) document.exitFullscreen();
+                        else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
+                        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+                    }
+                };
+
+                const toggleFullScreen = () => {
+                    toggleFullScreenByDom(document.body, !fullscreen.value);
+                    fullscreen.value = !fullscreen.value;
+                };
+
+                const toggleFullScreenMain = () => {
+                    toggleFullScreenByDom(document.body.getElementsByClassName('right-content')[0], !fullscreenMain.value);
+                    fullscreenMain.value = !fullscreenMain.value;
+                };
+
+                const dropdownChangePersonalInfo = (command) => {
+                    console.log(command);
+                    alert(command);
+                }
+
+                const dropdownChangeCloseTag = (command) => {
+                    if (command === 'closeall') {
+                        cachedViews.value = [];
+                        const dom = document.querySelector('.app-main');
+                        dom.innerHTML = `tag已清除，根据需要显示界面`;
+
+                    } else if (command === 'closeother') {
+                        cachedViews.value = cachedViews.value.filter(x => x.index === currentIndex.value);
+                    }
+                }
+
+                return {
+                    collapse,
+                    cachedViews,
+                    toggleCollapse,
+                    handleMenuSelect,
+                    isActive,
+                    clickTag,
+                    closeSingleTag,
+                    fullscreen,
+                    fullscreenMain,
+                    toggleFullScreen,
+                    toggleFullScreenMain,
+                    dropdownChangePersonalInfo,
+                    dropdownChangeCloseTag
+                }
+            }
+
+        }
+
+        const app = createApp(vue3Composition);
+        // 遍历挂载element plus icons
+        for ([name, comp] of Object.entries(ElementPlusIconsVue)) { app.component(name, comp); }
+        app.use(ElementPlus).mount('#app');
+    </script>
+</body>
+
+</html>

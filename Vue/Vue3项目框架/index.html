@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue3 + ElementPlus Template</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="./css/root.css" />
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/iconfont/iconfont.css" />
+    <link rel="stylesheet" href="./css/layout.css" />
+
+    <script src="./js/vue.js"></script>
+    <script src="https://unpkg.com/element-plus"></script>
+    <script src="https://unpkg.com/@element-plus/icons-vue"></script>
+    <script src="./js/main.js"></script>
+
+
+</head>
+
+<body data-theme="default">
+
+    <div id="app">
+        <div class="layout">
+            <!-- 顶部的一级导航栏 -->
+            <div class="top-main-nav" v-if="showTopNavBar">
+                <div class="left">
+                    <img alt="" src="https://hooray.gitee.io/fantastic-admin-pro-example/assets/logo-eb12b828.png"
+                        class="logo">
+                    <div class="title">Fantastic-admin 专业版</div>
+                    <div class="item-list">
+                        <div class="item" :class="{ active: activeIndex === item.index }"
+                            v-for="(item, index) in mainMenuList" @click="activeIndex = index">
+                            <el-icon :size="22">
+                                <component :is="item.icon"></component>
+                            </el-icon>
+                            <div>{{ item.text }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="right">
+                    <!-- info -->
+                    <div class="info">
+                        <span class="bell">
+                            <el-badge is-dot class="item">
+                                <el-icon>
+                                    <bell />
+                                </el-icon>
+                            </el-badge>
+                        </span>
+
+                        <span class="fullscreen" @click="toggleFullScreen">
+                            <i v-if="fullscreen" class="iconfont icon-fullscreen-shrink"></i>
+                            <i v-else class="iconfont icon-fullscreen-expand"></i>
+                        </span>
+
+                        <el-dropdown :hide-on-click="false" class="name">
+                            <el-icon>
+                                <service />
+                            </el-icon>
+                            <template #dropdown>
+                                <el-dropdown-menu>
+                                    <el-dropdown-item command="logout">中文</el-dropdown-item>
+                                    <el-dropdown-item command="logout">English</el-dropdown-item>
+                                </el-dropdown-menu>
+                            </template>
+                        </el-dropdown>
+                        <el-dropdown :hide-on-click="false" class="name" @command="dropdownChangePersonalInfo">
+                            <span>个人信息（头像 + Name）</span>
+                            <template #dropdown>
+                                <el-dropdown-menu>
+                                    <el-dropdown-item command="logout">退出登录</el-dropdown-item>
+                                </el-dropdown-menu>
+                            </template>
+                        </el-dropdown>
+                    </div>
+                </div>
+            </div>
+
+            <div class="body" style="display: flex; flex-direction: row; flex: 1; overflow: hidden;">
+                <!-- 左侧一级导航 -->
+                <div class="left-main" v-if="templateIndex === 0 || templateIndex === 3">
+                    <img alt="" src="https://hooray.gitee.io/fantastic-admin-pro-example/assets/logo-eb12b828.png"
+                        class="logo">
+                    <div class="item-list">
+                        <div class="item" :class="{ active: activeIndex === item.index }"
+                            v-for="(item, index) in mainMenuList" @click="activeIndex = index">
+                            <el-icon :size="22">
+                                <component :is="item.icon"></component>
+                            </el-icon>
+                            <div>{{ item.text }}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 左侧二级导航栏：logo图片 + 菜单导航 -->
+                <div :class="collapse ? 'left' : 'left-fold'" class="left-second"
+                    v-if="templateIndex === 0 || templateIndex === 1 || templateIndex === 2">
+                    <div v-if="!collapse" class="web-name">Fantastic-admin 专业版</div>
+
+                    <el-scrollbar class="scrollbar" wrap-class="scrollbar-wrapper">
+                        <el-menu default-active="001" :collapse="collapse" class="menu el-menu-vertical"
+                            @select="handleMenuSelect">
+                            <el-menu-item index="001" title="首页">
+                                <el-icon>
+                                    <document />
+                                </el-icon>
+                                <template #title><span>首页</span> </template>
+                            </el-menu-item>
+
+                            <el-sub-menu index="004">
+                                <template #title>
+                                    <el-icon><document /></el-icon>
+                                    <span>分级导航</span>
+                                </template>
+                                <el-menu-item index="004-0">菜单1.1</el-menu-item>
+                                <el-sub-menu index="004-1">
+                                    <template #title>二级菜单</template>
+                                    <el-menu-item index="004-1-1">菜单2.1</el-menu-item>
+                                    <el-menu-item index="004-1-2">菜单2.2</el-menu-item>
+
+                                    <el-sub-menu index="004-2">
+                                        <template #title>三级菜单</template>
+                                        <el-menu-item index="004-2-1">菜单2.3.1</el-menu-item>
+                                        <el-menu-item index="004-2-2">菜单2.3.2</el-menu-item>
+                                    </el-sub-menu>
+                                </el-sub-menu>
+                            </el-sub-menu>
+                            <!-- <div v-if="activeIndex === 0">
+                                <el-menu-item index="001" title="首页">
+                                    <el-icon>
+                                        <document />
+                                    </el-icon>
+                                    <template #title><span>首页</span> </template>
+                                </el-menu-item>
+
+                                <el-sub-menu index="004">
+                                    <template #title>
+                                        <el-icon><document /></el-icon>
+                                        <span>分级导航</span>
+                                    </template>
+                                    <el-menu-item index="004-0">菜单1.1</el-menu-item>
+                                    <el-sub-menu index="004-1">
+                                        <template #title>二级菜单</template>
+                                        <el-menu-item index="004-1-1">菜单2.1</el-menu-item>
+                                        <el-menu-item index="004-1-2">菜单2.2</el-menu-item>
+
+                                        <el-sub-menu index="004-2">
+                                            <template #title>三级菜单</template>
+                                            <el-menu-item index="004-2-1">菜单2.3.1</el-menu-item>
+                                            <el-menu-item index="004-2-2">菜单2.3.2</el-menu-item>
+                                        </el-sub-menu>
+                                    </el-sub-menu>
+                                </el-sub-menu>
+                            </div>
+                            <div v-if="activeIndex === 1">
+                                <el-menu-item index="0012" title="测试">
+                                    <el-icon>
+                                        <document />
+                                    </el-icon>
+                                    <template #title><span>测试</span> </template>
+                                </el-menu-item>
+                            </div>
+                            <div v-if="activeIndex === 2">
+                                <el-menu-item index="0013" title="测试222">
+                                    <el-icon>
+                                        <document />
+                                    </el-icon>
+                                    <template #title><span>测试222</span> </template>
+                                </el-menu-item>
+                            </div> -->
+                        </el-menu>
+                    </el-scrollbar>
+                </div>
+
+                <div class="right-content">
+                    <div class="tags-box">
+                        <el-scrollbar class="tags-scrollbar tags">
+                            <div class="tag-box" v-for="cachedView in cachedViews" :key="cachedView.index">
+                                <el-tag class="tag" closable :type="isActive(cachedView) ? '' : 'info'"
+                                    @click="clickTag(cachedView.index)" @close="closeSingleTag(cachedView)"
+                                    effect="dark">{{ cachedView.title }}</el-tag>
+                                <div class="left-root"></div>
+                                <div class="right-root"></div>
+                            </div>
+
+                        </el-scrollbar>
+                        <div class="more-action">
+                            <el-dropdown>
+                                <span class="el-dropdown-link">
+                                    <el-icon :size="20">
+                                        <Download />
+                                    </el-icon>
+                                </span>
+                                <template #dropdown>
+                                    TODO
+                                </template>
+                            </el-dropdown>
+                        </div>
+
+                        <!-- <div class="options-box">
+                            <div>
+                                <el-icon>
+                                    <refresh-left />
+                                </el-icon>
+                            </div>
+                            <div>
+                                <el-dropdown class="dropdown" @command="dropdownChangeCloseTag">
+                                    <span class="el-dropdown-link">
+                                        <el-icon class="el-icon--right">
+                                            <arrow-down />
+                                        </el-icon>
+                                    </span>
+                                    <template #dropdown>
+                                        <el-dropdown-menu>
+                                            <el-dropdown-item command="closeall">关闭全部</el-dropdown-item>
+                                            <el-dropdown-item command="closeother">关闭其他</el-dropdown-item>
+                                        </el-dropdown-menu>
+                                    </template>
+                                </el-dropdown>
+                            </div>
+                            <div @click="toggleFullScreenMain">
+                                <i v-if="fullscreenMain" class="iconfont icon-fullscreen-shrink"></i>
+                                <i v-else class="iconfont icon-fullscreen-expand"></i>
+                            </div>
+                        </div> -->
+                    </div>
+
+                    <div class="navbar">
+                        <div class="left">
+                            <span class="icon" @click="toggleCollapse">
+                                <el-icon v-if="collapse">
+                                    <d-arrow-right />
+                                </el-icon>
+                                <el-icon v-else>
+                                    <d-arrow-left />
+                                </el-icon>
+                            </span>
+
+                            <el-breadcrumb>
+                                <transition-group name="breadcrumb">
+                                    <el-breadcrumb-item v-for="(item, index) in [{ path: 'qqqq', title: '1111' },
+                                  { path: 'qqqq', title: '1111' }, { path: 'qqqq', title: '1111' }]" :key="item.path">
+                                        {{ item.title ?? '[ 无标题 ]' }}
+                                    </el-breadcrumb-item>
+                                </transition-group>
+                            </el-breadcrumb>
+
+                            <!-- <span class="menu">
+                                <el-dropdown class="dropdown">
+                                    <span class="el-dropdown-link">
+                                        菜单
+                                        <el-icon class="el-icon--right">
+                                            <arrow-down />
+                                        </el-icon>
+                                    </span>
+                                    <template #dropdown>
+                                        <el-dropdown-menu>
+                                            <el-dropdown-item>子菜单1</el-dropdown-item>
+                                            <el-dropdown-item>子菜单2</el-dropdown-item>
+                                            <el-dropdown-item>子菜单3</el-dropdown-item>
+                                        </el-dropdown-menu>
+                                    </template>
+                                </el-dropdown>/子菜单
+                            </span> -->
+                        </div>
+
+                        <!-- info -->
+                        <div class="info" v-if="!showTopNavBar">
+                            <!-- <span>搜索</span> -->
+                            <span class="bell">
+                                <el-badge is-dot class="item">
+                                    <el-icon>
+                                        <bell />
+                                    </el-icon>
+                                </el-badge>
+                            </span>
+
+                            <span class="fullscreen" @click="toggleFullScreen">
+                                <i v-if="fullscreen" class="iconfont icon-fullscreen-shrink"></i>
+                                <i v-else class="iconfont icon-fullscreen-expand"></i>
+                            </span>
+
+                            <el-dropdown :hide-on-click="false" class="name">
+                                <el-icon>
+                                    <service />
+                                </el-icon>
+                                <template #dropdown>
+                                    <el-dropdown-menu>
+                                        <el-dropdown-item command="logout">中文</el-dropdown-item>
+                                        <el-dropdown-item command="logout">English</el-dropdown-item>
+                                    </el-dropdown-menu>
+                                </template>
+                            </el-dropdown>
+                            <el-dropdown :hide-on-click="false" class="name" @command="dropdownChangePersonalInfo">
+                                <span>个人信息（头像 + Name）</span>
+                                <template #dropdown>
+                                    <el-dropdown-menu>
+                                        <el-dropdown-item command="logout">退出登录</el-dropdown-item>
+                                    </el-dropdown-menu>
+                                </template>
+                            </el-dropdown>
+                        </div>
+                    </div>
+
+                    <div class="app-main">主体内容</div>
+                </div>
+            </div>
+        </div>
+
+        <el-drawer v-model="drawer" title="应用设置">
+            <el-radio-group v-model="templateIndex">
+                <el-radio :label="0">模板1</el-radio>
+                <el-radio :label="1">模板2</el-radio>
+                <el-radio :label="2">模板3</el-radio>
+                <el-radio :label="3">模板4</el-radio>
+                <el-radio :label="4">模板5</el-radio>
+            </el-radio-group>
+        </el-drawer>
+
+        <div class="setting-icon" @click="drawer = true;">
+            <span>
+                <el-icon class="rotate">
+                    <Setting />
+                </el-icon>
+            </span>
+        </div>
+
+    </div>
+
+    <script>
+        var app = bootstrap();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,117 @@
+:root [data-theme=default] {
+    --g-theme-color: var(--el-color-primary);
+    --g-app-bg: var(--el-bg-color);
+    --g-main-bg: var(--el-bg-color-page);
+    --g-border-color: var(--el-border-color-lighter);
+    --g-header-bg: #222b45;
+    --g-header-color: #fff;
+    --g-header-menu-color: #fff;
+    --g-header-menu-hover-color: #fff;
+    --g-header-menu-hover-bg: #334067;
+    --g-header-menu-active-color: #fff;
+    --g-header-menu-active-bg: #334067;
+    --g-main-sidebar-bg: #222b45;
+    --g-main-sidebar-menu-color: #eee;
+    --g-main-sidebar-menu-hover-color: #fff;
+    --g-main-sidebar-menu-hover-bg: #334067;
+    --g-main-sidebar-menu-active-color: #fff;
+    --g-main-sidebar-menu-active-bg: #334067;
+    --g-sub-sidebar-bg: #fff;
+    --g-sub-sidebar-logo-bg: #222b45;
+    --g-sub-sidebar-logo-color: #fff;
+    --g-sub-sidebar-menu-bg: #e8e8e8;
+    --g-sub-sidebar-menu-color: var(--el-text-color-primary);
+    --g-sub-sidebar-menu-hover-color: var(--el-text-color-primary);
+    --g-sub-sidebar-menu-hover-bg: #e1e1e1;
+    --g-sub-sidebar-menu-active-color: #fff;
+    --g-sub-sidebar-menu-active-bg: var(--el-color-primary);
+    --g-badge-bg: var(--el-color-danger);
+    --g-badge-color: #fff;
+    --g-badge-border-color: #fff;
+    --g-tabbar-bg: var(--el-bg-color-page);
+    --g-tabbar-dividers-bg: var(--el-border-color-darker);
+    --g-tabbar-tab-color: var(--el-text-color-placeholder);
+    --g-tabbar-tab-hover-color: var(--el-text-color-placeholder);
+    --g-tabbar-tab-hover-bg: var(--el-fill-color-lighter);
+    --g-tabbar-tab-active-color: var(--el-text-color-regular);
+    --g-tabbar-tab-active-bg: var(--el-bg-color);
+    --g-toolbar-bg: var(--el-bg-color);
+    --g-nprogress-color: var(--el-color-primary);
+}
+
+:root {
+    --mx-menu-backgroud: #fff;
+    --mx-menu-hover-backgroud: #f1f1f1;
+    --mx-menu-active-backgroud: #dfdfdf;
+    --mx-menu-open-backgroud: #f1f1f1;
+    --mx-menu-divider: #f0f0f0;
+    --mx-menu-text: #2e2e2e;
+    --mx-menu-hover-text: #2e2e2e;
+    --mx-menu-active-text: #2e2e2e;
+    --mx-menu-open-text: #2e2e2e;
+    --mx-menu-disabled-text: #c9c8c8;
+    --mx-menu-shadow-color: rgba(0,0,0,.1);
+    --mx-menu-backgroud-radius: 10px;
+    --mx-menu-shortcut-backgroud: #ebebeb;
+    --mx-menu-shortcut-backgroud-hover: #ebebeb;
+    --mx-menu-shortcut-backgroud-active: #ebebeb;
+    --mx-menu-shortcut-backgroud-open: #ebebeb;
+    --mx-menu-shortcut-backgroud-disabled: #fdfdfd;
+    --mx-menu-shortcut-text: #424242;
+    --mx-menu-shortcut-text-hover: #424242;
+    --mx-menu-shortcut-text-active: #424242;
+    --mx-menu-shortcut-text-open: #424242;
+    --mx-menu-shortcut-text-disabled: #a5a5a5;
+    --mx-menu-focus-color: #0085f1;
+    --mx-menu-placeholder-width: 24px;
+}
+
+:root {
+    --g-box-shadow-color: rgb(0 0 0 / 12%);
+}
+
+:root {
+    --g-app-width: 1400px;
+    --g-header-width: 100%;
+    --g-header-height: 80px;
+    --g-main-sidebar-width: 90px;
+    --g-sub-sidebar-width: 220px;
+    --g-sub-sidebar-collapse-width: 64px;
+    --g-sidebar-logo-height: 50px;
+    --g-tabbar-height: 50px;
+    --g-toolbar-height: 50px;
+    --g-tabbar-tab-max-width: 150px;
+    --g-tabbar-tab-min-width: 150px;
+}
+
+:root {
+    --el-menu-active-color: var(--el-color-primary);
+    --el-menu-text-color: var(--el-text-color-primary);
+    --el-menu-hover-text-color: var(--el-color-primary);
+    --el-menu-bg-color: var(--el-fill-color-blank);
+    --el-menu-hover-bg-color: var(--el-color-primary-light-9);
+    --el-menu-item-height: 56px;
+    --el-menu-sub-item-height: calc(var(--el-menu-item-height) - 6px);
+    --el-menu-horizontal-sub-item-height: 36px;
+    --el-menu-item-font-size: var(--el-font-size-base);
+    --el-menu-item-hover-fill: var(--el-color-primary-light-9);
+    --el-menu-border-color: var(--el-border-color);
+    --el-menu-base-level-padding: 20px;
+    --el-menu-level-padding: 20px;
+    --el-menu-icon-width: 24px;
+}
+
+:root {
+    --el-loading-spinner-size: 42px;
+    --el-loading-fullscreen-spinner-size: 50px;
+}
+
+:root {
+    --el-popup-modal-bg-color: var(--el-color-black);
+    --el-popup-modal-opacity: .5;
+}
+
+/* 自定义全局可选择样式 */
+:root {
+    --zh-left-width: 220px;
+}

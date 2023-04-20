@@ -1,0 +1,171 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3870623 */
+  src: url('iconfont.woff2?t=1679390661883') format('woff2'),
+       url('iconfont.woff?t=1679390661883') format('woff'),
+       url('iconfont.ttf?t=1679390661883') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-kehuguanli:before {
+  content: "\e686";
+}
+
+.icon-icon_order:before {
+  content: "\e611";
+}
+
+.icon-dictionary:before {
+  content: "\e604";
+}
+
+.icon-quanxianguanli:before {
+  content: "\e610";
+}
+
+.icon-caidancaiwu:before {
+  content: "\e615";
+}
+
+.icon-yisheng-01:before {
+  content: "\e61d";
+}
+
+.icon-xiala11:before {
+  content: "\e624";
+}
+
+.icon-xiala6:before {
+  content: "\e614";
+}
+
+.icon-xiala2-01:before {
+  content: "\e62e";
+}
+
+.icon-shangla:before {
+  content: "\e62a";
+}
+
+.icon-xiala12:before {
+  content: "\e61a";
+}
+
+.icon-xiala21:before {
+  content: "\e61b";
+}
+
+.icon-xiala:before {
+  content: "\e6b9";
+}
+
+.icon-xiala1:before {
+  content: "\e756";
+}
+
+.icon-weibiaoti550:before {
+  content: "\e636";
+}
+
+.icon-ai13:before {
+  content: "\e681";
+}
+
+.icon-ai211:before {
+  content: "\e6c7";
+}
+
+.icon-ai216:before {
+  content: "\e6cc";
+}
+
+.icon-ai234:before {
+  content: "\e6de";
+}
+
+.icon-xiala2:before {
+  content: "\e60c";
+}
+
+.icon-xiala3:before {
+  content: "\e65b";
+}
+
+.icon-close_light:before {
+  content: "\e7dc";
+}
+
+.icon-menu:before {
+  content: "\e6c1";
+}
+
+.icon-xiala4:before {
+  content: "\e617";
+}
+
+.icon-fullscreen-exit:before {
+  content: "\e7ec";
+}
+
+.icon-xiala5:before {
+  content: "\e62d";
+}
+
+.icon-buju:before {
+  content: "\e641";
+}
+
+.icon-kuaibuju:before {
+  content: "\e652";
+}
+
+.icon-close_light1:before {
+  content: "\e637";
+}
+
+.icon-buju1:before {
+  content: "\e619";
+}
+
+.icon-buju2:before {
+  content: "\e6b8";
+}
+
+.icon-fullscreen-shrink:before {
+  content: "\e676";
+}
+
+.icon-fullscreen-expand:before {
+  content: "\e675";
+}
+
+.icon-zhedie2:before {
+  content: "\e620";
+}
+
+.icon-zhedie1:before {
+  content: "\e621";
+}
+
+.icon-buju3:before {
+  content: "\e718";
+}
+
+.icon-language-outline:before {
+  content: "\e7df";
+}
+
+.icon-language-sharp:before {
+  content: "\e8a9";
+}
+
+.icon-language:before {
+  content: "\e9cf";
+}
+

@@ -1,0 +1,90 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+html,
+body, #app {
+    width: 100vw;
+    height: 100vh;
+}
+
+body {
+    background-color: var(--g-app-bg);
+    transition: background-color .3s;
+    box-sizing: border-box;
+    font-family: Lato,PingFang SC,Microsoft YaHei,sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+
+.rotate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* font-size: 50px; */
+    animation: rotate 5s linear infinite;
+    -webkit-animation: rotate 5s linear infinite;
+    
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+
+    25% {
+        transform: rotate(90deg);
+    }
+
+    50% {
+        transform: rotate(180deg);
+    }
+
+    75% {
+        transform: rotate(270deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+
+    25% {
+        transform: rotate(90deg);
+    }
+
+    50% {
+        transform: rotate(180deg);
+    }
+
+    75% {
+        transform: rotate(270deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+.menu.el-menu-vertical {
+    height: 100%;
+    border-right: 0px !important;
+    background: #fff;
+}
+
+
+
+.el-dropdown {
+    vertical-align: middle !important;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bolder;
+}
