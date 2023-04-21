@@ -16,13 +16,15 @@
     <script src="./js/vue.js"></script>
     <script src="https://unpkg.com/element-plus"></script>
     <script src="https://unpkg.com/@element-plus/icons-vue"></script>
+
+    <script src="./js/components/menuItem.js"></script>
+    
     <script src="./js/main.js"></script>
 
 
 </head>
 
 <body data-theme="default">
-
     <div id="app">
         <div class="layout">
             <!-- 顶部的一级导航栏 -->
@@ -102,9 +104,11 @@
                     <div v-if="!collapse" class="web-name">Fantastic-admin 专业版</div>
 
                     <el-scrollbar class="scrollbar" wrap-class="scrollbar-wrapper">
-                        <el-menu default-active="001" :collapse="collapse" class="menu el-menu-vertical"
+                        <el-menu default-active="001" :collapse="collapse" class="menu el-menu-vertical" :collapse-transition="true"
                             @select="handleMenuSelect">
-                            <el-menu-item index="001" title="首页">
+
+                            <menu-item-component v-for="item in menuList" :key="item.id" :item="item"> </menu-item-component>
+                            <!-- <el-menu-item index="001" title="首页">
                                 <el-icon>
                                     <document />
                                 </el-icon>
@@ -128,7 +132,7 @@
                                         <el-menu-item index="004-2-2">菜单2.3.2</el-menu-item>
                                     </el-sub-menu>
                                 </el-sub-menu>
-                            </el-sub-menu>
+                            </el-sub-menu> -->
                             <!-- <div v-if="activeIndex === 0">
                                 <el-menu-item index="001" title="首页">
                                     <el-icon>

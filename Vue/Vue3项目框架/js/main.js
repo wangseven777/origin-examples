@@ -1,5 +1,6 @@
-function bootstrap () {
-    const { createApp, reactive, toRefs, ref, defineComponent, h, computed } = Vue;
+function bootstrap() {
+        const { createApp, reactive, toRefs, ref, defineComponent, h, computed } = Vue;
+
         const vue3Composition = {
             setup() {
                 //#region 选择模板，默认0号
@@ -18,6 +19,12 @@ function bootstrap () {
                 //#endregion
 
                 //#region 左侧二级导航
+                const menuList = ref([
+                    { id: 0,  icon: 'Notification', text: '演示' },
+                    { id: 1,  icon: 'Memo', text: '页面' },
+                    { id: 2,  icon: 'Files', text: '生态' },
+                ]);
+
                 const handleMenuSelect = (index, path, item) => {
                     const dom = document.querySelector('.app-main');
                     dom.innerHTML = `选中菜单，序号: ${index}`;
@@ -121,6 +128,9 @@ function bootstrap () {
                     mainMenuList,
                     // generateMenu,
 
+                    // 二级导航
+                    menuList,
+
                     drawer,
 
                     collapse,
@@ -144,6 +154,11 @@ function bootstrap () {
         const app = createApp(vue3Composition);
         // 遍历挂载element plus icons
         for ([name, comp] of Object.entries(ElementPlusIconsVue)) { app.component(name, comp); }
+
+        // 挂载自定义组件
+        const menuItemComponent = getMenuItemComponent();
+        app.component('menu-item-component', menuItemComponent);
+
         app.use(ElementPlus).mount('#app');
 
         return app;
