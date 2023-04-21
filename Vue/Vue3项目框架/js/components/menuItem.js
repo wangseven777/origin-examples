@@ -1,6 +1,5 @@
 function getMenuItemComponent () {
     const { createApp, reactive, toRefs, ref, defineComponent, h, PropType } = Vue;
-    // const { Notification }  = ElementPlusIconsVue;
     const { ElMenuItem, ElIcon } = ElementPlus;
     const component1 = defineComponent({
         name: 'menuItem',
@@ -17,7 +16,7 @@ function getMenuItemComponent () {
             return true ? 
                 h(ElMenuItem, null,{ 
                     // default: () =>  h(ElIcon, null, { default: () => h({ template: `<component :is="Notification"></component>` }) }),
-                    default: () =>  h(ElIcon, null, { default: () => h('component', { is: 'Notifiaction' }, null) }),
+                    default: () =>  h(ElIcon, null, { default: () => h( ElementPlusIconsVue['Notification'])}),
                     title: () => 'hello worlds' 
                 })
                 :
