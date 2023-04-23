@@ -35,7 +35,7 @@
                     <div class="title">Fantastic-admin 专业版</div>
                     <div class="item-list">
                         <div class="item" :class="{ active: activeIndex === item.index }"
-                            v-for="(item, index) in mainMenuList" @click="activeIndex = index">
+                            v-for="(item, index) in mainMenuList" @click="changeMainMenu(item, index)">
                             <el-icon :size="22">
                                 <component :is="item.icon"></component>
                             </el-icon>
@@ -89,7 +89,7 @@
                         class="logo">
                     <div class="item-list">
                         <div class="item" :class="{ active: activeIndex === item.index }"
-                            v-for="(item, index) in mainMenuList" @click="activeIndex = index">
+                            v-for="(item, index) in mainMenuList" @click="changeMainMenu(item, index)">
                             <el-icon :size="22">
                                 <component :is="item.icon"></component>
                             </el-icon>
@@ -106,80 +106,12 @@
                     <el-scrollbar class="scrollbar" wrap-class="scrollbar-wrapper">
                         <el-menu default-active="001" :collapse="collapse" class="menu el-menu-vertical" :collapse-transition="true"
                             @select="handleMenuSelect">
-
                             <menu-item-component v-for="item in menuList" :key="item.id" :item="item"> </menu-item-component>
-                            <!-- <el-menu-item index="001" title="首页">
-                                <el-icon>
-                                    <document />
-                                </el-icon>
-                                <template #title><span>首页</span> </template>
-                            </el-menu-item>
-
-                            <el-sub-menu index="004">
-                                <template #title>
-                                    <el-icon><document /></el-icon>
-                                    <span>分级导航</span>
-                                </template>
-                                <el-menu-item index="004-0">菜单1.1</el-menu-item>
-                                <el-sub-menu index="004-1">
-                                    <template #title>二级菜单</template>
-                                    <el-menu-item index="004-1-1">菜单2.1</el-menu-item>
-                                    <el-menu-item index="004-1-2">菜单2.2</el-menu-item>
-
-                                    <el-sub-menu index="004-2">
-                                        <template #title>三级菜单</template>
-                                        <el-menu-item index="004-2-1">菜单2.3.1</el-menu-item>
-                                        <el-menu-item index="004-2-2">菜单2.3.2</el-menu-item>
-                                    </el-sub-menu>
-                                </el-sub-menu>
-                            </el-sub-menu> -->
-                            <!-- <div v-if="activeIndex === 0">
-                                <el-menu-item index="001" title="首页">
-                                    <el-icon>
-                                        <document />
-                                    </el-icon>
-                                    <template #title><span>首页</span> </template>
-                                </el-menu-item>
-
-                                <el-sub-menu index="004">
-                                    <template #title>
-                                        <el-icon><document /></el-icon>
-                                        <span>分级导航</span>
-                                    </template>
-                                    <el-menu-item index="004-0">菜单1.1</el-menu-item>
-                                    <el-sub-menu index="004-1">
-                                        <template #title>二级菜单</template>
-                                        <el-menu-item index="004-1-1">菜单2.1</el-menu-item>
-                                        <el-menu-item index="004-1-2">菜单2.2</el-menu-item>
-
-                                        <el-sub-menu index="004-2">
-                                            <template #title>三级菜单</template>
-                                            <el-menu-item index="004-2-1">菜单2.3.1</el-menu-item>
-                                            <el-menu-item index="004-2-2">菜单2.3.2</el-menu-item>
-                                        </el-sub-menu>
-                                    </el-sub-menu>
-                                </el-sub-menu>
-                            </div>
-                            <div v-if="activeIndex === 1">
-                                <el-menu-item index="0012" title="测试">
-                                    <el-icon>
-                                        <document />
-                                    </el-icon>
-                                    <template #title><span>测试</span> </template>
-                                </el-menu-item>
-                            </div>
-                            <div v-if="activeIndex === 2">
-                                <el-menu-item index="0013" title="测试222">
-                                    <el-icon>
-                                        <document />
-                                    </el-icon>
-                                    <template #title><span>测试222</span> </template>
-                                </el-menu-item>
-                            </div> -->
                         </el-menu>
                     </el-scrollbar>
                 </div>
 
+                <!-- 内容区域 -->
                 <div class="right-content">
                     <div class="tags-box">
                         <el-scrollbar class="tags-scrollbar tags">
@@ -252,29 +184,10 @@
                                     </el-breadcrumb-item>
                                 </transition-group>
                             </el-breadcrumb>
-
-                            <!-- <span class="menu">
-                                <el-dropdown class="dropdown">
-                                    <span class="el-dropdown-link">
-                                        菜单
-                                        <el-icon class="el-icon--right">
-                                            <arrow-down />
-                                        </el-icon>
-                                    </span>
-                                    <template #dropdown>
-                                        <el-dropdown-menu>
-                                            <el-dropdown-item>子菜单1</el-dropdown-item>
-                                            <el-dropdown-item>子菜单2</el-dropdown-item>
-                                            <el-dropdown-item>子菜单3</el-dropdown-item>
-                                        </el-dropdown-menu>
-                                    </template>
-                                </el-dropdown>/子菜单
-                            </span> -->
                         </div>
 
                         <!-- info -->
                         <div class="info" v-if="!showTopNavBar">
-                            <!-- <span>搜索</span> -->
                             <span class="bell">
                                 <el-badge is-dot class="item">
                                     <el-icon>

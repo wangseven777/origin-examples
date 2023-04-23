@@ -16,12 +16,25 @@ function bootstrap() {
                     { index: 1,  icon: 'Memo', text: '页面' },
                     { index: 2,  icon: 'Files', text: '生态' },
                 ]);
+                const changeMainMenu = (item, index) => {
+                    activeIndex.value = index;
+                    menuList.value = [
+                        { id: '001',  icon: 'Notification', text: '页面' + index },
+                        { id: '002',  icon: 'Notification', text: '生态' + index },
+                    ];
+                };
                 //#endregion
 
                 //#region 左侧二级导航
                 const menuList = ref([
                     { id: 0,  icon: 'Notification', text: '演示' },
-                    { id: 1,  icon: 'Memo', text: '页面' },
+                    { id: 1,  icon: 'Memo', text: '页面', children: [
+                        { id: 1.1, icon: 'Memo', text: '页面1' },
+                        { id: 1.2, icon: 'Memo', text: '页面2', children: [
+                            { id: 1.21, icon: 'Memo', text: '页面2.1' },
+                            { id: 1.22, icon: 'Memo', text: '页面2.2' },
+                        ] },
+                    ] },
                     { id: 2,  icon: 'Files', text: '生态' },
                 ]);
 
@@ -145,7 +158,8 @@ function bootstrap() {
                     toggleFullScreen,
                     toggleFullScreenMain,
                     dropdownChangePersonalInfo,
-                    dropdownChangeCloseTag
+                    dropdownChangeCloseTag,
+                    changeMainMenu
                 }
             }
 
