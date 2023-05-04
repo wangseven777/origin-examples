@@ -42,8 +42,23 @@ function bootstrap() {
                     !cachedViews.value.find(x => x.index === index) && cachedViews.value.push({ title: index, index });
                     currentIndex.value = index;
 
-                    updateContentByInnerHtml(`选中菜单，序号: ${index}`);
+                    const menu = breadthQuery(menuList.value, index);
+                    updateContentByInnerHtml(`选中菜单，序号: ${JSON.stringify(menu)}`);
                 }
+
+                const breadthQuery = (tree, id) => {
+                    let stark = [];
+                    stark = stark.concat(tree);
+                    while(stark.length) {
+                        const temp = stark.shift();
+                        if(temp.children) {
+                            stark = stark.concat(temp.children);
+                        }
+                        if(temp.id === id) {
+                            return temp;
+                        }
+                    }
+                };
                 //#endregion
 
                 //#region 设置抽屉组件
