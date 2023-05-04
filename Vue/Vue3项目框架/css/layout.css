@@ -261,6 +261,7 @@
     position: relative;
     display: flex;
     justify-content: space-around;
+    cursor: pointer;
 }
 
 .right-content .tags-box .tag.el-tag--info {

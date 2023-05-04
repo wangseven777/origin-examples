@@ -104,7 +104,7 @@
                     <div v-if="!collapse" class="web-name">Fantastic-admin 专业版</div>
 
                     <el-scrollbar class="scrollbar" wrap-class="scrollbar-wrapper">
-                        <el-menu default-active="001" :collapse="collapse" class="menu el-menu-vertical" :collapse-transition="true"
+                        <el-menu :default-active="activeIndex" :collapse="collapse" class="menu el-menu-vertical" :collapse-transition="true"
                             @select="handleMenuSelect">
                             <menu-item-component v-for="item in menuList" :key="item.id" :item="item"> </menu-item-component>
                         </el-menu>
@@ -117,7 +117,7 @@
                         <el-scrollbar class="tags-scrollbar tags">
                             <div class="tag-box" v-for="cachedView in cachedViews" :key="cachedView.index">
                                 <el-tag class="tag" closable :type="isActive(cachedView) ? '' : 'info'"
-                                    @click="clickTag(cachedView.index)" @close="closeSingleTag(cachedView)"
+                                    @click="clickTag(cachedView)" @close="closeSingleTag(cachedView)"
                                     effect="dark">{{ cachedView.title }}</el-tag>
                                 <div class="left-root"></div>
                                 <div class="right-root"></div>

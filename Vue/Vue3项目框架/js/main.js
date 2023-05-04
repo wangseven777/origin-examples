@@ -9,7 +9,7 @@ function bootstrap() {
                 const showTopNavBar = computed(() => templateIndex.value === 1 || templateIndex.value === 4);
                 //#endregion
 
-                //#region 左侧一级导航
+                //#region 左侧一级导航/顶部导航
                 const activeIndex = ref(0);
                 const mainMenuList = ref([
                     { index: 0,  icon: 'Notification', text: '演示' },
@@ -39,12 +39,10 @@ function bootstrap() {
                 ]);
 
                 const handleMenuSelect = (index, path, item) => {
-                    const dom = document.querySelector('.app-main');
-                    dom.innerHTML = `选中菜单，序号: ${index}`;
-
                     !cachedViews.value.find(x => x.index === index) && cachedViews.value.push({ title: index, index });
-
                     currentIndex.value = index;
+
+                    updateContentByInnerHtml(`选中菜单，序号: ${index}`);
                 }
                 //#endregion
 
@@ -57,6 +55,17 @@ function bootstrap() {
                 const currentIndex = ref();
                 //#endregion
 
+                //#region 内容展示区域
+                const updateContentByInnerHtml = (content) => {
+                    const dom = document.querySelector('.app-main');
+                    dom.innerHTML = content;
+                };
+
+                const updateContentByAppendChild = (child) => {
+                    const dom = document.querySelector('.app-main');
+                    dom.appendChild(child);
+                };
+                //#endregion
                 const collapse = ref(false);
                 const fullscreen = ref(false);
                 const fullscreenMain = ref(false);
@@ -84,7 +93,8 @@ function bootstrap() {
                     return route.index === currentIndex.value;
                 };
 
-                const clickTag = (index) => {
+                const clickTag = (cachedView) => {
+                    currentIndex.value = cachedView.index;
                     // console.log(path);
                     //   router.push(path);
                     // 路由跳转，更换主体内容
