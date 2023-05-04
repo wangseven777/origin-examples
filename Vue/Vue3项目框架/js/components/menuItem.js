@@ -2,7 +2,7 @@ function getMenuItemComponent() {
   const { createApp, reactive, toRefs, ref, defineComponent, h, PropType } =
     Vue;
   const { ElMenuItem, ElIcon, ElSubMenu } = ElementPlus;
-  const component1 = defineComponent({
+  const component = defineComponent({
     name: "menuItem",
     props: {
       item: {
@@ -55,5 +55,5 @@ function getMenuItemComponent() {
     },
   });
 
-  return component1;
+  return component;
 }
