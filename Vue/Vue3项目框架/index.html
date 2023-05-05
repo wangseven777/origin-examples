@@ -18,7 +18,7 @@
     <script src="https://unpkg.com/@element-plus/icons-vue"></script>
 
     <script src="./js/components/menuItem.js"></script>
-    
+
     <script src="./js/utils.js"></script>
     <script src="./js/app.js"></script>
     <script src="./js/main.js"></script>
@@ -106,9 +106,10 @@
                     <div v-if="!collapse" class="web-name">Fantastic-admin 专业版</div>
 
                     <el-scrollbar class="scrollbar" wrap-class="scrollbar-wrapper">
-                        <el-menu :default-active="activeIndex" :collapse="collapse" class="menu el-menu-vertical" :collapse-transition="true"
-                            @select="handleMenuSelect">
-                            <menu-item-component v-for="item in menuList" :key="item.id" :item="item"> </menu-item-component>
+                        <el-menu :default-active="activeIndex" :collapse="collapse" class="menu el-menu-vertical"
+                            :collapse-transition="true" @select="handleMenuSelect">
+                            <menu-item-component v-for="item in menuList" :key="item.id" :item="item">
+                            </menu-item-component>
                         </el-menu>
                     </el-scrollbar>
                 </div>
@@ -118,11 +119,13 @@
                     <div class="tags-box">
                         <el-scrollbar class="tags-scrollbar tags">
                             <div class="tag-box" v-for="cachedView in cachedViews" :key="cachedView.id">
-                                <el-tag class="tag" :closable="cachedViews && cachedViews.length > 1" :type="isActive(cachedView) ? '' : 'info'"
-                                    @click="clickTag(cachedView)" @close="closeSingleTag(cachedView)"
-                                    effect="dark"><el-icon :size="22">
+                                <el-tag class="tag" :closable="cachedViews && cachedViews.length > 1"
+                                    :type="isActive(cachedView) ? '' : 'info'" @click="clickTag(cachedView)"
+                                    @close="closeSingleTag(cachedView)" effect="dark">
+                                    <el-icon :size="22">
                                         <component :is="cachedView.icon"></component>
-                                    </el-icon>{{ cachedView.title }}</el-tag>
+                                    </el-icon>{{ cachedView.title }}
+                                </el-tag>
                                 <div class="left-root"></div>
                                 <div class="right-root"></div>
                             </div>
