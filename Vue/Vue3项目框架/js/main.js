@@ -1,5 +1,5 @@
-function bootstrap() {
-  const { createApp, reactive, toRefs, ref, defineComponent, h, computed } =
+const bootstrap = () => {
+  const { createApp, reactive, toRefs, ref, defineComponent, h, computed, onMounted } =
     Vue;
 
   const vue3Composition = {
@@ -132,6 +132,8 @@ function bootstrap() {
 
       const clickTag = (cachedView) => {
         currentIndex.value = cachedView.id;
+        const menu = findTreeNode(menuList.value, cachedView.id);
+        updateContentByDom(menu || { id: '000', text: '主页' });
         // console.log(path);
         //   router.push(path);
         // 路由跳转，更换主体内容
@@ -139,7 +141,15 @@ function bootstrap() {
       //#endregion
 
       //#region 内容展示区域
-
+      onMounted(() => { 
+        updateContentByDom({ id: '000', text: '主页' }); 
+        cachedViews.value.push({
+          ...{ id: '000', text: '主页' },
+          title: '主页',
+          pathList: [{ id: '000', text: '主页' }],
+        });
+        currentIndex.value = '000';
+      });
       //#endregion
 
       //#region 收藏/面包屑/折叠
