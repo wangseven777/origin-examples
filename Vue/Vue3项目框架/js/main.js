@@ -10,6 +10,15 @@ function bootstrap() {
       const showTopNavBar = computed(
         () => templateIndex.value === "1" || templateIndex.value === "4"
       );
+      const showLeftNavBar = computed(
+        () => templateIndex.value === "0" || templateIndex.value === "3"
+      );
+      const showLeftMenu = computed(
+        () =>
+          templateIndex.value === "0" ||
+          templateIndex.value === "1" ||
+          templateIndex.value === "2"
+      );
       //#endregion
 
       //#region  一级导航： 左侧/顶部
@@ -89,13 +98,16 @@ function bootstrap() {
         const menu = findTreeNode(menuList.value, index);
 
         !cachedViews.value.find((x) => x.id === index) &&
-          cachedViews.value.push({ ...menu, title: menu.text, pathList: searchTreeNodeParents(menuList.value,index)});
+          cachedViews.value.push({
+            ...menu,
+            title: menu.text,
+            pathList: searchTreeNodeParents(menuList.value, index),
+          });
         currentIndex.value = index;
 
         updateContentByDom(menu);
       };
 
-      
       //#endregion
 
       //#region 设置抽屉组件
@@ -132,7 +144,9 @@ function bootstrap() {
 
       //#region 收藏/面包屑/折叠
       const currentViewPathList = computed(() => {
-        const result = cachedViews.value.find(x => x.id === currentIndex.value);
+        const result = cachedViews.value.find(
+          (x) => x.id === currentIndex.value
+        );
         return result?.pathList;
       });
       //#endregion
@@ -195,6 +209,8 @@ function bootstrap() {
         templateIndex,
         useTemplateIndex,
         showTopNavBar,
+        showLeftNavBar,
+        showLeftMenu,
 
         // 一级导航
         activeIndex,
