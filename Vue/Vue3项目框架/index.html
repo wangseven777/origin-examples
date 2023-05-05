@@ -84,7 +84,7 @@
 
             <div class="body" style="display: flex; flex-direction: row; flex: 1; overflow: hidden;">
                 <!-- 左侧一级导航 -->
-                <div class="left-main" v-if="templateIndex === 0 || templateIndex === 3">
+                <div class="left-main" v-if="templateIndex === '0' || templateIndex === '3'">
                     <img alt="" src="https://hooray.gitee.io/fantastic-admin-pro-example/assets/logo-eb12b828.png"
                         class="logo">
                     <div class="item-list">
@@ -100,7 +100,7 @@
 
                 <!-- 左侧二级导航栏：logo图片 + 菜单导航 -->
                 <div :class="collapse ? 'left' : 'left-fold'" class="left-second"
-                    v-if="templateIndex === 0 || templateIndex === 1 || templateIndex === 2">
+                    v-if="templateIndex === '0' || templateIndex === '1' || templateIndex === '2'">
                     <div v-if="!collapse" class="web-name">Fantastic-admin 专业版</div>
 
                     <el-scrollbar class="scrollbar" wrap-class="scrollbar-wrapper">
@@ -115,10 +115,12 @@
                 <div class="right-content">
                     <div class="tags-box">
                         <el-scrollbar class="tags-scrollbar tags">
-                            <div class="tag-box" v-for="cachedView in cachedViews" :key="cachedView.index">
+                            <div class="tag-box" v-for="cachedView in cachedViews" :key="cachedView.id">
                                 <el-tag class="tag" closable :type="isActive(cachedView) ? '' : 'info'"
                                     @click="clickTag(cachedView)" @close="closeSingleTag(cachedView)"
-                                    effect="dark">{{ cachedView.title }}</el-tag>
+                                    effect="dark"><el-icon :size="22">
+                                        <component :is="cachedView.icon"></component>
+                                    </el-icon>{{ cachedView.title }}</el-tag>
                                 <div class="left-root"></div>
                                 <div class="right-root"></div>
                             </div>
@@ -137,32 +139,6 @@
                             </el-dropdown>
                         </div>
 
-                        <!-- <div class="options-box">
-                            <div>
-                                <el-icon>
-                                    <refresh-left />
-                                </el-icon>
-                            </div>
-                            <div>
-                                <el-dropdown class="dropdown" @command="dropdownChangeCloseTag">
-                                    <span class="el-dropdown-link">
-                                        <el-icon class="el-icon--right">
-                                            <arrow-down />
-                                        </el-icon>
-                                    </span>
-                                    <template #dropdown>
-                                        <el-dropdown-menu>
-                                            <el-dropdown-item command="closeall">关闭全部</el-dropdown-item>
-                                            <el-dropdown-item command="closeother">关闭其他</el-dropdown-item>
-                                        </el-dropdown-menu>
-                                    </template>
-                                </el-dropdown>
-                            </div>
-                            <div @click="toggleFullScreenMain">
-                                <i v-if="fullscreenMain" class="iconfont icon-fullscreen-shrink"></i>
-                                <i v-else class="iconfont icon-fullscreen-expand"></i>
-                            </div>
-                        </div> -->
                     </div>
 
                     <div class="navbar">
@@ -178,9 +154,8 @@
 
                             <el-breadcrumb>
                                 <transition-group name="breadcrumb">
-                                    <el-breadcrumb-item v-for="(item, index) in [{ path: 'qqqq', title: '1111' },
-                                  { path: 'qqqq', title: '1111' }, { path: 'qqqq', title: '1111' }]" :key="item.path">
-                                        {{ item.title ?? '[ 无标题 ]' }}
+                                    <el-breadcrumb-item v-for="(item, index) in currentViewPathList" :key="item.id">
+                                        {{ item.text ?? '[ 无标题 ]' }}
                                     </el-breadcrumb-item>
                                 </transition-group>
                             </el-breadcrumb>
@@ -230,11 +205,11 @@
 
         <el-drawer v-model="drawer" title="应用设置">
             <el-radio-group v-model="templateIndex">
-                <el-radio :label="0">模板1</el-radio>
-                <el-radio :label="1">模板2</el-radio>
-                <el-radio :label="2">模板3</el-radio>
+                <el-radio label="0">模板1</el-radio>
+                <el-radio label="1">模板2</el-radio>
+                <!-- <el-radio :label="2">模板3</el-radio>
                 <el-radio :label="3">模板4</el-radio>
-                <el-radio :label="4">模板5</el-radio>
+                <el-radio :label="4">模板5</el-radio> -->
             </el-radio-group>
         </el-drawer>
 

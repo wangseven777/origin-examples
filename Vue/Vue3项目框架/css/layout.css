@@ -197,6 +197,7 @@
     line-height: 50px; 
     vertical-align: middle;
     text-align: center;
+    font-weight: bolder;
 }
 
 .left-second .scrollbar {
@@ -263,6 +264,13 @@
     justify-content: space-around;
     cursor: pointer;
 }
+
+.right-content .tags-box .tag .el-icon {
+    line-height: 1;
+    vertical-align: middle;
+    padding-right: 5px;
+}
+
 
 .right-content .tags-box .tag.el-tag--info {
     background-color: #F2F3F5;
