@@ -1,103 +1,101 @@
 function bootstrap() {
-  const { createApp, reactive, toRefs, ref, defineComponent, h, computed } = Vue;
+  const { createApp, reactive, toRefs, ref, defineComponent, h, computed } =
+    Vue;
 
   const vue3Composition = {
     setup() {
       //#region 选择模板，默认0号
-      const templateIndex = ref('0');
+      const templateIndex = ref("0");
       const useTemplateIndex = (index) => (templateIndex.value = index);
       const showTopNavBar = computed(
-        () => templateIndex.value === '1' || templateIndex.value === '4'
+        () => templateIndex.value === "1" || templateIndex.value === "4"
       );
       //#endregion
 
       //#region  一级导航： 左侧/顶部
-      const activeIndex = ref('0');
+      const activeIndex = ref("0");
       const mainMenuList = ref([
-        { index: '0', icon: "Notification", text: "演示" },
-        { index: '1', icon: "Memo", text: "页面" },
-        { index: '2', icon: "Files", text: "生态" },
+        { index: "0", icon: "Notification", text: "演示" },
+        { index: "1", icon: "Memo", text: "页面" },
+        { index: "2", icon: "Files", text: "生态" },
       ]);
+
       const changeMainMenu = (item, index) => {
         activeIndex.value = index;
         menuList.value = [
-          { id: "001", icon: "Notification", text: "页面" + index },
-          { id: "002", icon: "Notification", text: "生态" + index },
+          {
+            id: "0" + index,
+            icon: "Notification",
+            text: "演示" + index,
+            cache: true,
+          },
+          {
+            id: "1" + index,
+            icon: "Memo",
+            text: "页面" + index,
+            children: [
+              {
+                id: "1.1" + index,
+                icon: "Memo",
+                text: "页面1" + index,
+                cache: true,
+              },
+              {
+                id: "1.2" + index,
+                icon: "Memo",
+                text: "页面2" + index,
+                children: [
+                  { id: "1.21" + index, icon: "Memo", text: "页面2.1" + index },
+                  { id: "1.22" + index, icon: "Memo", text: "页面2.2" + index },
+                ],
+              },
+            ],
+          },
+          { id: "2" + index, icon: "Files", text: "生态" + index },
         ];
       };
       //#endregion
 
       //#region 二级导航
       const collapse = ref(false);
-      const toggleCollapse = () => { collapse.value = !collapse.value; };
+      const toggleCollapse = () => {
+        collapse.value = !collapse.value;
+      };
 
       const menuList = ref([
-        { id: '0', icon: "Notification", text: "演示" },
+        { id: "00", icon: "Notification", text: "演示0", cache: true },
         {
-          id: '1',
+          id: "10",
           icon: "Memo",
-          text: "页面",
+          text: "页面0",
           children: [
-            { id: '1.1', icon: "Memo", text: "页面1" },
+            { id: "1.10", icon: "Memo", text: "页面10", cache: true },
             {
-              id: '1.2',
+              id: "1.20",
               icon: "Memo",
-              text: "页面2",
+              text: "页面20",
               children: [
-                { id: '1.21', icon: "Memo", text: "页面2.1" },
-                { id: '1.22', icon: "Memo", text: "页面2.2" },
+                { id: "1.210", icon: "Memo", text: "页面2.10" },
+                { id: "1.220", icon: "Memo", text: "页面2.20" },
               ],
             },
           ],
         },
-        { id: '2', icon: "Files", text: "生态" },
+        { id: "20", icon: "Files", text: "生态0" },
       ]);
 
       // use data id as menu index
       const handleMenuSelect = (index, path, item) => {
         const menu = findTreeNode(menuList.value, index);
 
-        !cachedViews.value.find((x) => x.id === index) && cachedViews.value.push({ ...menu, title: menu.text });
+        !cachedViews.value.find((x) => x.id === index) &&
+          cachedViews.value.push({ ...menu, title: menu.text, pathList: searchTreeNodeParents(menuList.value,index)});
         currentIndex.value = index;
 
-        updateContentByInnerHtml(`选中菜单，序号: ${JSON.stringify(menu)}`);
+        updateContentByDom(menu);
       };
 
-      const findTreeNode = (tree, id) => {
-        let stark = [];
-        stark = stark.concat(tree);
-        while (stark.length) {
-          const temp = stark.shift();
-          if (temp.children) {
-            stark = stark.concat(temp.children);
-          }
-          if (temp.id === id) {
-            return temp;
-          }
-        }
-      };
-
-      const searchTreeNodeParents = (map, id) => {
-        let t = [];
-        for (const element of map) {
-          const e = element;
-          if (e.id === id) {
-            //若查询到对应的节点，则直接返回
-            t.push(e);
-            break;
-          } else if (e.children && e.children.length !== 0) {
-            //判断是否还有子节点，若有对子节点进行循环调用
-            let p = searchTreeNodeParents(e.children, id);
-            //若p的长度不为0，则说明子节点在该节点的children内，记录此节点，并终止循环
-            if (p.length !== 0) {
-              p.unshift(e);
-              t = p;
-              break;
-            }
-          }
-        }
-        return t;
-      };
+      
       //#endregion
 
       //#region 设置抽屉组件
@@ -129,37 +127,22 @@ function bootstrap() {
       //#endregion
 
       //#region 内容展示区域
-      const updateContentByInnerHtml = (content) => {
-        const dom = document.querySelector(".app-main");
-        dom.innerHTML = content;
-      };
 
-      const updateContentByAppendChild = (child) => {
-        const dom = document.querySelector(".app-main");
-        dom.appendChild(child);
-      };
       //#endregion
-    
+
       //#region 收藏/面包屑/折叠
       const currentViewPathList = computed(() => {
-        const result = searchTreeNodeParents(menuList.value, currentIndex.value);
-        console.log(JSON.stringify(result));
-        return result;
-
+        const result = cachedViews.value.find(x => x.id === currentIndex.value);
+        return result?.pathList;
       });
       //#endregion
-      
 
       const fullscreen = ref(false);
       const fullscreenMain = ref(false);
 
-      
-
       const toggleSideBar = () => {
         collapse.value = !collapse.value;
       };
-
-      
 
       const toggleFullScreenByDom = (element, isFullScreen) => {
         if (!element) return;
@@ -237,7 +220,7 @@ function bootstrap() {
         dropdownChangePersonalInfo,
         dropdownChangeCloseTag,
         changeMainMenu,
-        currentViewPathList
+        currentViewPathList,
       };
     },
   };

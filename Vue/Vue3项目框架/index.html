@@ -19,6 +19,8 @@
 
     <script src="./js/components/menuItem.js"></script>
     
+    <script src="./js/utils.js"></script>
+    <script src="./js/app.js"></script>
     <script src="./js/main.js"></script>
 
 
@@ -116,7 +118,7 @@
                     <div class="tags-box">
                         <el-scrollbar class="tags-scrollbar tags">
                             <div class="tag-box" v-for="cachedView in cachedViews" :key="cachedView.id">
-                                <el-tag class="tag" closable :type="isActive(cachedView) ? '' : 'info'"
+                                <el-tag class="tag" :closable="cachedViews && cachedViews.length > 1" :type="isActive(cachedView) ? '' : 'info'"
                                     @click="clickTag(cachedView)" @close="closeSingleTag(cachedView)"
                                     effect="dark"><el-icon :size="22">
                                         <component :is="cachedView.icon"></component>
@@ -198,7 +200,7 @@
                         </div>
                     </div>
 
-                    <div class="app-main">主体内容</div>
+                    <div class="app-main"></div>
                 </div>
             </div>
         </div>
