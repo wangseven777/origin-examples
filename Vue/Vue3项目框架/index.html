@@ -15,7 +15,9 @@
 
     <script src="./js/vue.js"></script>
     <script src="https://unpkg.com/element-plus"></script>
-    <script src="https://unpkg.com/@element-plus/icons-vue"></script>
+    <!-- <script src="https://unpkg.com/@element-plus/icons-vue"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@element-plus/icons-vue@2.1.0"></script> -->
+    <script src="https://unpkg.com/@element-plus/icons-vue@latest"></script>
 
     <script src="./js/components/menuItem.js"></script>
 
@@ -133,9 +135,9 @@
                         <div class="more-action">
                             <el-dropdown>
                                 <span class="el-dropdown-link">
-                                    <el-icon :size="20">
-                                        <Download />
-                                    </el-icon>
+                                    <li class="el-icon-dropdown" style="list-style: none;height: 100%;width: 20px; background-color: white; border-radius: 5px;">
+                                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" data-v-ea893728=""><path fill="currentColor" d="m192 384 320 384 320-384z"></path></svg>
+                                    </li>
                                 </span>
                                 <template #dropdown>
                                     TODO
