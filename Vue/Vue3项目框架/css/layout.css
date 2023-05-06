@@ -426,10 +426,23 @@
     height: 50px;
     text-align: right;
     vertical-align: middle;
+    padding: 0px 20px;
 }
 
 .right-content .navbar .info .bell {
     cursor: pointer;
+}
+
+.right-content .navbar .info .item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 26px;
+    width: 34px;
+    cursor: pointer;
+    vertical-align: middle;
+    position: relative;
+    line-height: 26px;
 }
 
 .right-content .navbar .info .bell .item {

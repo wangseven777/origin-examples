@@ -1,6 +1,14 @@
 const bootstrap = () => {
-  const { createApp, reactive, toRefs, ref, defineComponent, h, computed, onMounted } =
-    Vue;
+  const {
+    createApp,
+    reactive,
+    toRefs,
+    ref,
+    defineComponent,
+    h,
+    computed,
+    onMounted,
+  } = Vue;
 
   const vue3Composition = {
     setup() {
@@ -117,27 +125,40 @@ const bootstrap = () => {
       //#region tags
       const cachedViews = ref([]);
       const currentIndex = ref();
-      const homeMenu = {  id: '000', text: '主页', icon: 'Notification'  };
+      const homeMenu = { id: "000", text: "主页", icon: "Notification" };
+      const isAtHome = currentIndex.value === homeMenu.id;
       const disabledLeft = computed(() => {
-        const index = cachedViews.value.findIndex(x => x.id === currentIndex.value);
+        const index = cachedViews.value.findIndex(
+          (x) => x.id === currentIndex.value
+        );
         return index === 0;
       });
 
       const disabledRight = computed(() => {
-        const index = cachedViews.value.findIndex(x => x.id === currentIndex.value);
+        const index = cachedViews.value.findIndex(
+          (x) => x.id === currentIndex.value
+        );
         return index === cachedViews.value.length - 1;
       });
 
       // 关闭其他标签
-      const closeOtherTag = () => { cachedViews.value = [cachedViews.value.find(x => x.id === currentIndex.value)]; };
+      const closeOtherTag = () => {
+        cachedViews.value = [
+          cachedViews.value.find((x) => x.id === currentIndex.value),
+        ];
+      };
       // 关闭右侧标签
-      const closeRightTag = () => { 
-        const index = cachedViews.value.findIndex(x => x.id === currentIndex.value);
+      const closeRightTag = () => {
+        const index = cachedViews.value.findIndex(
+          (x) => x.id === currentIndex.value
+        );
         cachedViews.value = cachedViews.value.toSpliced(index + 1);
-       };
-       // 关闭左侧标签
+      };
+      // 关闭左侧标签
       const closeLeftTag = () => {
-        const index = cachedViews.value.findIndex(x => x.id === currentIndex.value);
+        const index = cachedViews.value.findIndex(
+          (x) => x.id === currentIndex.value
+        );
         cachedViews.value = cachedViews.value.toSpliced(0, index);
       };
 
@@ -165,24 +186,37 @@ const bootstrap = () => {
       };
       //#endregion
 
+      //#region 收藏
+      const starList = ref([]);
+      const addStar = (item) => starList.value.push(item);
+      const removeStar = (item) =>
+        (starList.value = starList.value.filter((x) => x.id !== item.id));
+      //#endregion
+
+      //#region 面包屑
+      const currentViewPathList = computed(() => {
+        const result = cachedViews.value.find(
+          (x) => x.id === currentIndex.value
+        );
+        return result?.pathList;
+      });
+      //#endregion
+
+      //#region 姓名/放大缩小功能/消息提示 栏
+      const userName = ref("李白");
+      const { pinyin } = pinyinPro;
+      const pinyinFL = computed(() => pinyin(userName.value || "无")[0].toUpperCase());
+      //#endregion
+
       //#region 内容展示区域
-      onMounted(() => { 
-        updateContentByDom(homeMenu); 
+      onMounted(() => {
+        updateContentByDom(homeMenu);
         cachedViews.value.push({
           ...homeMenu,
           title: homeMenu.text,
           pathList: [homeMenu],
         });
         currentIndex.value = homeMenu.id;
-      });
-      //#endregion
-
-      //#region 收藏/面包屑/折叠
-      const currentViewPathList = computed(() => {
-        const result = cachedViews.value.find(
-          (x) => x.id === currentIndex.value
-        );
-        return result?.pathList;
       });
       //#endregion
 
@@ -256,11 +290,22 @@ const bootstrap = () => {
         menuList,
 
         // tag
+        isAtHome,
         disabledLeft,
         disabledRight,
         closeOtherTag,
         closeRightTag,
         closeLeftTag,
+        clickTag,
+        closeSingleTag,
+
+        // 收藏
+        starList,
+        addStar,
+        removeStar,
+
+        userName,
+        pinyinFL,
 
         drawer,
 
@@ -269,8 +314,6 @@ const bootstrap = () => {
         toggleCollapse,
         handleMenuSelect,
         isActive,
-        clickTag,
-        closeSingleTag,
         fullscreen,
         fullscreenMain,
         toggleFullScreen,
@@ -296,4 +339,4 @@ const bootstrap = () => {
   app.use(ElementPlus).mount("#app");
 
   return app;
-}
+};

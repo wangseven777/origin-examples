@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="./css/iconfont/iconfont.css" />
     <link rel="stylesheet" href="./css/layout.css" />
 
+    <script src="https://cdn.jsdelivr.net/gh/zh-lx/pinyin-pro@latest/dist/pinyin-pro.js"></script>
+
     <script src="./js/vue.js"></script>
     <script src="https://unpkg.com/element-plus"></script>
     <!-- <script src="https://unpkg.com/@element-plus/icons-vue"></script> -->
@@ -184,20 +186,20 @@
 
                         <!-- info -->
                         <div class="info" v-if="!showTopNavBar">
-                            <span class="bell">
-                                <el-badge is-dot class="item">
+                            <span class="bell item">
+                                <el-badge :value="9" class="item">
                                     <el-icon>
                                         <bell />
                                     </el-icon>
                                 </el-badge>
                             </span>
 
-                            <span class="fullscreen" @click="toggleFullScreen">
+                            <span class="fullscreen item" @click="toggleFullScreen">
                                 <i v-if="fullscreen" class="iconfont icon-fullscreen-shrink"></i>
                                 <i v-else class="iconfont icon-fullscreen-expand"></i>
                             </span>
 
-                            <el-dropdown :hide-on-click="false">
+                            <el-dropdown :hide-on-click="false" class="item">
                                 <el-icon>
                                     <service />
                                 </el-icon>
@@ -209,7 +211,7 @@
                                 </template>
                             </el-dropdown>
                             <el-dropdown :hide-on-click="false" class="name" @command="dropdownChangePersonalInfo">
-                                <span>个人信息（头像 + Name）</span>
+                                <span><el-avatar :size="23" style="margin-right: 5px; margin-left: 20px;">{{ pinyinFL }}</el-avatar>{{ userName }}</span>
                                 <template #dropdown>
                                     <el-dropdown-menu>
                                         <el-dropdown-item command="logout">退出登录</el-dropdown-item>

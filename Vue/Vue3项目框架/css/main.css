@@ -88,3 +88,7 @@ body {
     font-size: 14px;
     font-weight: bolder;
 }
+
+:focus-visible {
+    outline: none;
+}
