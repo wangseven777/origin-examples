@@ -74,6 +74,7 @@ const bootstrap = () => {
       //#endregion
 
       //#region 二级导航
+      const refMenu = ref();
       const collapse = ref(false);
       const toggleCollapse = () => {
         collapse.value = !collapse.value;
@@ -179,6 +180,8 @@ const bootstrap = () => {
       const clickTag = (cachedView) => {
         currentIndex.value = cachedView.id;
         const menu = findTreeNode(menuList.value, cachedView.id);
+        // refMenu.value.open(cachedView.id);
+        activeIndex.value = cachedView.id;
         updateContentByDom(menu || homeMenu);
         // console.log(path);
         //   router.push(path);
@@ -287,6 +290,7 @@ const bootstrap = () => {
         // generateMenu,
 
         // 二级导航
+        refMenu,
         menuList,
 
         // tag

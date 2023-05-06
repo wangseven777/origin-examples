@@ -362,10 +362,16 @@
 
 .right-content .navbar .left {
     display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.right-content .navbar .left .el-dropdown.item {
+    margin-left: 10px;
 }
 
 .right-content .navbar .left .el-breadcrumb {
-    margin-left: 20px;
+    margin-left: 10px;
     white-space: nowrap;
     line-height: normal;
     vertical-align: middle;
