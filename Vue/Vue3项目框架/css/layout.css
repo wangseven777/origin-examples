@@ -300,6 +300,51 @@
     pointer-events: none;
 }
 
+/* tag下拉弹窗样式 */
+.tag-action-popper {
+    padding: 15px !important;
+    min-width: 200px;
+}
+
+.tag-action-popper .actions {
+    width: 100%;
+    display: flex;
+}
+
+.tag-action-popper .tag {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    cursor: pointer;
+    align-items: center;
+    height: 32px;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+.tag-action-popper .tag .el-tag__content {
+    display: flex;
+}
+
+.tag-action-popper .actions i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background-color: var(--el-fill-color);
+    transition: var(--el-transition-color),background-color .3s;
+}
+
+.tag-action-popper .actions i:hover {
+    color: var(--el-color-primary);
+    background-color: var(--el-fill-color-light);
+}
 
 
 

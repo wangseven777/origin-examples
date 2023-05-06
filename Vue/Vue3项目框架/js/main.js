@@ -117,6 +117,7 @@ const bootstrap = () => {
       //#region tags
       const cachedViews = ref([]);
       const currentIndex = ref();
+      const homeMenu = {  id: '000', text: '主页', icon: 'Notification'  };
 
       // 关闭单个标签
       const closeSingleTag = (cachedView) => {
@@ -125,6 +126,8 @@ const bootstrap = () => {
           (x) => x.id !== cachedView.id
         );
         currentIndex.value = cachedViews.value[0].id;
+        const menu = findTreeNode(menuList.value, currentIndex.value);
+        updateContentByDom(menu || homeMenu);
       };
 
       // 标签高亮
@@ -133,7 +136,7 @@ const bootstrap = () => {
       const clickTag = (cachedView) => {
         currentIndex.value = cachedView.id;
         const menu = findTreeNode(menuList.value, cachedView.id);
-        updateContentByDom(menu || { id: '000', text: '主页' });
+        updateContentByDom(menu || homeMenu);
         // console.log(path);
         //   router.push(path);
         // 路由跳转，更换主体内容
@@ -142,13 +145,13 @@ const bootstrap = () => {
 
       //#region 内容展示区域
       onMounted(() => { 
-        updateContentByDom({ id: '000', text: '主页' }); 
+        updateContentByDom(homeMenu); 
         cachedViews.value.push({
-          ...{ id: '000', text: '主页' },
-          title: '主页',
-          pathList: [{ id: '000', text: '主页' }],
+          ...homeMenu,
+          title: homeMenu.text,
+          pathList: [homeMenu],
         });
-        currentIndex.value = '000';
+        currentIndex.value = homeMenu.id;
       });
       //#endregion
 

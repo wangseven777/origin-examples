@@ -132,15 +132,30 @@
                             </div>
 
                         </el-scrollbar>
-                        <div class="more-action">
-                            <el-dropdown>
+                        <div class="more-action" v-if="cachedViews && cachedViews.length > 1">
+                            <el-dropdown popper-class="tag-action-popper" :hide-on-click="false">
                                 <span class="el-dropdown-link">
                                     <li class="el-icon-dropdown" style="list-style: none;height: 100%;width: 20px; background-color: white; border-radius: 5px;">
                                         <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" data-v-ea893728=""><path fill="currentColor" d="m192 384 320 384 320-384z"></path></svg>
                                     </li>
                                 </span>
                                 <template #dropdown>
-                                    TODO
+                                    <div class="actions">
+                                        <el-icon :size="20"><component is="Close"></component></el-icon>
+                                        <el-icon :size="20"><component is="Back"></component></el-icon>
+                                        <el-icon :size="20"><component is="Right"></component></el-icon>
+                                    </div>
+                                    <el-dropdown-menu>
+                                        <el-dropdown-item v-for="cachedView in cachedViews" :key="cachedView.id">
+                                            <el-tag class="tag" :closable="cachedViews && cachedViews.length > 1"
+                                                :type="isActive(cachedView) ? '' : 'info'" @click="clickTag(cachedView)"
+                                                @close="closeSingleTag(cachedView)" effect="dark">
+                                                <el-icon :size="22">
+                                                    <component :is="cachedView.icon"></component>
+                                                </el-icon>{{ cachedView.title }}
+                                            </el-tag>
+                                        </el-dropdown-item>
+                                    </el-dropdown-menu>
                                 </template>
                             </el-dropdown>
                         </div>
@@ -182,7 +197,7 @@
                                 <i v-else class="iconfont icon-fullscreen-expand"></i>
                             </span>
 
-                            <el-dropdown :hide-on-click="false" class="name">
+                            <el-dropdown :hide-on-click="false">
                                 <el-icon>
                                     <service />
                                 </el-icon>
