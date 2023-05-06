@@ -326,22 +326,23 @@
     display: flex;
 }
 
-.tag-action-popper .actions i {
+.tag-action-popper .actions button {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 24px;
     height: 24px;
-    margin-right: 10px;
+    /* margin-right: 10px; */
     border-radius: 5px;
     cursor: pointer;
     outline: none;
     border: none;
     background-color: var(--el-fill-color);
     transition: var(--el-transition-color),background-color .3s;
+    color: black;
 }
 
-.tag-action-popper .actions i:hover {
+.tag-action-popper .actions button:hover {
     color: var(--el-color-primary);
     background-color: var(--el-fill-color-light);
 }

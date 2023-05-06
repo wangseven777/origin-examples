@@ -141,9 +141,9 @@
                                 </span>
                                 <template #dropdown>
                                     <div class="actions">
-                                        <el-icon :size="20"><component is="Close"></component></el-icon>
-                                        <el-icon :size="20"><component is="Back"></component></el-icon>
-                                        <el-icon :size="20"><component is="Right"></component></el-icon>
+                                        <el-button type="primary" icon="Close" circle :disabled="cachedViews.length === 1" @click="closeOtherTag"> </el-button>
+                                        <el-button type="primary" icon="Back" circle :disabled="disabledLeft" @click="closeLeftTag"> </el-button>
+                                        <el-button type="primary" icon="Right" circle :disabled="disabledRight" @click="closeRightTag"> </el-button>
                                     </div>
                                     <el-dropdown-menu>
                                         <el-dropdown-item v-for="cachedView in cachedViews" :key="cachedView.id">

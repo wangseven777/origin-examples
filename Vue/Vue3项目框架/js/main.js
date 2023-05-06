@@ -118,6 +118,28 @@ const bootstrap = () => {
       const cachedViews = ref([]);
       const currentIndex = ref();
       const homeMenu = {  id: '000', text: '主页', icon: 'Notification'  };
+      const disabledLeft = computed(() => {
+        const index = cachedViews.value.findIndex(x => x.id === currentIndex.value);
+        return index === 0;
+      });
+
+      const disabledRight = computed(() => {
+        const index = cachedViews.value.findIndex(x => x.id === currentIndex.value);
+        return index === cachedViews.value.length - 1;
+      });
+
+      // 关闭其他标签
+      const closeOtherTag = () => { cachedViews.value = [cachedViews.value.find(x => x.id === currentIndex.value)]; };
+      // 关闭右侧标签
+      const closeRightTag = () => { 
+        const index = cachedViews.value.findIndex(x => x.id === currentIndex.value);
+        cachedViews.value = cachedViews.value.toSpliced(index + 1);
+       };
+       // 关闭左侧标签
+      const closeLeftTag = () => {
+        const index = cachedViews.value.findIndex(x => x.id === currentIndex.value);
+        cachedViews.value = cachedViews.value.toSpliced(0, index);
+      };
 
       // 关闭单个标签
       const closeSingleTag = (cachedView) => {
@@ -232,6 +254,13 @@ const bootstrap = () => {
 
         // 二级导航
         menuList,
+
+        // tag
+        disabledLeft,
+        disabledRight,
+        closeOtherTag,
+        closeRightTag,
+        closeLeftTag,
 
         drawer,
 
