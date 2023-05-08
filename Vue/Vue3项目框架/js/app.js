@@ -133,9 +133,9 @@ const updateContentByDom = async (menu) => {
 <script type="text/babel">
     //OH的右边的内容就是JSX的语法
     //（script type="text/babel" 需要这么写，不然就会报错，需要告诉babel需要转哪些，只需要在script标签写type="text/babel"就可以了）
-    let oH = <div>
+    let oH = <h1>
         hello react!
-    </div>;
+    </h1>;
     // ReactDOM.render(要渲染什么内容，渲染到哪里)
     //只有用了这个才会创建虚拟DOM，先创建再更新
     ReactDOM.render(oH, document.querySelector("#app-main .box"));
@@ -143,8 +143,9 @@ const updateContentByDom = async (menu) => {
 
 <script>
 
+// 测试脚本
 const dom = document.querySelector(".app-main");
-dom.style.backgroundColor = 'red';
+dom.style.backgroundColor = '#909090';
 
 // 引入JQ并使用
 function callback() { $('#app-main').css({ 'color': 'white' }); }
