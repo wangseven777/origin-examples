@@ -16,9 +16,7 @@ const updateContentByInnerHtml = async (menu) => {
   dom.innerHTML = content;
 };
 
-const updateContentByVueComponent = async (menu) => {};
-
-const updateContentByDom = async (menu) => {
+const updateContentByVue = async (menu) => {
   const dom = document.querySelector(".app-main");
   let content;
   if (menu.cache && _cachedView.has(menu.id)) {
@@ -58,6 +56,92 @@ const updateContentByDom = async (menu) => {
   app.use(ElementPlus).mount("#app-main .box");
   return app;
 })();
+
+const dom = document.querySelector(".app-main");
+dom.style.backgroundColor = 'red';
+
+// 引入JQ并使用
+function callback() { $('#app-main').css({ 'color': 'white' }); }
+loadScript('https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js', callback); // loadScript是全局公共方法，使用方式Fn(url, callback)
+
+// 使用完或者不需要使用时，目前只能迷惑性的在HTML中不显示，但实际已经装载，$依旧可以全局使用
+// 如果不想被使用，可以强制置空，$ = null;
+unloadScript('https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js');
+</script>
+      `;
+    _cachedView.set(menu.id, content);
+  }
+  const fragDOM = document.createRange().createContextualFragment(content);
+  dom.innerHTML = "";
+  dom.appendChild(fragDOM);
+};
+
+const updateContentByReact = async (menu) => {
+  const dom = document.querySelector(".app-main");
+  let content;
+  if (menu.cache && _cachedView.has(menu.id)) {
+    content = _cachedView.get(menu.id);
+    console.log("使用缓存内容......");
+  } else {
+    console.log("请求接口......");
+    content = `
+      <div class="box"></div>
+
+<script type="text/babel">
+    //OH的右边的内容就是JSX的语法
+    //（script type="text/babel" 需要这么写，不然就会报错，需要告诉babel需要转哪些，只需要在script标签写type="text/babel"就可以了）
+    let oH = <div>
+        hello react!
+    </div>;
+    // ReactDOM.render(要渲染什么内容，渲染到哪里)
+    //只有用了这个才会创建虚拟DOM，先创建再更新
+    ReactDOM.render(oH, document.querySelector("#app-main .box"));
+</script>
+
+<script>
+
+const dom = document.querySelector(".app-main");
+dom.style.backgroundColor = 'red';
+
+// 引入JQ并使用
+function callback() { $('#app-main').css({ 'color': 'white' }); }
+loadScript('https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js', callback); // loadScript是全局公共方法，使用方式Fn(url, callback)
+
+// 使用完或者不需要使用时，目前只能迷惑性的在HTML中不显示，但实际已经装载，$依旧可以全局使用
+// 如果不想被使用，可以强制置空，$ = null;
+unloadScript('https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js');
+</script>
+      `;
+    _cachedView.set(menu.id, content);
+  }
+  const fragDOM = document.createRange().createContextualFragment(content);
+  dom.innerHTML = "";
+  dom.appendChild(fragDOM);
+};
+
+const updateContentByDom = async (menu) => {
+  const dom = document.querySelector(".app-main");
+  let content;
+  if (menu.cache && _cachedView.has(menu.id)) {
+    content = _cachedView.get(menu.id);
+    console.log("使用缓存内容......");
+  } else {
+    console.log("请求接口......");
+    content = `
+      <div class="box"></div>
+
+<script type="text/babel">
+    //OH的右边的内容就是JSX的语法
+    //（script type="text/babel" 需要这么写，不然就会报错，需要告诉babel需要转哪些，只需要在script标签写type="text/babel"就可以了）
+    let oH = <div>
+        hello react!
+    </div>;
+    // ReactDOM.render(要渲染什么内容，渲染到哪里)
+    //只有用了这个才会创建虚拟DOM，先创建再更新
+    ReactDOM.render(oH, document.querySelector("#app-main .box"));
+</script>
+
+<script>
 
 const dom = document.querySelector(".app-main");
 dom.style.backgroundColor = 'red';
