@@ -120,29 +120,26 @@ unloadScript('https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js');
 };
 
 const updateContentByDom = async (menu) => {
-  const dom = document.querySelector(".app-main");
+  const appMainDom = document.querySelector(".app-main");
   let content;
   if (menu.cache && _cachedView.has(menu.id)) {
     content = _cachedView.get(menu.id);
     console.log("使用缓存内容......");
   } else {
     console.log("请求接口......");
+    const id = (new Date()).getMilliseconds();
     content = `
-      <div class="box"></div>
+      <div class="box" id='id${id}'></div>
 
-<script type="text/babel">
-    //OH的右边的内容就是JSX的语法
-    //（script type="text/babel" 需要这么写，不然就会报错，需要告诉babel需要转哪些，只需要在script标签写type="text/babel"就可以了）
-    let oH = <h1>
-        hello react!
-    </h1>;
-    // ReactDOM.render(要渲染什么内容，渲染到哪里)
-    //只有用了这个才会创建虚拟DOM，先创建再更新
-    ReactDOM.render(oH, document.querySelector("#app-main .box"));
+<script type="module" id="ab${(new Date()).getMilliseconds()}">
+    ReactDOM.render(React.createElement('button',
+    { onClick: () => console.log('test') },
+    'Like'), document.querySelector("#app-main .box"));
+    console.log('1111');
 </script>
 
-<script>
-
+<script type="module" id="aa${(new Date()).getMilliseconds()}">
+console.log('2222');
 // 测试脚本
 const dom = document.querySelector(".app-main");
 dom.style.backgroundColor = '#909090';
@@ -159,11 +156,15 @@ unloadScript('https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js');
     _cachedView.set(menu.id, content);
   }
   const fragDOM = document.createRange().createContextualFragment(content);
-  dom.innerHTML = "";
-  dom.appendChild(fragDOM);
+  appMainDom.innerHTML = "";
+  appMainDom.firstChild && appMainDom.removeChild(appMainDom.firstChild);
+  appMainDom.appendChild(fragDOM);
 };
 
 // 接口请求
 // 自动追加
 // script脚本
 // vue组件， dom中使用vue模板语法
+
+
+// 动态抽离script并执行（包括界面初始化时，以及dom更新时）
