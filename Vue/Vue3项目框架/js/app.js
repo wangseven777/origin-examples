@@ -33,3 +33,8 @@ const updateContentByDom = async (menu) => {
     dom.innerHTML = '';
     dom.appendChild(fragDOM);
 };
+
+// 接口请求
+// 自动追加
+// script脚本
+// vue组件， dom中使用vue语法
