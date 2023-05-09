@@ -120,6 +120,11 @@ unloadScript('https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js');
 };
 
 const updateContentByDom = async (menu) => {
+  // api请求
+  // const result = await fetchData('https://www.baidu.com');
+  // console.log(result);
+
+  
   const appMainDom = document.querySelector(".app-main");
   let content;
   if (menu.cache && _cachedView.has(menu.id)) {
