@@ -542,11 +542,13 @@
 
 .star-action-popper .star-list {
     padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 
 .star-action-popper .star-list .tag {
-    width: 100%;
     display: flex;
     justify-content: space-around;
     cursor: pointer;

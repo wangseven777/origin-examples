@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />  
-    <meta http-equiv="Pragma" content="no-cache" />  
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
     <title>Vue3 + ElementPlus Template</title>
     <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -118,8 +118,8 @@
                     <div v-if="!collapse" class="web-name">Fantastic-admin 专业版</div>
 
                     <el-scrollbar class="scrollbar" wrap-class="scrollbar-wrapper">
-                        <el-menu ref="refMenu" :default-active="activeIndex" :collapse="collapse" class="menu el-menu-vertical"
-                            :collapse-transition="true" @select="handleMenuSelect">
+                        <el-menu ref="refMenu" :default-active="activeIndex" :collapse="collapse"
+                            class="menu el-menu-vertical" :collapse-transition="true" @select="handleMenuSelect">
                             <menu-item-component v-for="item in menuList" :key="item.index" :item="item">
                             </menu-item-component>
                         </el-menu>
@@ -146,15 +146,22 @@
                         <div class="more-action" v-if="cachedViews && cachedViews.length > 1">
                             <el-dropdown popper-class="tag-action-popper" :hide-on-click="false">
                                 <span class="el-dropdown-link">
-                                    <li class="el-icon-dropdown" style="list-style: none;height: 100%;width: 20px; background-color: white; border-radius: 5px;">
-                                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" data-v-ea893728=""><path fill="currentColor" d="m192 384 320 384 320-384z"></path></svg>
+                                    <li class="el-icon-dropdown"
+                                        style="list-style: none;height: 100%;width: 20px; background-color: white; border-radius: 5px;">
+                                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"
+                                            data-v-ea893728="">
+                                            <path fill="currentColor" d="m192 384 320 384 320-384z"></path>
+                                        </svg>
                                     </li>
                                 </span>
                                 <template #dropdown>
                                     <div class="actions">
-                                        <el-button type="primary" icon="Close" circle :disabled="cachedViews.length === 1" @click="closeOtherTag"> </el-button>
-                                        <el-button type="primary" icon="Back" circle :disabled="disabledLeft" @click="closeLeftTag"> </el-button>
-                                        <el-button type="primary" icon="Right" circle :disabled="disabledRight" @click="closeRightTag"> </el-button>
+                                        <el-button type="primary" icon="Close" circle
+                                            :disabled="cachedViews.length === 1" @click="closeOtherTag"> </el-button>
+                                        <el-button type="primary" icon="Back" circle :disabled="disabledLeft"
+                                            @click="closeLeftTag"> </el-button>
+                                        <el-button type="primary" icon="Right" circle :disabled="disabledRight"
+                                            @click="closeRightTag"> </el-button>
                                     </div>
                                     <el-dropdown-menu>
                                         <el-dropdown-item v-for="cachedView in cachedViews" :key="cachedView.index">
@@ -192,32 +199,31 @@
                                     <div class="top">
                                         <span class="text">我的收藏夹</span>
                                         <span class="icon" v-if="!isAtHome">
-                                            <el-icon @click="addStar" :size="20" v-if="showEmptyStar"><star /></el-icon>
-                                            <el-icon :size="23"  v-else><star-filled /></el-icon>
+                                            <el-icon @click="addStar" :size="20" v-if="showEmptyStar">
+                                                <star />
+                                            </el-icon>
+                                            <el-icon :size="23" v-else>
+                                                <star-filled />
+                                            </el-icon>
                                         </span>
                                     </div>
                                     <div class="empty-box" v-if="starList.length === 0">
                                         <el-empty description=" " />
-                                        <span>收藏夹是空的</span> <br/>
+                                        <span>收藏夹是空的</span> <br />
                                         <span>
-                                            请点击右上角的 <el-icon><star /></el-icon>将当前页面添加到收藏夹
+                                            请点击右上角的 <el-icon>
+                                                <star />
+                                            </el-icon>将当前页面添加到收藏夹
                                         </span>
                                     </div>
 
                                     <div class="star-list" v-else>
-                                        <el-tag closable class="tag" v-for="star in starList" >
+                                        <el-tag closable class="tag" v-for="star in starList"
+                                            @close="() => removeStar(star)">
                                             <el-icon :size="22">
                                                 <component :is="star.icon"></component>
                                             </el-icon>{{ star.title }}
                                         </el-tag>
-                                        <!-- <el-tag   v-for="cachedView in starList"
-                                        class="tag" :closable="cachedViews && cachedViews.length > 1"
-                                            :type="isActive(cachedView) ? '' : 'info'" @click="clickTag(cachedView)"
-                                            @close="closeSingleTag(cachedView)" effect="dark">
-                                            <el-icon :size="22">
-                                                <component :is="cachedView.icon"></component>
-                                            </el-icon>{{ cachedView.title }}
-                                        </el-tag> -->
                                     </div>
                                 </template>
                             </el-dropdown>
@@ -262,7 +268,10 @@
                                 </template>
                             </el-dropdown>
                             <el-dropdown :hide-on-click="false" class="name" @command="dropdownChangePersonalInfo">
-                                <span><el-avatar :size="23" style="margin-right: 5px; margin-left: 20px;">{{ pinyinFL }}</el-avatar>{{ userName }}</span>
+                                <span>
+                                    <el-avatar :size="23" style="margin-right: 5px; margin-left: 20px;">{{ pinyinFL }}
+                                    </el-avatar>{{ userName }}
+                                </span>
                                 <template #dropdown>
                                     <el-dropdown-menu>
                                         <el-dropdown-item command="logout">退出登录</el-dropdown-item>
