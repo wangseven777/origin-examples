@@ -509,3 +509,33 @@
   align-items: center;
   justify-content: center;
 }
+
+
+/* 下拉自定义样式：收藏下拉 */
+.star-action-popper {
+    width: 300px;
+}
+
+.star-action-popper .top {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    font-weight: 700;
+}
+
+.star-action-popper .top .text {
+    justify-items: left;
+}
+.star-action-popper .top .icon {
+    text-align: right;
+    cursor: pointer;
+}
+
+.star-action-popper .empty-box {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: var(--el-text-color-disabled);
+}

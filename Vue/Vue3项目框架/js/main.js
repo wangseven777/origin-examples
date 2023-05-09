@@ -191,7 +191,10 @@ const bootstrap = () => {
 
       //#region 收藏
       const starList = ref([]);
-      const addStar = (item) => starList.value.push(item);
+      const addStar = () => {
+        const item = findTreeNode(menuList.value, currentIndex.value);
+        starList.value.push(item);
+      };
       const removeStar = (item) =>
         (starList.value = starList.value.filter((x) => x.id !== item.id));
       //#endregion
