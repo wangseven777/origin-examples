@@ -54,7 +54,7 @@
                             <el-icon :size="22">
                                 <component :is="item.icon"></component>
                             </el-icon>
-                            <div>{{ item.text }}</div>
+                            <div>{{ item.title }}</div>
                         </div>
                     </div>
                 </div>
@@ -108,7 +108,7 @@
                             <el-icon :size="22">
                                 <component :is="item.icon"></component>
                             </el-icon>
-                            <div>{{ item.text }}</div>
+                            <div>{{ item.title }}</div>
                         </div>
                     </div>
                 </div>
@@ -191,7 +191,9 @@
                                 <template #dropdown>
                                     <div class="top">
                                         <span class="text">我的收藏夹</span>
-                                        <span class="icon"><el-icon @click="addStar"><star /></el-icon></span>
+                                        <span class="icon" v-if="!isAtHome">
+                                            <el-icon @click="addStar"><star /></el-icon>
+                                        </span>
                                     </div>
                                     <div class="empty-box" v-if="starList.length === 0">
                                         <el-empty description=" " />
@@ -201,14 +203,21 @@
                                         </span>
                                     </div>
 
-                                    <div v-else>
+                                    <div class="star-list" v-else>
+                                        <div v-for="star in starList">
+                                            <el-tag closable class="tag" >
+                                                <el-icon :size="22">
+                                                    <component :is="star.icon"></component>
+                                                </el-icon>{{ star.title }}
+                                            </el-tag>
+                                        </div>
                                         <!-- <el-tag   v-for="cachedView in starList"
                                         class="tag" :closable="cachedViews && cachedViews.length > 1"
                                             :type="isActive(cachedView) ? '' : 'info'" @click="clickTag(cachedView)"
                                             @close="closeSingleTag(cachedView)" effect="dark">
                                             <el-icon :size="22">
                                                 <component :is="cachedView.icon"></component>
-                                            </el-icon>{{ cachedView.text }}
+                                            </el-icon>{{ cachedView.title }}
                                         </el-tag> -->
                                     </div>
                                 </template>
@@ -217,7 +226,7 @@
                             <el-breadcrumb>
                                 <transition-group name="breadcrumb">
                                     <el-breadcrumb-item v-for="(item, index) in currentViewPathList" :key="item.index">
-                                        {{ item.text ?? '[ 无标题 ]' }}
+                                        {{ item.title ?? '[ 无标题 ]' }}
                                     </el-breadcrumb-item>
                                 </transition-group>
                             </el-breadcrumb>

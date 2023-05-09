@@ -20,7 +20,7 @@ function getMenuItemComponent() {
                 h(ElIcon, null, {
                   default: () => h(ElementPlusIconsVue[item?.icon]),
                 }),
-              title: () => item?.text,
+              title: () => item?.title,
             })
           : h(
               ElSubMenu,
@@ -30,7 +30,7 @@ function getMenuItemComponent() {
                   h(ElIcon, null, {
                     default: () => h(ElementPlusIconsVue[item?.icon]),
                   }),
-                  h("span", { class: "tab" }, item.text),
+                  h("span", { class: "tab" }, item.title),
                 ],
 
                 default: () =>
@@ -43,7 +43,7 @@ function getMenuItemComponent() {
                           h(ElIcon, null, {
                             default: () => h(ElementPlusIconsVue[child?.icon]),
                           }),
-                          h("span", null, child.text),
+                          h("span", null, child.title),
                         ],
                       });
                     }

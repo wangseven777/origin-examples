@@ -32,9 +32,9 @@ const bootstrap = () => {
       //#region  一级导航： 左侧/顶部
       const activeIndex = ref("0");
       const mainMenuList = ref([
-        { index: "0", icon: "Notification", text: "演示" },
-        { index: "1", icon: "Memo", text: "页面" },
-        { index: "2", icon: "Files", text: "生态" },
+        { index: "0", icon: "Notification", title: "演示" },
+        { index: "1", icon: "Memo", title: "页面" },
+        { index: "2", icon: "Files", title: "生态" },
       ]);
 
       const changeMainMenu = (item, index) => {
@@ -43,32 +43,32 @@ const bootstrap = () => {
           {
             index: "0" + index,
             icon: "Notification",
-            text: "演示" + index,
+            title: "演示" + index,
             cache: true,
           },
           {
             index: "1" + index,
             icon: "Memo",
-            text: "页面" + index,
+            title: "页面" + index,
             children: [
               {
                 index: "1.1" + index,
                 icon: "Memo",
-                text: "页面1" + index,
+                title: "页面1" + index,
                 cache: true,
               },
               {
                 index: "1.2" + index,
                 icon: "Memo",
-                text: "页面2" + index,
+                title: "页面2" + index,
                 children: [
-                  { index: "1.21" + index, icon: "Memo", text: "页面2.1" + index },
-                  { index: "1.22" + index, icon: "Memo", text: "页面2.2" + index },
+                  { index: "1.21" + index, icon: "Memo", title: "页面2.1" + index },
+                  { index: "1.22" + index, icon: "Memo", title: "页面2.2" + index },
                 ],
               },
             ],
           },
-          { index: "2" + index, icon: "Files", text: "生态" + index },
+          { index: "2" + index, icon: "Files", title: "生态" + index },
         ];
       };
       //#endregion
@@ -81,25 +81,25 @@ const bootstrap = () => {
       };
 
       const menuList = ref([
-        { index: "00", icon: "Notification", text: "演示0", cache: true },
+        { index: "00", icon: "Notification", title: "演示0", cache: true },
         {
           index: "10",
           icon: "Memo",
-          text: "页面0",
+          title: "页面0",
           children: [
-            { index: "1.10", icon: "Memo", text: "页面10", cache: true },
+            { index: "1.10", icon: "Memo", title: "页面10", cache: true },
             {
               index: "1.20",
               icon: "Memo",
-              text: "页面20",
+              title: "页面20",
               children: [
-                { index: "1.210", icon: "Memo", text: "页面2.10" },
-                { index: "1.220", icon: "Memo", text: "页面2.20" },
+                { index: "1.210", icon: "Memo", title: "页面2.10" },
+                { index: "1.220", icon: "Memo", title: "页面2.20" },
               ],
             },
           ],
         },
-        { index: "20", icon: "Files", text: "生态0" },
+        { index: "20", icon: "Files", title: "生态0" },
       ]);
 
       // use data index as menu index
@@ -109,7 +109,7 @@ const bootstrap = () => {
         !cachedViews.value.find((x) => x.index === index) &&
           cachedViews.value.push({
             ...menu,
-            title: menu.text,
+            title: menu.title,
             pathList: searchTreeNodeParents(menuList.value, index),
           });
         currentIndex.value = index;
@@ -126,7 +126,7 @@ const bootstrap = () => {
       //#region tags
       const cachedViews = ref([]);
       const currentIndex = ref();
-      const homeMenu = { index: "000", text: "主页", icon: "Notification" };
+      const homeMenu = { index: "000", title: "主页", icon: "Notification" };
       const isAtHome = currentIndex.value === homeMenu.index;
       const disabledLeft = computed(() => {
         const index = cachedViews.value.findIndex(
@@ -193,7 +193,7 @@ const bootstrap = () => {
       const starList = ref([]);
       const addStar = () => {
         const item = findTreeNode(menuList.value, currentIndex.value);
-        starList.value.push(item);
+        item && starList.value.push(item);
       };
       const removeStar = (item) =>
         (starList.value = starList.value.filter((x) => x.index !== item.index));
@@ -219,7 +219,7 @@ const bootstrap = () => {
         updateContentByDom(homeMenu);
         cachedViews.value.push({
           ...homeMenu,
-          title: homeMenu.text,
+          title: homeMenu.title,
           pathList: [homeMenu],
         });
         currentIndex.value = homeMenu.index;

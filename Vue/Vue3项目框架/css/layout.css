@@ -539,3 +539,19 @@
     text-align: center;
     color: var(--el-text-color-disabled);
 }
+
+.star-action-popper .star-list {
+    padding: 10px;
+}
+
+
+.star-action-popper .star-list .tag {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    cursor: pointer;
+    align-items: center;
+    height: 32px;
+    line-height: 1;
+    vertical-align: middle;
+}
