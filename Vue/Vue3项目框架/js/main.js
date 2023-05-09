@@ -125,9 +125,9 @@ const bootstrap = () => {
 
       //#region tags
       const cachedViews = ref([]);
-      const currentIndex = ref();
       const homeMenu = { index: "000", title: "主页", icon: "Notification" };
-      const isAtHome = currentIndex.value === homeMenu.index;
+      const currentIndex = ref(homeMenu.index);
+      const isAtHome = computed(() => currentIndex.value === homeMenu.index);
       const disabledLeft = computed(() => {
         const index = cachedViews.value.findIndex(
           (x) => x.index === currentIndex.value
@@ -191,6 +191,9 @@ const bootstrap = () => {
 
       //#region 收藏
       const starList = ref([]);
+      const showEmptyStar = computed(() => {
+        return starList.value.length === 0 || (starList.value.length > 0 && !starList.value.find(x => x.index === currentIndex.value));
+      });
       const addStar = () => {
         const item = findTreeNode(menuList.value, currentIndex.value);
         item && starList.value.push(item);
@@ -308,6 +311,7 @@ const bootstrap = () => {
 
         // 收藏
         starList,
+        showEmptyStar,
         addStar,
         removeStar,
 

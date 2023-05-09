@@ -192,7 +192,8 @@
                                     <div class="top">
                                         <span class="text">我的收藏夹</span>
                                         <span class="icon" v-if="!isAtHome">
-                                            <el-icon @click="addStar"><star /></el-icon>
+                                            <el-icon @click="addStar" :size="20" v-if="showEmptyStar"><star /></el-icon>
+                                            <el-icon :size="23"  v-else><star-filled /></el-icon>
                                         </span>
                                     </div>
                                     <div class="empty-box" v-if="starList.length === 0">
@@ -204,13 +205,11 @@
                                     </div>
 
                                     <div class="star-list" v-else>
-                                        <div v-for="star in starList">
-                                            <el-tag closable class="tag" >
-                                                <el-icon :size="22">
-                                                    <component :is="star.icon"></component>
-                                                </el-icon>{{ star.title }}
-                                            </el-tag>
-                                        </div>
+                                        <el-tag closable class="tag" v-for="star in starList" >
+                                            <el-icon :size="22">
+                                                <component :is="star.icon"></component>
+                                            </el-icon>{{ star.title }}
+                                        </el-tag>
                                         <!-- <el-tag   v-for="cachedView in starList"
                                         class="tag" :closable="cachedViews && cachedViews.length > 1"
                                             :type="isActive(cachedView) ? '' : 'info'" @click="clickTag(cachedView)"

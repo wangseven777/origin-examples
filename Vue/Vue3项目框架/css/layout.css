@@ -554,4 +554,9 @@
     height: 32px;
     line-height: 1;
     vertical-align: middle;
+    margin-bottom: 10px;
+}
+
+.star-action-popper .star-list .tag .el-tag__content {
+    display: flex;
 }
