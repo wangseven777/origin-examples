@@ -549,6 +549,7 @@
 
 
 .star-action-popper .star-list .tag {
+    width: 40%;
     display: flex;
     justify-content: space-around;
     cursor: pointer;
