@@ -120,7 +120,7 @@
                     <el-scrollbar class="scrollbar" wrap-class="scrollbar-wrapper">
                         <el-menu ref="refMenu" :default-active="activeIndex" :collapse="collapse" class="menu el-menu-vertical"
                             :collapse-transition="true" @select="handleMenuSelect">
-                            <menu-item-component v-for="item in menuList" :key="item.id" :item="item">
+                            <menu-item-component v-for="item in menuList" :key="item.index" :item="item">
                             </menu-item-component>
                         </el-menu>
                     </el-scrollbar>
@@ -130,7 +130,7 @@
                 <div class="right-content">
                     <div class="tags-box">
                         <el-scrollbar class="tags-scrollbar tags">
-                            <div class="tag-box" v-for="cachedView in cachedViews" :key="cachedView.id">
+                            <div class="tag-box" v-for="cachedView in cachedViews" :key="cachedView.index">
                                 <el-tag class="tag" :closable="cachedViews && cachedViews.length > 1"
                                     :type="isActive(cachedView) ? '' : 'info'" @click="clickTag(cachedView)"
                                     @close="closeSingleTag(cachedView)" effect="dark">
@@ -157,7 +157,7 @@
                                         <el-button type="primary" icon="Right" circle :disabled="disabledRight" @click="closeRightTag"> </el-button>
                                     </div>
                                     <el-dropdown-menu>
-                                        <el-dropdown-item v-for="cachedView in cachedViews" :key="cachedView.id">
+                                        <el-dropdown-item v-for="cachedView in cachedViews" :key="cachedView.index">
                                             <el-tag class="tag" :closable="cachedViews && cachedViews.length > 1"
                                                 :type="isActive(cachedView) ? '' : 'info'" @click="clickTag(cachedView)"
                                                 @close="closeSingleTag(cachedView)" effect="dark">
@@ -216,7 +216,7 @@
 
                             <el-breadcrumb>
                                 <transition-group name="breadcrumb">
-                                    <el-breadcrumb-item v-for="(item, index) in currentViewPathList" :key="item.id">
+                                    <el-breadcrumb-item v-for="(item, index) in currentViewPathList" :key="item.index">
                                         {{ item.text ?? '[ 无标题 ]' }}
                                     </el-breadcrumb-item>
                                 </transition-group>

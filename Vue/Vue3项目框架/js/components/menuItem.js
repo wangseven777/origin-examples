@@ -15,7 +15,7 @@ function getMenuItemComponent() {
     render() {
       const renderItem = (item) => {
         return !item || !item.children || item.children.length === 0
-          ? h(ElMenuItem, { index: item?.id } , {
+          ? h(ElMenuItem, { index: item?.index } , {
               default: () =>
                 h(ElIcon, null, {
                   default: () => h(ElementPlusIconsVue[item?.icon]),
@@ -24,7 +24,7 @@ function getMenuItemComponent() {
             })
           : h(
               ElSubMenu,
-              { index: item?.id || "" },
+              { index: item?.index || "" },
               {
                 title: () => [
                   h(ElIcon, null, {
@@ -38,7 +38,7 @@ function getMenuItemComponent() {
                     if (child.children && child.children.length > 0)
                       return renderItem(child);
                     else {
-                      return h(ElMenuItem, { index: child?.id || "" }, {
+                      return h(ElMenuItem, { index: child?.index || "" }, {
                         default: () => [
                           h(ElIcon, null, {
                             default: () => h(ElementPlusIconsVue[child?.icon]),

@@ -41,34 +41,34 @@ const bootstrap = () => {
         activeIndex.value = index;
         menuList.value = [
           {
-            id: "0" + index,
+            index: "0" + index,
             icon: "Notification",
             text: "演示" + index,
             cache: true,
           },
           {
-            id: "1" + index,
+            index: "1" + index,
             icon: "Memo",
             text: "页面" + index,
             children: [
               {
-                id: "1.1" + index,
+                index: "1.1" + index,
                 icon: "Memo",
                 text: "页面1" + index,
                 cache: true,
               },
               {
-                id: "1.2" + index,
+                index: "1.2" + index,
                 icon: "Memo",
                 text: "页面2" + index,
                 children: [
-                  { id: "1.21" + index, icon: "Memo", text: "页面2.1" + index },
-                  { id: "1.22" + index, icon: "Memo", text: "页面2.2" + index },
+                  { index: "1.21" + index, icon: "Memo", text: "页面2.1" + index },
+                  { index: "1.22" + index, icon: "Memo", text: "页面2.2" + index },
                 ],
               },
             ],
           },
-          { id: "2" + index, icon: "Files", text: "生态" + index },
+          { index: "2" + index, icon: "Files", text: "生态" + index },
         ];
       };
       //#endregion
@@ -81,32 +81,32 @@ const bootstrap = () => {
       };
 
       const menuList = ref([
-        { id: "00", icon: "Notification", text: "演示0", cache: true },
+        { index: "00", icon: "Notification", text: "演示0", cache: true },
         {
-          id: "10",
+          index: "10",
           icon: "Memo",
           text: "页面0",
           children: [
-            { id: "1.10", icon: "Memo", text: "页面10", cache: true },
+            { index: "1.10", icon: "Memo", text: "页面10", cache: true },
             {
-              id: "1.20",
+              index: "1.20",
               icon: "Memo",
               text: "页面20",
               children: [
-                { id: "1.210", icon: "Memo", text: "页面2.10" },
-                { id: "1.220", icon: "Memo", text: "页面2.20" },
+                { index: "1.210", icon: "Memo", text: "页面2.10" },
+                { index: "1.220", icon: "Memo", text: "页面2.20" },
               ],
             },
           ],
         },
-        { id: "20", icon: "Files", text: "生态0" },
+        { index: "20", icon: "Files", text: "生态0" },
       ]);
 
-      // use data id as menu index
+      // use data index as menu index
       const handleMenuSelect = (index, path, item) => {
         const menu = findTreeNode(menuList.value, index);
 
-        !cachedViews.value.find((x) => x.id === index) &&
+        !cachedViews.value.find((x) => x.index === index) &&
           cachedViews.value.push({
             ...menu,
             title: menu.text,
@@ -126,18 +126,18 @@ const bootstrap = () => {
       //#region tags
       const cachedViews = ref([]);
       const currentIndex = ref();
-      const homeMenu = { id: "000", text: "主页", icon: "Notification" };
-      const isAtHome = currentIndex.value === homeMenu.id;
+      const homeMenu = { index: "000", text: "主页", icon: "Notification" };
+      const isAtHome = currentIndex.value === homeMenu.index;
       const disabledLeft = computed(() => {
         const index = cachedViews.value.findIndex(
-          (x) => x.id === currentIndex.value
+          (x) => x.index === currentIndex.value
         );
         return index === 0;
       });
 
       const disabledRight = computed(() => {
         const index = cachedViews.value.findIndex(
-          (x) => x.id === currentIndex.value
+          (x) => x.index === currentIndex.value
         );
         return index === cachedViews.value.length - 1;
       });
@@ -145,20 +145,20 @@ const bootstrap = () => {
       // 关闭其他标签
       const closeOtherTag = () => {
         cachedViews.value = [
-          cachedViews.value.find((x) => x.id === currentIndex.value),
+          cachedViews.value.find((x) => x.index === currentIndex.value),
         ];
       };
       // 关闭右侧标签
       const closeRightTag = () => {
         const index = cachedViews.value.findIndex(
-          (x) => x.id === currentIndex.value
+          (x) => x.index === currentIndex.value
         );
         cachedViews.value = cachedViews.value.toSpliced(index + 1);
       };
       // 关闭左侧标签
       const closeLeftTag = () => {
         const index = cachedViews.value.findIndex(
-          (x) => x.id === currentIndex.value
+          (x) => x.index === currentIndex.value
         );
         cachedViews.value = cachedViews.value.toSpliced(0, index);
       };
@@ -167,21 +167,21 @@ const bootstrap = () => {
       const closeSingleTag = (cachedView) => {
         if (cachedViews.value.length < 2) return;
         cachedViews.value = cachedViews.value.filter(
-          (x) => x.id !== cachedView.id
+          (x) => x.index !== cachedView.index
         );
-        currentIndex.value = cachedViews.value[0].id;
+        currentIndex.value = cachedViews.value[0].index;
         const menu = findTreeNode(menuList.value, currentIndex.value);
         updateContentByDom(menu || homeMenu);
       };
 
       // 标签高亮
-      const isActive = (cachedView) => cachedView.id === currentIndex.value;
+      const isActive = (cachedView) => cachedView.index === currentIndex.value;
 
       const clickTag = (cachedView) => {
-        currentIndex.value = cachedView.id;
-        const menu = findTreeNode(menuList.value, cachedView.id);
-        // refMenu.value.open(cachedView.id);
-        activeIndex.value = cachedView.id;
+        currentIndex.value = cachedView.index;
+        const menu = findTreeNode(menuList.value, cachedView.index);
+        // refMenu.value.open(cachedView.index);
+        activeIndex.value = cachedView.index;
         updateContentByDom(menu || homeMenu);
         // console.log(path);
         //   router.push(path);
@@ -196,13 +196,13 @@ const bootstrap = () => {
         starList.value.push(item);
       };
       const removeStar = (item) =>
-        (starList.value = starList.value.filter((x) => x.id !== item.id));
+        (starList.value = starList.value.filter((x) => x.index !== item.index));
       //#endregion
 
       //#region 面包屑
       const currentViewPathList = computed(() => {
         const result = cachedViews.value.find(
-          (x) => x.id === currentIndex.value
+          (x) => x.index === currentIndex.value
         );
         return result?.pathList;
       });
@@ -222,7 +222,7 @@ const bootstrap = () => {
           title: homeMenu.text,
           pathList: [homeMenu],
         });
-        currentIndex.value = homeMenu.id;
+        currentIndex.value = homeMenu.index;
       });
       //#endregion
 
