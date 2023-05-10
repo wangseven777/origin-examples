@@ -147,7 +147,7 @@ const updateContentByDom = async (menu) => {
 console.log('2222');
 // 测试脚本
 const dom = document.querySelector(".app-main");
-dom.style.backgroundColor = '#909090';
+// dom.style.backgroundColor = '#909090';
 
 // 引入JQ并使用
 function callback() { $('#app-main').css({ 'color': 'white' }); }
