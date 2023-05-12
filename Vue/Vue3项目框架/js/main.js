@@ -62,8 +62,8 @@ const bootstrap = () => {
                 icon: "Memo",
                 title: "页面2" + index,
                 children: [
-                  { index: "1.21" + index, icon: "Memo", title: "页面2.1" + index },
-                  { index: "1.22" + index, icon: "Memo", title: "页面2.2" + index },
+                  { index: "1.21" + index, icon: "Memo", title: "页面2.1" + index, cache: true, },
+                  { index: "1.22" + index, icon: "Memo", title: "页面2.2" + index, cache: true, },
                 ],
               },
             ],
@@ -104,6 +104,7 @@ const bootstrap = () => {
 
       // use data index as menu index
       const handleMenuSelect = (index, path, item) => {
+        const lastMenu = findTreeNode(menuList.value, currentIndex.value) || homeMenu;
         const menu = findTreeNode(menuList.value, index);
 
         !cachedViews.value.find((x) => x.index === index) &&
@@ -114,7 +115,7 @@ const bootstrap = () => {
           });
         currentIndex.value = index;
 
-        updateContentByDom(menu);
+        updateContent(menu, lastMenu);
       };
 
       //#endregion
@@ -171,18 +172,19 @@ const bootstrap = () => {
         );
         currentIndex.value = cachedViews.value[0].index;
         const menu = findTreeNode(menuList.value, currentIndex.value);
-        updateContentByDom(menu || homeMenu);
+        updateContent(menu || homeMenu);
       };
 
       // 标签高亮
       const isActive = (cachedView) => cachedView.index === currentIndex.value;
 
       const clickTag = (cachedView) => {
+        const lastMenu = findTreeNode(menuList.value, currentIndex.value) || homeMenu;
         currentIndex.value = cachedView.index;
         const menu = findTreeNode(menuList.value, cachedView.index);
         // refMenu.value.open(cachedView.index);
         activeIndex.value = cachedView.index;
-        updateContentByDom(menu || homeMenu);
+        updateContent(menu || homeMenu, lastMenu);
         // console.log(path);
         //   router.push(path);
         // 路由跳转，更换主体内容
@@ -219,7 +221,7 @@ const bootstrap = () => {
 
       //#region 内容展示区域
       onMounted(() => {
-        updateContentByDom(homeMenu);
+        updateContent(homeMenu);
         cachedViews.value.push({
           ...homeMenu,
           title: homeMenu.title,

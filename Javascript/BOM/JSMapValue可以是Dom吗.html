@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="box">111</div>
+    <div class="box">222</div>
+    <div class="box">333</div>
+    <div class="box">444</div>
+    <div class="box">5555</div>
+    <script>
+        const boxes = document.getElementsByClassName('box');
+        const map = new Map();
+        for (let i = 0; i < boxes.length; i++) {
+            map.set(i, boxes[i]);
+        }
+
+        map.forEach(x => {
+            const dom = x.cloneNode(true);
+            document.body.appendChild(dom);
+        });
+
+        // 经验证，可以存DOM！！！！！！
+    </script>
+</body>
+
+</html>
