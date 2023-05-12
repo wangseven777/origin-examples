@@ -52,18 +52,18 @@ const bootstrap = () => {
             title: "页面" + index,
             children: [
               {
-                index: "1.1" + index,
+                index: "11" + index,
                 icon: "Memo",
                 title: "页面1" + index,
                 cache: true,
               },
               {
-                index: "1.2" + index,
+                index: "12" + index,
                 icon: "Memo",
                 title: "页面2" + index,
                 children: [
-                  { index: "1.21" + index, icon: "Memo", title: "页面2.1" + index, cache: true, },
-                  { index: "1.22" + index, icon: "Memo", title: "页面2.2" + index, cache: true, },
+                  { index: "121" + index, icon: "Memo", title: "页面2.1" + index, cache: true, },
+                  { index: "122" + index, icon: "Memo", title: "页面2.2" + index, cache: true, },
                 ],
               },
             ],
@@ -87,14 +87,14 @@ const bootstrap = () => {
           icon: "Memo",
           title: "页面0",
           children: [
-            { index: "1.10", icon: "Memo", title: "页面10", cache: true },
+            { index: "110", icon: "Memo", title: "页面10", cache: true },
             {
-              index: "1.20",
+              index: "120",
               icon: "Memo",
               title: "页面20",
               children: [
-                { index: "1.210", icon: "Memo", title: "页面2.10" },
-                { index: "1.220", icon: "Memo", title: "页面2.20" },
+                { index: "1210", icon: "Memo", title: "vue页面2.10", templateType: 'vue' },
+                { index: "1220", icon: "Memo", title: "react页面2.20", templateType: 'react' },
               ],
             },
           ],

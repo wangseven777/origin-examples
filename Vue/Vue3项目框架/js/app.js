@@ -82,58 +82,131 @@ const updateContentByDom = async (menu, lastMenu) => {
   }
 };
 
-const updateContentByVue = async (menu) => {
-  const dom = document.querySelector(".app-main");
+const updateContentByVue = async (menu, lastMenu) => {
+  const appMainDom = document.querySelector(".app-main");
   let content;
-  if (menu.cache && _cachedView.has(menu.id)) {
-    content = _cachedView.get(menu.id);
+  // 如果已经缓存，直接展示即可
+  if (menu.cache && _cachedView.has(menu.index)) {
     console.log("使用缓存内容......");
+    lastMenu && lastMenu.cache && _addCacheView(appMainDom, lastMenu);
+    const fgDom = _cachedView.get(menu.index);
+    appMainDom.innerHTML = '';
+    appMainDom.appendChild(fgDom);
   } else {
-    console.log("请求接口......");
     content = `
-      <div class="box">
-      <h1>这是测试显示内容，该内容可能来自接口请求, 参数： ${JSON.stringify(
-        menu
-      )}</h1>
-      <div v-if="true">测试vue中的模板语法</div>
-      <div v-if="false">测试vue中的模板语法：false</div>
-</div>
+              <div class="box" id="app-main-${menu.index}"> 
+                <h1>测试：vue 模板</h1>
+                <h3>参数:</h3>
+                <div>menu: ${menu && JSON.stringify(menu)}</div>
+                <div>lastMenu: ${lastMenu && JSON.stringify(lastMenu)}</div>
 
-<script>
-// 解析vue语法
-(function() {
-  const {
-    createApp,
-    reactive,
-    toRefs,
-    ref,
-    defineComponent,
-    h,
-    computed,
-    onMounted,
-  } = Vue;
-  const vue3Composition = {
-    setup() {}
-  };
-  const app = createApp(vue3Composition);
-  for ([name, comp] of Object.entries(ElementPlusIconsVue)) {
-    app.component(name, comp);
-  }
-  app.use(ElementPlus).mount("#app-main .box");
-  return app;
-})();
+                <h3>功能:</h3>
+                <h5>v-if</h5>
+                <div v-if="true">v-if: true</div>
+                <div v-if="false">v-if: false</div>
 
-const dom = document.querySelector(".app-main");
-dom.style.backgroundColor = 'red';
+                <h5>v-for</h5>
+                <span v-for="(item, index) in 10" :key="index" style="border: 1px solid black; padding: 5px; margin: 5px;">{{ item }}</span>
+
+                <h5>按钮</h5>
+                <el-button type="success" @click="btnClick()">Ele Button</el-button>
+
+              </div>
+              
+              <script type="module">
+                (function() {
+                  const {
+                    createApp,
+                    reactive,
+                    toRefs,
+                    ref,
+                    defineComponent,
+                    h,
+                    computed,
+                    onMounted,
+                  } = Vue;
+                  const vue3Composition1 = {
+                    setup() {
+                      const btnClick = (e) => {
+                        alert('hello');
+                      };
+
+                      return {
+                        btnClick,
+                      }
+                    }
+                  };
+                  const app1 = createApp(vue3Composition1);
+                  for ([name, comp] of Object.entries(ElementPlusIconsVue)) {
+                    app1.component(name, comp);
+                  }
+                  app1.use(ElementPlus).mount("#app-main-${menu.index}");
+                  return app1;
+                })();
+              </script>
+
+              <style>
+                #app-main-${menu.index} h3 { line-height: 50px; }
+                #app-main-${menu.index} h5 { line-height: 50px; }
+              <style>
+              `;
+    lastMenu && lastMenu.cache && _addCacheView(appMainDom, lastMenu);
+    const fragDOM = document.createRange().createContextualFragment(content);
+    appMainDom.innerHTML = '';
+    appMainDom.appendChild(fragDOM);
+              }
+//   const dom = document.querySelector(".app-main");
+//   let content;
+//   if (menu.cache && _cachedView.has(menu.id)) {
+//     content = _cachedView.get(menu.id);
+//     console.log("使用缓存内容......");
+//   } else {
+//     console.log("请求接口......");
+//     content = `
+//       <div class="box">
+//       <h1>这是测试显示内容，该内容可能来自接口请求, 参数： ${JSON.stringify(
+//         menu
+//       )}</h1>
+//       <div v-if="true">测试vue中的模板语法</div>
+//       <div v-if="false">测试vue中的模板语法：false</div>
+// </div>
+
+// <script>
+// // 解析vue语法
+// (function() {
+//   const {
+//     createApp,
+//     reactive,
+//     toRefs,
+//     ref,
+//     defineComponent,
+//     h,
+//     computed,
+//     onMounted,
+//   } = Vue;
+//   const vue3Composition = {
+//     setup() {
+ // }
+//   };
+//   const app = createApp(vue3Composition);
+//   for ([name, comp] of Object.entries(ElementPlusIconsVue)) {
+//     app.component(name, comp);
+//   }
+//   app.use(ElementPlus).mount("#app-main .box");
+//   return app;
+// })();
+
+// const dom = document.querySelector(".app-main");
+// dom.style.backgroundColor = 'red';
 
 
-</script>
-      `;
-    _cachedView.set(menu.id, content);
-  }
-  const fragDOM = document.createRange().createContextualFragment(content);
-  dom.innerHTML = "";
-  dom.appendChild(fragDOM);
+// </script>
+//       `;
+//     _cachedView.set(menu.id, content);
+//   }
+//   const fragDOM = document.createRange().createContextualFragment(content);
+//   dom.innerHTML = "";
+//   dom.appendChild(fragDOM);
 };
 
 const updateContentByReact = async (menu) => {
@@ -177,45 +250,4 @@ unloadScript('https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js');
   const fragDOM = document.createRange().createContextualFragment(content);
   dom.innerHTML = "";
   dom.appendChild(fragDOM);
-};
-
-const updateContentByDom111 = async (menu) => {
-
-  // api请求
-  // const result = await fetchData('https://www.baidu.com');
-  // console.log(result);
-
-  
-  // const appMainDom = document.querySelector(".app-main");
-  // let content;
-  // if (menu.cache && _cachedView.has(menu.id)) {
-  //   content = _cachedView.get(menu.id);
-  //   console.log("使用缓存内容......");
-  // } else {
-  //   console.log("请求接口......");
-  //   const id = (new Date()).getMilliseconds();
-  //   content = `
-  //   <div>
-  //   <h2 onClick={() => console.log('Hello, World!')}>Hello, World!</h2>
-  // </div>
-  //     `;
-  //   _cachedView.set(menu.id, content);
-  // }
-  // const fragDOM = document.createRange().createContextualFragment(content);
-  // appMainDom.innerHTML = "";
-  // appMainDom.firstChild && appMainDom.removeChild(appMainDom.firstChild);
-
-  //     ReactDOM.render(<myComponent />, appMainDom);
-
-
-  // appMainDom.appendChild(fragDOM);
-
-};
-
-// 接口请求
-// 自动追加
-// script脚本
-// vue组件， dom中使用vue模板语法
-
-
-// 动态抽离script并执行（包括界面初始化时，以及dom更新时）
+}
