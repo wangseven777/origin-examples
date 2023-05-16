@@ -19,20 +19,25 @@ const _addCacheView = (appMainDom, menu) => {
  */
 const updateContent = async (menu, lastMenu) => {
   if (lastMenu && menu.index === lastMenu.index) return;
+  NProgress.start();
   switch (menu.templateType) {
     case "vue":
       updateContentByVue(menu, lastMenu);
+      NProgress.done();
       break;
     case "react":
       updateContentByReact(menu, lastMenu);
+      NProgress.done();
       break;
     default:
       updateContentByDom(menu, lastMenu);
+      NProgress.done();
       break;
   }
 };
 
 const updateContentByDom = async (menu, lastMenu) => {
+  NProgress.inc();
   const appMainDom = document.querySelector(".app-main");
   let content;
   // 如果已经缓存，直接展示即可
@@ -90,6 +95,7 @@ const updateContentByDom = async (menu, lastMenu) => {
 };
 
 const updateContentByVue = async (menu, lastMenu) => {
+  NProgress.inc();
   const appMainDom = document.querySelector(".app-main");
   let content;
   // 如果已经缓存，直接展示即可
@@ -165,6 +171,7 @@ const updateContentByVue = async (menu, lastMenu) => {
 };
 
 const updateContentByReact = async (menu, lastMenu) => {
+  NProgress.inc();
   const appMainDom = document.querySelector(".app-main");
   let content;
   // 如果已经缓存，直接展示即可
