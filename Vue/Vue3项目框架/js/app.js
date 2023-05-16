@@ -4,7 +4,7 @@ const _currentView = {};
 const _addCacheView = (appMainDom, menu) => {
   _cachedView.set(
     menu.index,
-    appMainDom.firstChild && appMainDom.firstChild.cloneNode(true)
+    appMainDom.lastChild && appMainDom.lastChild.cloneNode(true)
   );
 };
 
@@ -48,7 +48,15 @@ const updateContentByDom = async (menu, lastMenu) => {
     appMainDom.innerHTML = "";
     appMainDom.appendChild(fgDom);
   } else {
-    content = `<div class="box" id="app-main-${menu.index}"> 
+    const id = uuid.v4().replaceAll('-', '');
+    content = `
+              <script>
+              function con () {
+                console.log('hello world');
+              }
+              </script>
+              <div class="template" id="${id}">
+              <div class="box" id="app-main-${menu.index}"> 
                 <h1>测试：内容是原生HTML</h1>
                 <h3>参数:</h3>
                 <div>menu: ${menu && JSON.stringify(menu)}</div>
@@ -56,22 +64,16 @@ const updateContentByDom = async (menu, lastMenu) => {
                 <h3>功能:</h3>
                 <div>改变背景色：#909090</div>
                 <div>引入JQ，并修改字体颜色：wheat</div>
-                <div>按钮，click事件</div>
+                <button onclick="con()">Click me</button>
                 <input type="button" class='app-main-${
                   menu.index
                 }-button' value="测试按钮" />
               </div>
               <script type="module">
-                const dom = document.querySelector(".app-main");
-                dom.style.backgroundColor = '#909090';
+                const dom${id} = document.querySelector(".app-main");
+                dom${id}.style.backgroundColor = '#909090';
                 window.console.log('hell');
 
-                const btn = document.querySelector('.app-main-${
-                  menu.index
-                }-button');
-                btn.addEventListener('click', function(e) {
-                  alert(e);
-                });
 
                 // 引入JQ并使用
                 function callback() { $('#app-main').css({ 'color': 'wheat' }); }
@@ -86,6 +88,9 @@ const updateContentByDom = async (menu, lastMenu) => {
                   line-height: 40px;
                 }
               <style>
+              </div>
+
+
               `;
     lastMenu && lastMenu.cache && _addCacheView(appMainDom, lastMenu);
     const fragDOM = document.createRange().createContextualFragment(content);
