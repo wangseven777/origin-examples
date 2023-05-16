@@ -85,11 +85,12 @@
     height: 79px;
     text-align: right;
     vertical-align: middle;
+    padding: 0px 20px;
 }
 
-.top-main-nav .right .info>span {
+/* .top-main-nav .right .info>span {
     width: 34px;
-}
+} */
 
 .top-main-nav .right .info .bell {
     cursor: pointer;
@@ -97,6 +98,18 @@
 
 .top-main-nav .right .info .el-icon {
     color: white;
+}
+
+.top-main-nav .right .info .item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 26px;
+    width: 34px;
+    cursor: pointer;
+    vertical-align: middle;
+    position: relative;
+    line-height: 26px;
 }
 
 .top-main-nav .right .info .bell .item {

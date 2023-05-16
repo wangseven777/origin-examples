@@ -75,24 +75,27 @@
                             </el-badge>
                         </span>
 
-                        <span class="fullscreen" @click="toggleFullScreen">
+                        <span class="fullscreen item" @click="toggleFullScreen">
                             <i v-if="fullscreen" class="iconfont icon-fullscreen-shrink"></i>
                             <i v-else class="iconfont icon-fullscreen-expand"></i>
                         </span>
 
-                        <el-dropdown @command="changeLan" class="name">
+                        <el-dropdown @command="changeLan" class="name item">
                             <el-icon>
                                 <i class="iconfont icon-language-outline"></i>
                             </el-icon>
                             <template #dropdown>
                                 <el-dropdown-menu>
-                                    <el-dropdown-item command="logout">中文</el-dropdown-item>
-                                    <el-dropdown-item command="logout">English</el-dropdown-item>
+                                    <el-dropdown-item command="zh_CN">中文</el-dropdown-item>
+                                    <el-dropdown-item command="en">English</el-dropdown-item>
                                 </el-dropdown-menu>
                             </template>
                         </el-dropdown>
                         <el-dropdown :hide-on-click="false" class="name" @command="dropdownChangePersonalInfo">
-                            <span>个人信息（头像 + Name）</span>
+                            <span>
+                                <el-avatar :size="23" style="margin-right: 5px; margin-left: 20px;">{{ pinyinFL }}
+                                </el-avatar>{{ userName }}
+                            </span>
                             <template #dropdown>
                                 <el-dropdown-menu>
                                     <el-dropdown-item command="logout">退出登录</el-dropdown-item>
