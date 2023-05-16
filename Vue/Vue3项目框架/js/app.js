@@ -52,7 +52,7 @@ const updateContentByDom = async (menu, lastMenu) => {
     content = `
               <script>
               function con () {
-                console.log('hello world');
+                alert('hello world');
               }
               </script>
               <div class="template" id="${id}">
@@ -64,16 +64,14 @@ const updateContentByDom = async (menu, lastMenu) => {
                 <h3>功能:</h3>
                 <div>改变背景色：#909090</div>
                 <div>引入JQ，并修改字体颜色：wheat</div>
-                <button onclick="con()">Click me</button>
-                <input type="button" class='app-main-${
+                <button onclick="con()" class='app-main-${
                   menu.index
-                }-button' value="测试按钮" />
+                }-button'>测试按钮</button>
               </div>
               <script type="module">
                 const dom${id} = document.querySelector(".app-main");
                 dom${id}.style.backgroundColor = '#909090';
                 window.console.log('hell');
-
 
                 // 引入JQ并使用
                 function callback() { $('#app-main').css({ 'color': 'wheat' }); }
