@@ -8,6 +8,9 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <title>Vue3 + ElementPlus Template</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/i18next/22.4.15/i18next.js"></script>
+    <script src="./js/language.js"></script>
+
     <link href="https://cdn.bootcdn.net/ajax/libs/element-plus/2.3.3/index.css" rel="stylesheet">
 
     <!-- <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css" /> -->
@@ -39,6 +42,7 @@
     <script src="./js/main.js"></script>
 
 
+
 </head>
 
 <body data-theme="default">
@@ -49,7 +53,7 @@
                 <div class="left">
                     <img alt="" src="https://hooray.gitee.io/fantastic-admin-pro-example/assets/logo-eb12b828.png"
                         class="logo">
-                    <div class="title">Fantastic-admin 专业版</div>
+                    <div class="title lang-title">Fantastic-admin 专业版</div>
                     <div class="item-list">
                         <div class="item" :class="{ active: activeIndex === item.index }"
                             v-for="(item, index) in mainMenuList" @click="changeMainMenu(item, index)">
@@ -76,7 +80,7 @@
                             <i v-else class="iconfont icon-fullscreen-expand"></i>
                         </span>
 
-                        <el-dropdown :hide-on-click="false" class="name">
+                        <el-dropdown @command="changeLan" class="name">
                             <el-icon>
                                 <i class="iconfont icon-language-outline"></i>
                             </el-icon>
@@ -117,7 +121,7 @@
 
                 <!-- 左侧二级导航栏：logo图片 + 菜单导航 -->
                 <div :class="collapse ? 'left' : 'left-fold'" class="left-second" v-if="showLeftMenu">
-                    <div v-if="!collapse" class="web-name">Fantastic-admin 专业版</div>
+                    <div v-if="!collapse" class="web-name lang-title">Fantastic-admin 专业版</div>
 
                     <el-scrollbar class="scrollbar" wrap-class="scrollbar-wrapper">
                         <el-menu ref="refMenu" :default-active="activeIndex" :collapse="collapse"
@@ -258,14 +262,14 @@
                                 <refresh />
                             </el-icon>
 
-                            <el-dropdown :hide-on-click="false" class="item">
+                            <el-dropdown class="item" @command="changeLan">
                                 <el-icon>
                                     <i class="iconfont icon-language-outline"></i>
                                 </el-icon>
                                 <template #dropdown>
                                     <el-dropdown-menu>
-                                        <el-dropdown-item command="logout">中文</el-dropdown-item>
-                                        <el-dropdown-item command="logout">English</el-dropdown-item>
+                                        <el-dropdown-item command="zh_CN">中文</el-dropdown-item>
+                                        <el-dropdown-item command="en">English</el-dropdown-item>
                                     </el-dropdown-menu>
                                 </template>
                             </el-dropdown>
@@ -310,8 +314,8 @@
 
     <script>
         var app = bootstrap();
+        initLanguage();
     </script>
-
 </body>
 
 </html>

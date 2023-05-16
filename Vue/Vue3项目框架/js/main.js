@@ -104,6 +104,9 @@ const bootstrap = () => {
 
       // use data index as menu index
       const handleMenuSelect = (index, path, item) => {
+        changeLan();
+        // i18next.changeLanguage('zh_CN');
+        // document.getElementById('title').innerHTML = i18next.t('title');
         const lastMenu = findTreeNode(menuList.value, currentIndex.value) || homeMenu;
         const menu = findTreeNode(menuList.value, index);
 
@@ -284,6 +287,11 @@ const bootstrap = () => {
         }
       };
 
+      const changeLan = async (lang) => {
+        await i18next.changeLanguage(lang);
+        updateLangContent();
+    }
+
       return {
         // 模板
         templateIndex,
@@ -320,6 +328,8 @@ const bootstrap = () => {
         userName,
         pinyinFL,
 
+        changeLan,
+
         drawer,
 
         collapse,
@@ -348,6 +358,9 @@ const bootstrap = () => {
   // 挂载自定义组件
   const menuItemComponent = getMenuItemComponent();
   app.component("menu-item-component", menuItemComponent);
+
+  // const i18n = createI18n({});
+  // app.use(i18n);
 
   app.use(ElementPlus).mount("#app");
 
