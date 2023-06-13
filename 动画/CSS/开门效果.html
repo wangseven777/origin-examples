@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 1366px;
+            height: 600px;
+            /* 添加背景图片，开门后看到 */
+            background: url(./images/bg.jpg);
+            margin: 50px auto;
+            /* 添加边框，可有可无 */
+            border: 5px solid yellow;
+            /* 溢出隐藏 */
+            overflow: hidden;
+        }
+
+        /* 伪元素法 */
+        .box::before,
+        .box::after {
+            content: '';
+            float: left;
+            /* 一门一半 */
+            width: 50%;
+            height: 100%;
+            /* 给门画上图案 左对齐*/
+            background: pink url(./images/fm.jpg) left;
+            /* 过渡时间 */
+            transition: 1s;
+        }
+
+        .box::after {
+            /* 背景图片右对齐 */
+            background: blue url(./images/fm.jpg) right;
+        }
+
+        /* 鼠标悬停 */
+        .box:hover::before {
+            /* 向左偏移自身的一倍 */
+            transform: translate(-100%);
+        }
+
+        .box:hover::after {
+            /* 向右偏移自身的一倍 */
+            transform: translate(100%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+</body>
+
+</html>

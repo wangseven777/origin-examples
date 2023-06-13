@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="dist/axios.js"></script>
+    <script src="./request.js"></script>
+</head>
+<body>
+    <button id="btn">axios使用get提交数据</button>
+    <button id="btn1">axios使用post提交数据</button>
+    <button id="btn2">直接使用axios发送get提交数据</button>
+    <button id="btn3">直接使用axios发送post提交数据</button>
+    <script>
+        var btn = document.querySelector("#btn");
+        btn.addEventListener("click",async function (params) {
+            var url = "http://www.liulongbin.top:3006/api/get";
+            var params = {name:'zs',age:20};
+
+        });
+        document.querySelector("#btn1").addEventListener("click",async function (params) {
+            var url = "http://www.liulongbin.top:3006/api/post";
+            var params = {location:'zs',address:'zs'};
+            const result = await post(url, params);
+            console.log('postResult:', result);
+        })
+        
+        document.querySelector("#btn2").addEventListener("click",function (params) {
+            var url = "http://www.liulongbin.top:3006/api/get";
+            var paramsdata = {name:'zss',age:20};
+            axios({
+                url:url,
+                method:'GET',
+                params:paramsdata
+            }).then(function (res) {
+                console.log(res.data);
+            });
+        });
+        document.querySelector("#btn3").addEventListener("click",function (params) {
+            var url = "http://www.liulongbin.top:3006/api/post";
+            var paramsdataa = {name:'钢铁侠',age:35};
+            axios({
+                url:url,
+                method:'POST',
+                data:paramsdataa
+            }).then(function (res) {
+                console.log(res.data);
+            });
+        });
+    </script>
+</body>
+</html>

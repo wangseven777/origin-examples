@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.compat.css" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .box {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .number-box {
+            height: 30px;
+            width: 30px;
+            border: 1px solid black;
+            padding: 2px;
+            overflow: hidden;
+            margin: 20px auto;
+            border: 4mm ridge rgba(211, 220, 50, .6);
+        }
+
+        .number {
+            height: 30px;
+            width: 30px;
+            font-size: 25px;
+        }
+
+        .button {
+            background-color: rgba(211, 220, 50, .6);
+            width: 70px;
+            height: 30px;
+            border: 1mm ridge;
+            cursor: pointer;
+        }
+
+        .button:focus {
+            border: 2px;
+            color: white;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="box">
+        <div class="number-box">
+            <div class="scroll"
+                style="height: 30px; width: 30px; line-height: 30px; vertical-align: middle; text-align: center; position: relative;">
+                <div class="number">1</div>
+                <div class="number">2</div>
+                <div class="number">3</div>
+                <div class="number">4</div>
+                <div class="number">5</div>
+                <div class="number">6</div>
+                <div class="number">7</div>
+                <div class="number">8</div>
+                <div class="number">9</div>
+                <div class="number">0</div>
+            </div>
+        </div>
+
+        <button class="button" onclick="start()">启动</button>
+        <button class="button" onclick="stop()">暂停</button>
+    </div>
+
+    <script>
+        const dom = document.querySelector('.scroll');
+        let sid = '';
+        function start() {
+            if (sid) return;
+            let i = 0;
+            sid = setInterval(() => {
+                dom.style.top = `-${i}px`;
+                i++;
+                if (i >= 30 * 10) i = 0;
+            }, 10);
+        }
+
+        function stop() {
+            sid && clearInterval(sid);
+            sid = '';
+            dom.style.top = `-${((30 - (-dom.offsetTop % 30)) - dom.offsetTop)}px`
+        }
+    </script>
+</body>
+
+</html>
