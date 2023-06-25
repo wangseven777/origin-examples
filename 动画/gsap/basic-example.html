@@ -25,7 +25,8 @@
                 backgroundColor: "red", // camelCase
                 duration: 1, // seconds
                 delay: 0.5,
-                ease: "power2.inOut",
+                // ease: "power2.inOut",
+                ease: "bounce",
                 stagger: 0.1, // stagger start times
                 paused: true, // default is false
                 overwrite: "auto", // default is false
@@ -42,7 +43,7 @@
                 // i.e. onUpdateParams (Array)
             });
 
-            gsap.fromTo('.selector', { backgroundColor: 'blue', }, { rotation: 360, x: 300, duration: 3, backgroundColor: 'red' });
+            gsap.fromTo('.selector', { backgroundColor: 'blue', }, { rotation: 360, x: 300, duration: 10, backgroundColor: 'red', ease: "elastic", });
 
             // "from" tween (animate from provided values)
             // gsap.from(".selector", {rotation: 27, x: 100, duration: 3});
