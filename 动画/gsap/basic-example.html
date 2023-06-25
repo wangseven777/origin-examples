@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.0/gsap.min.js"></script>
+</head>
+
+<body>
+
+    <div class="selector" style="width: 100px; height: 100px; background-color:aqua;"></div>
+
+
+    <script>
+        function myFunc () {
+            console.log('complete');
+        }
+
+        window.onload = function () {
+            // "to" tween (animate to provided values)
+            gsap.to(".selector", { // selector text, Array, or object
+                x: 100, // any properties (not limited to CSS)
+                backgroundColor: "red", // camelCase
+                duration: 1, // seconds
+                delay: 0.5,
+                ease: "power2.inOut",
+                stagger: 0.1, // stagger start times
+                paused: true, // default is false
+                overwrite: "auto", // default is false
+                repeat: 2, // number of repeats (-1 for infinite)
+                repeatDelay: 1, // seconds between repeats
+                repeatRefresh: true, // invalidates on each repeat
+                yoyo: true, // if true > A-B-B-A, if false > A-B-A-B
+                yoyoEase: true, // or ease like "power2"
+                immediateRender: false,
+                onComplete: myFunc,
+                // other callbacks: 
+                // onStart, onUpdate, onRepeat, onReverseComplete
+                // Each callback has a params property as well
+                // i.e. onUpdateParams (Array)
+            });
+
+            gsap.fromTo('.selector', { backgroundColor: 'blue', }, { rotation: 360, x: 300, duration: 3, backgroundColor: 'red' });
+
+            // "from" tween (animate from provided values)
+            // gsap.from(".selector", {rotation: 27, x: 100, duration: 3});
+
+            // "fromTo" tween (define both start and end values)
+            // gsap.fromTo(".selector", {rotation: 27, x: 100, duration: 1}, {rotation: 27, x: 100, duration: 1});
+            // // special properties (duration, ease, etc.) go in toVars
+
+            // // set values immediately (no animation)
+            // gsap.set(".selector", {rotation: 27, x: 100, duration: 1});
+        };
+
+    </script>
+
+</body>
+
+</html>

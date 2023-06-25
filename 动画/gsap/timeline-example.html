@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.0/gsap.min.js"></script>
+</head>
+
+<body>
+    <div class="selector" style="width: 100px; height: 100px; background-color:aqua;"></div>
+    <div class="selector2" style="width: 100px; height: 100px; background-color:aqua;"></div>
+
+
+    <script>
+        function myFunc() {
+            console.log('complete');
+        }
+
+        window.onload = function () {
+            // Create a timeline
+            let tl = gsap.timeline({
+                delay: 0.5,
+                paused: false, // default is false
+                repeat: -1, // number of repeats (-1 for infinite)
+                repeatDelay: 0, // seconds between repeats
+                repeatRefresh: false, // invalidates on each repeat
+                yoyo: true, // if true > A-B-B-A, if false > A-B-A-B
+                defaults: { // children inherit these defaults
+                    duration: 1,
+                    ease: "none"
+                },
+                smoothChildTiming: true,
+                autoRemoveChildren: true,
+                onComplete: myFunc,
+                // other callbacks: 
+                // onStart, onUpdate, onRepeat, onReverseComplete
+                // Each callback has a params property as well
+                // i.e. onUpdateParams (Array)
+            });
+
+            // Sequence multiple tweens
+            tl.to(".selector2", {duration: 4, backgroundColor: "blue"} )
+            .to(".selector", { x: 600, duration: 2, rotation: 360 }, "<" )
+            .to(".selector", { x: 0, duration: 2, rotation: 0,  delay: 2, }, "<" )
+            //   .to([".selector", ".selector2"], {duration: 3, x: 100});
+        };
+
+        // position parameter (controls placement)
+    // tl.to(target, {toVars}, positionParameter);
+
+// 0.7 // exactly 0.7 seconds into the timeline (absolute)
+// "-=0.7" // overlap with previous by 0.7 sec
+// "myLabel" // insert at "myLabel" position
+// "myLabel+=0.2" // 0.2 seconds after "myLabel"
+// "<" // align with start of most recently-added child
+// "<0.2" // 0.2 seconds after ^^
+// "-=50%" // overlap half of inserting animation's duration
+// "<25%" // 25% into the previous animation (from its start) 
+
+
+    </script>
+
+</body>
+
+</html>
