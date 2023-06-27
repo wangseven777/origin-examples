@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="./assets/js/logic-flow.js"></script>
+    <link href="./assets/css/index.css" rel="stylesheet">
+
+
+
+    <script src="./assets//js/BpmnElement.js"></script>
+    <script src="./assets/js/BpmnAdapter.js"></script>
+    <script src="./assets/js/Control.js"></script>
+    <script src="./assets/js/Menu.js"></script>
+    <script src="./assets/js/SelectionSelect.js"></script>
+    <script src="./assets/js/DndPanel.js"></script>
+    <script src="./assets/js/Snapshot.js"></script>
+    <link href="./assets/css/extension.css" rel="stylesheet">
+
+
+    <script src="./logicflow.js"></script>
+    <link href="./logicflow.css" rel="stylesheet">
+
+    <style>
+       
+    </style>
+</head>
+
+<body>
+    <div class="bpmn-example-container">
+        <div id="graph" class="viewport" style="width: 100%; height: 100%;"></div>
+        <!-- 左侧选区 -->
+        <div class="pattern">
+            <div class="selection"> </div>
+            <div>选区</div>
+            <div class="start-event"> </div>
+            <div>开始</div>
+            <div class="user-task"></div>
+            <div>用户任务</div>
+            <div class="service-task"></div>
+            <div>系统任务</div>
+            <div class="exclusive-gateway"></div>
+            <div>条件判断</div>
+            <div class="end-event"></div>
+            <div>结束</div>
+        </div>
+        <!-- 文件操作 -->
+        <div class="graph-io">
+            <span title="下载 XML" class="downlad-xml">
+              <img src="./assets/img.png" alt="下载XML" />
+            </span>
+            <span id="download-img" title="下载图片" class="downlad-svg">
+              <img src="./assets/download.png" alt="下载图片" />
+            </span>
+            <span id="upload-xml" title="上传 XML">
+              <input type="file" class="upload" />
+              <img src="./assets/upload.png" alt="上传XML" />
+            </span>
+        </div>
+    </div>
+
+
+    <script>
+        var lf;
+        window.onload = function() { init(); }
+    </script>
+
+</body>
+
+</html>
+
+<!-- 
+    备注：
+    extension links: https://cdn.jsdelivr.net/npm/@logicflow/extension@1.2.9/lib/
+    logicfllw website: https://07.logic-flow.cn/guide/start.html
+    logicflow github: https://github.com/didi/LogicFlow
+    示例：http://logic-flow.org/examples/#/basic/node
+ -->
