@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.0/gsap.min.js"></script>
+</head>
+
+<body>
+
+    <div class="selector" style="width: 100px; height: 100px; background-color:aqua;"></div>
+
+
+    <script>
+        function myFunc() {
+            console.log('complete');
+        }
+
+        window.onload = function () {
+            // "to" tween (animate to provided values)
+            gsap.to(".selector", { // selector text, Array, or object
+                x: 100, // any properties (not limited to CSS)
+                backgroundColor: "red", // camelCase
+                duration: 1, // seconds
+                delay: 0.5,
+                ease: "power2.inOut",
+                stagger: 0.1, // stagger start times
+                paused: true, // default is false
+                overwrite: "auto", // default is false
+                repeat: 2, // number of repeats (-1 for infinite)
+                repeatDelay: 1, // seconds between repeats
+                repeatRefresh: true, // invalidates on each repeat
+                yoyo: true, // if true > A-B-B-A, if false > A-B-A-B
+                yoyoEase: true, // or ease like "power2"
+                immediateRender: false,
+                onComplete: myFunc,
+                // other callbacks: 
+                // onStart, onUpdate, onRepeat, onReverseComplete
+                // Each callback has a params property as well
+                // i.e. onUpdateParams (Array)
+            });
+
+            let anim = gsap.fromTo('.selector', { backgroundColor: 'blue', }, { rotation: 360, x: 300, duration: 3, backgroundColor: 'red' });
+            // most methods can be used as getters or setters
+            anim.play() // plays forward
+                .pause()
+                .resume() // respects direction
+                .reverse()
+                .restart()
+                .timeScale(2) // 2 = double speed, 0.5 = half speed
+                .seek(1.5) // jump to a time (in seconds) or label
+                .progress(0.5) // jump to halfway
+                .totalProgress(0.8) // includes repeats
+                // when used as setter, returns animation (chaining)
+
+                // other useful methods (tween and timeline)
+                .kill() // immediately destroy
+                .isActive() // true if currently animating
+                .then() // Promise
+                .invalidate() // clear recorded start/end values
+                .eventCallback() // get/set an event callback
+
+                // timeline-specific methods
+                // add label, tween, timeline, or callback
+                .add(thing, position)
+                // calls function at given point
+                .call(func, params, position)
+                // get an Array of the timeline's children
+                .getChildren()
+                // empties the timeline
+                .clear()
+                // animate playhead to a position linearly
+                .tweenTo(timeOrLabel, { vars })
+                // ^^ with both start and end positions
+                .tweenFromTo(from, to, { vars })
+
+        };
+
+    </script>
+
+</body>
+
+</html>

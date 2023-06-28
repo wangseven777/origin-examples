@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.0/gsap.min.js"></script>
+    <style>
+        div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="circle1" style="width: 70px; height: 70px; border: 1px solid pink; margin: 0 auto;">
+        <div class="circle2" style="width: 50px; height: 50px; border: 1px solid pink;">
+            <div class="circle3" style="width: 30px; height: 30px; border: 1px solid pink;">
+                <div class="circle4" style="width: 10px; height: 10px; border: 1px solid pink;">
+    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+         window.onload = function () {
+            let tl = gsap.timeline({
+                delay: 0.5,
+                paused: false, // default is false
+                // repeat: 5, // number of repeats (-1 for infinite)
+                repeatDelay: 0, // seconds between repeats
+                repeatRefresh: false, // invalidates on each repeat
+                yoyo: true, // if true > A-B-B-A, if false > A-B-A-B
+                defaults: { // children inherit these defaults
+                    duration: 1,
+                    ease: "none"
+                },
+                smoothChildTiming: true,
+                autoRemoveChildren: true,
+                // onComplete: myFunc,
+                // other callbacks: 
+                // onStart, onUpdate, onRepeat, onReverseComplete
+                // Each callback has a params property as well
+                // i.e. onUpdateParams (Array)
+            });
+
+            let ani4 = tl.to('.circle4', { boxShadow: '0px 0px 5px hotpink', width: '20px', height: '20px', duration: 1, ease: "power2.inOut", repeat: 10,  yoyo: true,  });
+            // let ani3 = tl.to('.circle3', { boxShadow: '0px 0px 5px hotpink', duration: 1, ease: "power2.inOut", repeat: 10,   yoyo: true, }, "<");
+            // let ani2 = tl.to('.circle2', { boxShadow: '0px 0px 5px hotpink', duration: 1, ease: "power2.inOut", repeat: 10,  yoyo: true,  }, "<");
+            // let ani1 = tl.to('.circle1', { boxShadow: '0px 0px 5px hotpink', duration: 1, ease: "power2.inOut", repeat: 10, yoyo: true,  }, "<");
+
+
+            // ani1.reverse();
+            // gsap.fromTo('.selector', { backgroundColor: 'blue', }, { rotation: 360, x: 300, duration: 10, backgroundColor: 'red', ease: "elastic", });
+
+            // "from" tween (animate from provided values)
+            // gsap.from(".selector", {rotation: 27, x: 100, duration: 3});
+
+            // "fromTo" tween (define both start and end values)
+            // gsap.fromTo(".selector", {rotation: 27, x: 100, duration: 1}, {rotation: 27, x: 100, duration: 1});
+            // // special properties (duration, ease, etc.) go in toVars
+
+            // // set values immediately (no animation)
+            // gsap.set(".selector", {rotation: 27, x: 100, duration: 1});
+        };
+    </script>
+</body>
+</html>
