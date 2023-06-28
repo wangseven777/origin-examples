@@ -11,9 +11,10 @@
   .container {
     width: 100%;
     height: 100%;
+    position: relative;
   }
 
-  .bpmn-canvas {
+  #bpmnContainer {
     margin: 0 auto;
     width: 100%;
     height: 100%;
@@ -37,3 +38,40 @@
   }
 
   a[title="Powered by bpmn.io"] { display: none; }
+
+  /* 文件操作 */
+.graph-io {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    z-index: 9999;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    display: flex;
+  }
+  
+  .graph-io > span {
+    margin: 0 5px;
+    cursor: pointer;
+  }
+  
+  #upload-xml {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  #bpmn-upload-xml {
+    position: absolute;
+    z-index: 99;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  #bpmn-upload-xml::-webkit-file-upload-button {
+    cursor: pointer;
+  }
