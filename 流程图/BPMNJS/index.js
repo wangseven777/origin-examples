@@ -6,6 +6,12 @@ function init() {
 
     // 添加上传事件的监听
     addFileOperationEventListener();
+
+    // 视图监听
+    addModelerListener();
+
+    // 元素监听
+    addEventBusListener();
 }
 
 //#region 视图方法
@@ -26,6 +32,10 @@ const createBpmn = () => {
     additionalModules: [
       BpmnPropertiesPanelModule,
       BpmnPropertiesProviderModule,
+      {
+        __init__: ['customPalette'],
+        customPalette: ['type', CustomPalette],
+      },
     ],
   });
 
@@ -124,4 +134,42 @@ const addFileOperationEventListener = () => {
 
 // 导入XML
 
+//#endregion
+
+
+//#region 视图事件（监听方法）
+// 所有可监听事件：https://blog.csdn.net/juny0302/article/details/106074714
+// 监听modeler并绑定事件
+const addModelerListener = () =>  {
+  if (!bpmnModeler) return;
+  // 这里我是用了一个forEach给modeler上添加要绑定的事件
+  const events = [
+    "shape.added",
+    "shape.move.end",
+    "shape.removed",
+    "connect.end",
+    "connect.move",
+  ];
+  events.forEach(function (event) {
+    bpmnModeler.on(event, (e) => {
+      // console.log(`event: ${JSON.stringify(event)}:: \n e: ${JSON.stringify(e)} \n\n`);
+      const elementRegistry = bpmnModeler.get("elementRegistry");
+      const shape = e.element ? elementRegistry.get(e.element.id) : e.shape;
+      // console.log(`shape::\n ${JSON.stringify(shape)} \n\n`);
+    });
+  });
+}
+
+// 监听element并绑定事件
+const addEventBusListener = () => {
+  if (!bpmnModeler) return;
+  const eventBus = bpmnModeler.get("eventBus"); // 需要使用eventBus
+  const eventTypes = ["element.click", "element.changed"]; // 需要监听的事件集合
+  eventTypes.forEach(function (eventType) {
+    eventBus.on(eventType, function (e) {
+      if (!e || e.element.type == "bpmn:Process") return; // 这里我的根元素是bpmn:Process
+      // console.log(`name: ${e.gfx.textContent}, id: ${e.element.id} \n\n`);
+    });
+  });
+}
 //#endregion

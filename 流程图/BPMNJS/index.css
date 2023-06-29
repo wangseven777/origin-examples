@@ -75,3 +75,9 @@
   #bpmn-upload-xml::-webkit-file-upload-button {
     cursor: pointer;
   }
+
+
+  /* 扩展左侧菜单栏 */
+.icon-custom.zzh-task { /* 加上背景图 */
+    background-image: url('https://hexo-blog-1256114407.cos.ap-shenzhen-fsi.myqcloud.com/rules.png');
+}
