@@ -8,7 +8,7 @@
  *
  * Source Code: https://github.com/bpmn-io/bpmn-js
  *
- * Date: 2023-06-27
+ * Date: 2023-06-30
  */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -2713,6 +2713,21 @@
   }
 
   /**
+   * @param {Point[]} points
+   *
+   * @return {string}
+   */
+  function toSVGPoints(points) {
+    var result = '';
+
+    for (var i = 0, p; (p = points[i]); i++) {
+      result += p.x + ',' + p.y + ' ';
+    }
+
+    return result;
+  }
+
+  /**
    * @param {Point} point
    *
    * @return {Component[]}
@@ -2850,6 +2865,14 @@
 
     return gfx;
   }
+
+  var DiagramRenderUtil = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    componentsToPath: componentsToPath,
+    createLine: createLine,
+    toSVGPoints: toSVGPoints,
+    updateLine: updateLine
+  });
 
   /**
    * @typedef {import('../model/Types').Connection} Connection
@@ -18469,7 +18492,7 @@
     function colorEscape(str) {
 
       // only allow characters and numbers
-      return str.replace(/[^0-9a-zA-z]+/g, '_');
+      return str.replace(/[^0-9a-zA-Z]+/g, '_');
     }
 
     function marker(type, fill, stroke) {
@@ -39985,7 +40008,7 @@
 
         var isInterrupting = target.isInterrupting !== false;
 
-        var isInterruptingEqual = getBusinessObject(target).isInterrupting === isInterrupting;
+        var isInterruptingEqual = businessObject.isInterrupting === isInterrupting;
 
         // filters elements which types and event definition are equal but have have different interrupting types
         return differentType(replaceOption) || !differentType(replaceOption) && !isInterruptingEqual;
@@ -65999,6 +66022,8 @@
 
   Modeler.Viewer = Viewer;
   Modeler.NavigatedViewer = NavigatedViewer;
+  Modeler.DiagramBaseRenderer = BaseRenderer;
+  Modeler.DiagramRenderUtil = DiagramRenderUtil;
 
   /**
    * Create a new diagram to start modeling.

@@ -33,7 +33,7 @@ const createBpmn = () => {
       BpmnPropertiesPanelModule,
       BpmnPropertiesProviderModule,
       {
-        __init__: ['customPalette'],
+        __init__: ['customPalette', 'customRenderer'],
         customPalette: ['type', CustomPalette],
         customRenderer: ['type', CustomRenderer]
       },

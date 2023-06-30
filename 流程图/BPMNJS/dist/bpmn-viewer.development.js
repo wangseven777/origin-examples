@@ -8,7 +8,7 @@
  *
  * Source Code: https://github.com/bpmn-io/bpmn-js
  *
- * Date: 2023-06-27
+ * Date: 2023-06-30
  */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -2851,7 +2851,7 @@
     function colorEscape(str) {
 
       // only allow characters and numbers
-      return str.replace(/[^0-9a-zA-z]+/g, '_');
+      return str.replace(/[^0-9a-zA-Z]+/g, '_');
     }
 
     function marker(type, fill, stroke) {

@@ -16,10 +16,10 @@ function CustomPalette(bpmnFactory, create, elementFactory, palette, translate) 
 
         function createTask() {
             return function(event) {
-                const businessObject = bpmnFactory.create('bpmn:Task');
+                // const businessObject = bpmnFactory.create('bpmn:ZTask');
                 const shape = elementFactory.createShape({
-                    type: 'bpmn:Task',
-                    businessObject
+                    type: 'bpmn:UserTask',
+                    // businessObject
                 });
                 console.log(shape) // 只在拖动或者点击时触发
                 create.start(event, shape);
