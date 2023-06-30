@@ -132,6 +132,7 @@ function initLogicFlow() {
       strokeWidth: 30,
       strokeDasharray: '3,3', });
     model.updateText('开始文字被修改');
+    model.setProperties({ data: 'new', addP: 'p'  });
   });
 }
 
