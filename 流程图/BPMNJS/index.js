@@ -167,13 +167,18 @@ const addEventBusListener = () => {
   const eventBus = bpmnModeler.get("eventBus"); // 需要使用eventBus
   const eventTypes = ["element.click", "element.changed"]; // 需要监听的事件集合
   eventTypes.forEach(function (eventType) {
-    eventBus.on(eventType, function (e, a, b, c) {
+    eventBus.on(eventType, function (e, a) {
       if (!e || e.element.type == "bpmn:Process") return; // 这里我的根元素是bpmn:Process
       // console.log(`name: ${e.gfx.textContent}, id: ${e.element.id} \n\n`);
 
       const elementRegistry = bpmnModeler.get("elementRegistry");
       const shape = e.element ? elementRegistry.get(e.element.id) : e.shape;
-      
+      shape.businessObject.$attrs.name = '1111';
+      shape.businessObject.$attrs.age = '1111';
+      if (a.gfx?.childNodes[0]?.childNodes[0]?.style) {
+        a.gfx.childNodes[0].childNodes[0].style.stroke = 'red';
+        a.gfx.childNodes[0].childNodes[0].style.fill = 'red';
+      } 
     });
   });
 }
