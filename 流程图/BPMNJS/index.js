@@ -35,6 +35,7 @@ const createBpmn = () => {
       {
         __init__: ['customPalette'],
         customPalette: ['type', CustomPalette],
+        customRenderer: ['type', CustomRenderer]
       },
     ],
   });

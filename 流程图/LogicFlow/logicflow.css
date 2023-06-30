@@ -114,3 +114,10 @@ body {
 .upload::-webkit-file-upload-button {
   cursor: pointer;
 }
+
+
+.test-share {
+  width: 100px;
+  border: 1px solid black;
+  background: linear-gradient(45deg, transparent, pink);
+}

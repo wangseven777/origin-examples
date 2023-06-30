@@ -68,6 +68,50 @@ function initLogicFlow() {
     ...config,
     container: document.querySelector("#graph"),
   });
+  // 右击菜单：component-menu.md
+  lf.extension.menu.addMenuConfig({
+    nodeMenu: [
+      {
+        text: '分享',
+        className: 'test-share',
+        callback() {
+          alert('分享成功！');
+        }
+      },
+      {
+        text: '属性',
+        callback(node) {
+          alert(`
+            节点id：${node.id}
+            节点类型：${node.type}
+            节点坐标：(x: ${node.x}, y: ${node.y})`
+          );
+        },
+      },
+    ],
+    edgeMenu: [
+      {
+        text: '属性',
+        callback(edge) {
+          alert(`
+            边id：${edge.id}
+            边类型：${edge.type}
+            边坐标：(x: ${edge.x}, y: ${edge.y})
+            源节点id：${edge.sourceNodeId}
+            目标节点id：${edge.targetNodeId}`
+          );
+        },
+      },
+    ],
+    graphMenu: [
+      {
+        text: '分享',
+        callback() {
+          alert('分享成功！');
+        }
+      },
+    ],
+  });
   lf.render();
 
   lf &&
