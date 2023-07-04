@@ -81,3 +81,10 @@
 .icon-custom.zzh-task { /* 加上背景图 */
     background-image: url('https://hexo-blog-1256114407.cos.ap-shenzhen-fsi.myqcloud.com/rules.png');
 }
+
+.icon-custom.zzh-task.self-define { /* 加上背景图 */
+  background-image: url('./assets/img.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+

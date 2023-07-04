@@ -1,4 +1,4 @@
-function CustomPalette(bpmnFactory, create, elementFactory, palette, translate) {
+function CustomPalette(bpmnFactory, create, elementFactory, palette, translate, a,b ,c) {
     this.bpmnFactory = bpmnFactory;
     this.create = create;
     this.elementFactory = elementFactory;
@@ -52,15 +52,15 @@ function CustomPalette(bpmnFactory, create, elementFactory, palette, translate) 
                     click: createOriginTask()
                 }
             },
-            // 'create.zzh-task': {
-            //     group: 'model',
-            //     className: 'icon-custom zzh-task',
-            //     title: translate('创建一个类型为zzh-task的任务节点'),
-            //     action: {
-            //         dragstart: createTask(),
-            //         click: createTask()
-            //     }
-            // }
+            'create.zzh-task': {
+                group: 'model',
+                className: 'icon-custom zzh-task self-define',
+                title: translate('创建一个类型为zzh-task的任务节点'),
+                action: {
+                    dragstart: createTask(),
+                    click: createTask()
+                }
+            }
         }
     }
 }

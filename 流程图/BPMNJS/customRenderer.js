@@ -1,8 +1,12 @@
 function getCustomElementsAndConfig() {
-  const customElements = ["bpmn:UserTask"];
+  const customElements = ["bpmn:UserTask", 'custom:node'];
   const customConfig = {
     // 自定义元素的配置(后面会用到)
     "bpmn:UserTask": {
+      url: "https://hexo-blog-1256114407.cos.ap-shenzhen-fsi.myqcloud.com/rules.png",
+      attr: { x: 0, y: 0, width: 48, height: 48 },
+    },
+    "custom:node": {
       url: "https://hexo-blog-1256114407.cos.ap-shenzhen-fsi.myqcloud.com/rules.png",
       attr: { x: 0, y: 0, width: 48, height: 48 },
     },
@@ -14,71 +18,6 @@ function getCustomElementsAndConfig() {
 function CustomRenderer(eventBus, styles) {
   // 继承DiagramBaseRenderer
   BpmnJS.DiagramBaseRenderer.call(this, eventBus, 1500);
-
-  // this._styles = styles;
-
-  // var self = this;
-
-  // var computeStyle = styles.computeStyle;
-
-  // this.handlers = {
-  //   "custom:circle": function (parentGfx, element) {
-  //       return self.drawTriangle(parentGfx, element.width);
-  //   }
-  // };
-
-  // this.drawTriangle = function (parentGfx, side, attrs) {
-  //   const {  append, create, attr }  = TinySVG;
-  //   var halfSide = side / 2,
-  //     points;
-
-  //   points = [
-  //     { x: halfSide, y: 0 },
-  //     { x: side, y: side },
-  //     { x: 0, y: side },
-  //   ];
-
-  //   var pointsString = points
-  //     .map(function (point) {
-  //       return point.x + "," + point.y;
-  //     })
-  //     .join(" ");
-
-  //   attrs = computeStyle(attrs, {
-  //     stroke: "#3CAA82",
-  //     strokeWidth: 2,
-  //     fill: "#3CAA82",
-  //   });
-
-  //   var polygon = create("polygon");
-  //   attr(polygon, { points: pointsString });
-  //   attr(polygon, attrs);
-
-  //   append(parentGfx, polygon);
-
-  //   return polygon;
-  // };
-
-  // this.getTrianglePath = function (element) {
-  //   var x = element.x,
-  //     y = element.y,
-  //     width = element.width,
-  //     height = element.height;
-  //     var cx = element.x + element.width / 2,
-  //     cy = element.y + element.height / 2,
-  //     radius = element.width / 2;
-
-  //   var trianglePath = [
-  //       ["M", cx, cy],
-  //       ["m", 0, -radius],
-  //       ["a", radius, radius, 0, 1, 1, 0, 2 * radius],
-  //       ["a", radius, radius, 0, 1, 1, 0, -2 * radius],
-  //       ["z"],
-  //   ];
-
-  //   const { componentsToPath }  = BpmnJS.DiagramRenderUtil;
-  //   return componentsToPath(trianglePath);
-  // };
 }
 
 CustomRenderer.$inject = ["eventBus", "styles"];
