@@ -121,6 +121,7 @@ function initLogicFlow() {
       });
     });
 
+    // 监听视图点击事件
   lf.on("node:click", ({ data, e, position }) => {
     const model = lf.graphModel.getElement(data.id);
     model.setStyles({ 
@@ -136,6 +137,7 @@ function initLogicFlow() {
   });
 }
 
+// 监听左侧按钮点击事件
 function addPatternEventListener() {
   const patternDom = document.querySelector(".pattern");
   patternDom.addEventListener("mousedown", (event) => {

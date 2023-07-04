@@ -173,8 +173,10 @@ const addEventBusListener = () => {
 
       const elementRegistry = bpmnModeler.get("elementRegistry");
       const shape = e.element ? elementRegistry.get(e.element.id) : e.shape;
-      shape.businessObject.$attrs.name = '1111';
-      shape.businessObject.$attrs.age = '1111';
+      if (shape?.businessObject?.$attrs) {
+        shape.businessObject.$attrs.name = '1111';
+        shape.businessObject.$attrs.age = '1111';
+      }
       if (a.gfx?.childNodes[0]?.childNodes[0]?.style) {
         a.gfx.childNodes[0].childNodes[0].style.stroke = 'red';
         a.gfx.childNodes[0].childNodes[0].style.fill = 'red';
