@@ -1,15 +1,15 @@
 function getCustomElementsAndConfig() {
-  const customElements = ["bpmn:UserTask", 'custom:node'];
+  const customElements = ["bpmn:UserTask", 'miyue:SqlTask'];
   const customConfig = {
     // 自定义元素的配置(后面会用到)
     "bpmn:UserTask": {
       url: "https://hexo-blog-1256114407.cos.ap-shenzhen-fsi.myqcloud.com/rules.png",
       attr: { x: 0, y: 0, width: 48, height: 48 },
     },
-    "custom:node": {
-      url: "https://hexo-blog-1256114407.cos.ap-shenzhen-fsi.myqcloud.com/rules.png",
-      attr: { x: 0, y: 0, width: 48, height: 48 },
-    },
+    // "miyue:SqlTask": {
+    //   url: "https://hexo-blog-1256114407.cos.ap-shenzhen-fsi.myqcloud.com/rules.png",
+    //   attr: { x: 0, y: 0, width: 48, height: 48 },
+    // },
   };
 
   return { customElements, customConfig };

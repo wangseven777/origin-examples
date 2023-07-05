@@ -15,6 +15,50 @@ function init() {
 }
 
 //#region 视图方法
+const settins =  {
+  "name": "miyue",
+  "prefix": "miyue",
+  "uri": "http://miyue.org/schema",
+  "xml": {
+    "tagAlias": "lowerCase"
+  },
+  "associations": [],
+  "types": [
+    
+    {
+      "name": "Table",
+      "superClass": ["bpmn:Element"],
+      "meta": {
+        "allowedIn": ["miyue:SqlTask"]
+      },
+      "properties": [
+        {
+          "name": "fields",
+          "isMany": true,
+          "type": "TableField"
+        },
+        {
+          "name": "isKey",
+          "isAttr": true,
+          "type": "Boolean",
+          "default": false
+        },
+        {
+          "name": "author",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "title",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    },
+    
+  ]
+};
+
 // 创建
 const createBpmn = () => {
   const {
@@ -39,6 +83,9 @@ const createBpmn = () => {
         // elementFactory: [ 'type', CustomElementFactory ],
       },
     ],
+    moddleExtensions: {
+      miyue: settins,
+    }
   });
 
   bpmnModeler.createDiagram();
