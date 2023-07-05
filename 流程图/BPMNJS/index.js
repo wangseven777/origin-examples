@@ -1,17 +1,58 @@
+var SelfDescriptor = {
+  name: "self",
+  uri: "https://self",
+  prefix: "custom",
+  xml: {
+    tagAlias: "lowerCase",
+  },
+  types: [
+    {
+      name: "Task",
+      superClass: ["bpmn:Task"],
+      meta: {
+        allowedIn: ["*"],
+      },
+      properties: [
+        {
+          name: "fields",
+          isMany: true,
+          type: "TableField",
+        },
+        {
+          name: "isKey",
+          isAttr: true,
+          type: "Boolean",
+          default: false,
+        },
+        {
+          name: "author",
+          isAttr: true,
+          type: "String",
+        },
+        {
+          name: "title",
+          isAttr: true,
+          type: "String",
+        },
+      ],
+    },
+  ],
+};
+
 var bpmnModeler;
 var bpmnContainerDom;
 function init() {
-    bpmnContainerDom = document.querySelector('#bpmnContainer');
-    createBpmn();
+  bpmnContainerDom = document.querySelector("#bpmnContainer");
+  createBpmn();
 
-    // 添加上传事件的监听
-    addFileOperationEventListener();
+  // 添加上传事件的监听
+  addFileOperationEventListener();
 
-    // 视图监听
-    addModelerListener();
+  // 视图监听
+  addModelerListener();
 
-    // 元素监听
-    addEventBusListener();
+  // 元素监听
+  addEventBusListener();
 }
 
 //#region 视图方法
@@ -34,16 +75,17 @@ const createBpmn = () => {
       BpmnPropertiesPanelModule,
       BpmnPropertiesProviderModule,
       {
-        __init__: ['customPalette', 'customRenderer', 'customContextPad'],
-        customPalette: ['type', CustomPalette],
-        customRenderer: ['type', CustomRenderer],
-        customContextPad: ['type', CustomContextPad]
+        __init__: ["customPalette", "customRenderer", "customContextPad"],
+        customPalette: ["type", CustomPalette],
+        customRenderer: ["type", CustomRenderer],
+        customContextPad: ["type", CustomContextPad],
         // contextPadProvider: [ 'type', CustomContextPad ], // 重写contextPad
+        customElementFactory: ["type", CustomElementFactory],
       },
     ],
     moddleExtensions: {
-      // miyue: settins,
-    }
+      self: SelfDescriptor,
+    },
   });
 
   bpmnModeler.createDiagram();
@@ -72,82 +114,80 @@ const download = ({ name, data }) => {
 
 // 导出XML
 const exportBpmnXML = async () => {
-    if (!bpmnModeler) return;
-    try {
-        const { xml } = await bpmnModeler.saveXML({ format: true });
-        const name = "file.bpmn";
-        download({ name, data: xml });
-    } catch(err) {
-        console.error('导出XML出错', err);
-    }
+  if (!bpmnModeler) return;
+  try {
+    const { xml } = await bpmnModeler.saveXML({ format: true });
+    const name = "file.bpmn";
+    download({ name, data: xml });
+  } catch (err) {
+    console.error("导出XML出错", err);
+  }
 };
 
 // 导入XML
 const importBpmnXML = async (xml) => {
-    try {
-        await bpmnModeler.importXML(xml);
-    } catch(err) {
-        console.error('导入XML出错, 请确认该模型符合Bpmn2.0规范', err);
-    }
+  try {
+    await bpmnModeler.importXML(xml);
+  } catch (err) {
+    console.error("导入XML出错, 请确认该模型符合Bpmn2.0规范", err);
+  }
 };
 
 // 导出SVG
 const exportBpmnSvg = async () => {
-    if (!bpmnModeler) return;
-    try {
-        const  { svg } = await bpmnModeler.saveSVG();
-        const name = "file.svg";
-        download({ name, data: svg });
-    } catch(err) {
-        console.error("导出 SVG 出错", err);
-    }
+  if (!bpmnModeler) return;
+  try {
+    const { svg } = await bpmnModeler.saveSVG();
+    const name = "file.svg";
+    download({ name, data: svg });
+  } catch (err) {
+    console.error("导出 SVG 出错", err);
+  }
 };
-
 
 // 添加xml导入监听
 const addUploadBpmnXmlEventListener = () => {
-    const fileInput = document.getElementById('bpmn-upload-xml');
-    fileInput.addEventListener('change', function (event) {
-      const file = event.target.files[0];
-      const reader = new FileReader()
-      reader.onload = async (event) => {
-        if (event.target) {
-          const xml = event.target.result;
-          await destroyBpmn();
+  const fileInput = document.getElementById("bpmn-upload-xml");
+  fileInput.addEventListener("change", function (event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = async (event) => {
+      if (event.target) {
+        const xml = event.target.result;
+        await destroyBpmn();
         //   bpmnModeler = new BpmnModeler({ container: bpmnContainerDom });
-          createBpmn();
-          importBpmnXML(xml);
+        createBpmn();
+        importBpmnXML(xml);
 
-          fileInput.value = null;
-        }
+        fileInput.value = null;
       }
-      reader.readAsText(file); // you could also read images and other binaries
-    });
+    };
+    reader.readAsText(file); // you could also read images and other binaries
+  });
 };
 
 const addFileOperationEventListener = () => {
-    const downloadXmlDom = document.getElementById('bpmn-download-xml');
-    downloadXmlDom.addEventListener("click", (e) => {
-        exportBpmnXML();
-    });
-  
-    const downloadSvgDom = document.getElementById('bpmn-download-svg');
-    downloadSvgDom.addEventListener("click", (e) => {
-        exportBpmnSvg();
-    });
+  const downloadXmlDom = document.getElementById("bpmn-download-xml");
+  downloadXmlDom.addEventListener("click", (e) => {
+    exportBpmnXML();
+  });
 
-    addUploadBpmnXmlEventListener();
-  }
+  const downloadSvgDom = document.getElementById("bpmn-download-svg");
+  downloadSvgDom.addEventListener("click", (e) => {
+    exportBpmnSvg();
+  });
+
+  addUploadBpmnXmlEventListener();
+};
 
 // 导入XML
 
 //#endregion
 
-
 //#region 视图事件（监听方法）
 // 所有可监听事件：https://blog.csdn.net/juny0302/article/details/106074714
 // 监听modeler并绑定事件
-const addModelerListener = () =>  {
+const addModelerListener = () => {
   if (!bpmnModeler) return;
   // 这里我是用了一个forEach给modeler上添加要绑定的事件
   const events = [
@@ -165,7 +205,7 @@ const addModelerListener = () =>  {
       // console.log(`shape::\n ${JSON.stringify(shape)} \n\n`);
     });
   });
-}
+};
 
 // 监听element并绑定事件
 const addEventBusListener = () => {
@@ -180,14 +220,14 @@ const addEventBusListener = () => {
       const elementRegistry = bpmnModeler.get("elementRegistry");
       const shape = e.element ? elementRegistry.get(e.element.id) : e.shape;
       if (shape?.businessObject?.$attrs) {
-        shape.businessObject.$attrs.name = '1111';
-        shape.businessObject.$attrs.age = '1111';
+        shape.businessObject.$attrs.name = "1111";
+        shape.businessObject.$attrs.age = "1111";
       }
       if (a.gfx?.childNodes[0]?.childNodes[0]?.style) {
-        a.gfx.childNodes[0].childNodes[0].style.stroke = 'red';
-        a.gfx.childNodes[0].childNodes[0].style.fill = 'red';
-      } 
+        a.gfx.childNodes[0].childNodes[0].style.stroke = "red";
+        a.gfx.childNodes[0].childNodes[0].style.fill = "red";
+      }
     });
   });
-}
+};
 //#endregion

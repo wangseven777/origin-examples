@@ -16,11 +16,7 @@ function CustomPalette(bpmnFactory, create, elementFactory, palette, translate, 
 
         function createTask() {
             return function(event) {
-                const businessObject = bpmnFactory.create('miyue:SqlTask');
-                const shape = elementFactory.createShape({
-                    type: 'miyue:SqlTask',
-                    businessObject
-                });
+                const shape = elementFactory.createShape({ type: 'custom:Task' });
                 create.start(event, shape);
             }
         }
@@ -52,15 +48,15 @@ function CustomPalette(bpmnFactory, create, elementFactory, palette, translate, 
                     click: createOriginTask()
                 }
             },
-            // 'create.zzh-task': {
-            //     group: 'model',
-            //     className: 'icon-custom zzh-task self-define',
-            //     title: translate('创建一个类型为zzh-task的任务节点'),
-            //     action: {
-            //         dragstart: createTask(),
-            //         click: createTask()
-            //     }
-            // }
+            'create.zzh-task': {
+                group: 'model',
+                className: 'icon-custom zzh-task self-define',
+                title: translate('自定义元素'), // 新增一个自定义类型元素
+                action: {
+                    dragstart: createTask(),
+                    click: createTask()
+                }
+            }
         }
     }
 }

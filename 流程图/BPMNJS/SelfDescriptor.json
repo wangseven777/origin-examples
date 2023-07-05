@@ -1,0 +1,96 @@
+{
+    "name": "self",
+    "uri": "https://self",
+    "prefix": "se",
+    "xml": {
+      "tagAlias": "lowerCase"
+    },
+    "types": [
+      {
+        "name": "AttrOne",
+        "superClass": [
+          "Element"
+        ],
+        "properties": [
+          {
+            "name": "name",
+            "type": "String",
+            "isAttr": "true"
+          },
+          {
+            "name": "values",
+            "type": "AttrOneProp",
+            "isMany": true
+          }
+        ]
+      },
+      {
+        "name": "AttrOneProp",
+        "superClass": [
+          "Element"
+        ],
+        "meta": {
+          "allowedIn": [ "*" ]
+        },
+        "properties": [
+          {
+            "name": "propName",
+            "type": "String",
+            "isAttr": true
+          },
+          {
+            "name": "value",
+            "type": "String",
+            "isAttr": true
+          }
+        ]
+      },
+      {
+        "name": "Table",
+        "superClass": ["bpmn:Element"],
+        "meta": {
+          "allowedIn": ["custom:node"]
+        },
+        "properties": [
+          {
+            "name": "fields",
+            "isMany": true,
+            "type": "TableField"
+          },
+          {
+            "name": "isKey",
+            "isAttr": true,
+            "type": "Boolean",
+            "default": false
+          },
+          {
+            "name": "author",
+            "isAttr": true,
+            "type": "String"
+          },
+          {
+            "name": "title",
+            "isAttr": true,
+            "type": "String"
+          }
+        ]
+      },
+      {
+        "name": "AttrTwo",
+        "superClass": [
+          "Element"
+        ],
+        "meta": {
+          "allowedIn": [ "*" ]
+        },
+        "properties": [
+          {
+            "name": "value",
+            "type": "String",
+            "isBody": true
+          }
+        ]
+      }
+    ]
+  }
+  
