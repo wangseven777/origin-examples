@@ -8,7 +8,7 @@
  *
  * Source Code: https://github.com/bpmn-io/bpmn-js
  *
- * Date: 2023-07-04
+ * Date: 2023-07-05
  */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :

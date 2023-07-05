@@ -74,6 +74,7 @@ const createBpmn = () => {
     additionalModules: [
       BpmnPropertiesPanelModule,
       BpmnPropertiesProviderModule,
+      CamundaPlatformPropertiesProviderModule,
       {
         __init__: ["customPalette", "customRenderer", "customContextPad"],
         customPalette: ["type", CustomPalette],
@@ -85,6 +86,7 @@ const createBpmn = () => {
     ],
     moddleExtensions: {
       self: SelfDescriptor,
+      camunda: BpmnJS.camundaModdleDescriptors
     },
   });
 
