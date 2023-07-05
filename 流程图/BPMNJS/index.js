@@ -15,49 +15,6 @@ function init() {
 }
 
 //#region 视图方法
-const settins =  {
-  "name": "miyue",
-  "prefix": "miyue",
-  "uri": "http://miyue.org/schema",
-  "xml": {
-    "tagAlias": "lowerCase"
-  },
-  "associations": [],
-  "types": [
-    
-    {
-      "name": "Table",
-      "superClass": ["bpmn:Element"],
-      "meta": {
-        "allowedIn": ["miyue:SqlTask"]
-      },
-      "properties": [
-        {
-          "name": "fields",
-          "isMany": true,
-          "type": "TableField"
-        },
-        {
-          "name": "isKey",
-          "isAttr": true,
-          "type": "Boolean",
-          "default": false
-        },
-        {
-          "name": "author",
-          "isAttr": true,
-          "type": "String"
-        },
-        {
-          "name": "title",
-          "isAttr": true,
-          "type": "String"
-        }
-      ]
-    },
-    
-  ]
-};
 
 // 创建
 const createBpmn = () => {
@@ -77,14 +34,15 @@ const createBpmn = () => {
       BpmnPropertiesPanelModule,
       BpmnPropertiesProviderModule,
       {
-        __init__: ['customPalette', 'customRenderer',],
+        __init__: ['customPalette', 'customRenderer', 'customContextPad'],
         customPalette: ['type', CustomPalette],
         customRenderer: ['type', CustomRenderer],
-        // elementFactory: [ 'type', CustomElementFactory ],
+        customContextPad: ['type', CustomContextPad]
+        // contextPadProvider: [ 'type', CustomContextPad ], // 重写contextPad
       },
     ],
     moddleExtensions: {
-      miyue: settins,
+      // miyue: settins,
     }
   });
 
