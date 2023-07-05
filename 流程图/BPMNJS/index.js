@@ -88,7 +88,18 @@ const createBpmn = () => {
       self: SelfDescriptor,
       camunda: BpmnJS.camundaModdleDescriptors
     },
+    textRenderer: {
+      defaultStyle: {
+      }
+    },
+    bpmnRenderer: {
+      defaultFillColor: '#333',
+      defaultStrokeColor: '#fff'
+    }
   });
+
+  //开启快捷键
+  bpmnModeler.get('keyboard').bind(document);
 
   bpmnModeler.createDiagram();
 };
@@ -226,8 +237,8 @@ const addEventBusListener = () => {
         shape.businessObject.$attrs.age = "1111";
       }
       if (a.gfx?.childNodes[0]?.childNodes[0]?.style) {
-        a.gfx.childNodes[0].childNodes[0].style.stroke = "red";
-        a.gfx.childNodes[0].childNodes[0].style.fill = "red";
+        // a.gfx.childNodes[0].childNodes[0].style.stroke = "red";
+        // a.gfx.childNodes[0].childNodes[0].style.fill = "red";
       }
     });
   });
